@@ -106,7 +106,7 @@ export default function Navbar() {
 
 
             <header className="hidden md:block">
-                <div className="sticky top-0 z-30 flex h-20 items-center justify-between border-b bg-(--color-background) px-4 backdrop-blur-md">
+                <div className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-(--color-background) px-4 backdrop-blur-md">
 
                     <Button
                         variant="ghost"
