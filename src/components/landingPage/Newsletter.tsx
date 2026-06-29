@@ -1,6 +1,8 @@
 import { Mail } from "lucide-react";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
+import type { VariantProps } from "class-variance-authority";
+
 
 function Newsletter() {
     return (

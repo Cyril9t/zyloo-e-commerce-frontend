@@ -11,7 +11,9 @@ import Reviews from "./reviews";
 import Newsletter from "./Newsletter";
 
 
+
 export function LandingPage() {
+
 
     return (
         <div className="" >
@@ -116,6 +118,7 @@ export function LandingPage() {
                         </div>
                     </div>
                 </section>
+
             </div>
 
             <section className="bg-muted">

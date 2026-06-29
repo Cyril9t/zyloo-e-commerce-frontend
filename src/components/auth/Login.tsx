@@ -6,9 +6,22 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import Navbar from "../landingPage/navbar/navbar";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../../lib/schema/validate";
+import type { loginData } from "../../lib/schema/validate";
+
 export default function LoginPage() {
     const [showPassword, setShowPassword] = React.useState(false);
+    const { handleSubmit, register, formState: { errors } } = useForm<loginData>({
+        resolver: zodResolver(loginSchema)
+    })
+
     const year = new Date(Date.now()).toLocaleString("en-US", { year: "numeric" })
+
+    const submit = (data: loginData) => {
+        console.log(data)
+    }
     return (
 
         <div>
@@ -47,7 +60,7 @@ export default function LoginPage() {
                             <p className="text-sm opacity-50">Sign in to your premium account</p>
                         </div>
 
-                        <form className="space-y-4 xl:space-y-5">
+                        <form onSubmit={handleSubmit(submit)} className="space-y-4 xl:space-y-5">
                             <div className="space-y-2">
                                 <Label htmlFor="email" className="text-xs font-medium uppercase tracking-wider ">
                                     Email Address
@@ -55,9 +68,11 @@ export default function LoginPage() {
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="name@aether.com"
+                                    placeholder="name@zyloo.com"
                                     className="h-11 rounded-md border-border "
+                                    {...register("email")}
                                 />
+                                <p className="text-[11px] text-destructive">{errors.email?.message}</p>
                             </div>
 
                             <div className="space-y-2">
@@ -75,7 +90,9 @@ export default function LoginPage() {
                                         type={showPassword ? "text" : "password"}
                                         className="h-11 rounded-md border-border pr-10"
                                         placeholder="***********"
+                                        {...register("password")}
                                     />
+                                    <p className="text-[11px] text-destructive">{errors.password?.message}</p>
 
                                     <button
                                         type="button"

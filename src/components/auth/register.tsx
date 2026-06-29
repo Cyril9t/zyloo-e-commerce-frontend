@@ -6,8 +6,21 @@ import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import { Globe, ImageOff, Import } from "lucide-react";
 import Navbar from "../landingPage/navbar/navbar";
+import { useForm } from "react-hook-form";
+import { registerSchema } from "../../lib/schema/validate";
+import type { registerData } from "../../lib/schema/validate";
+import { zodResolver } from "@hookform/resolvers/zod"
 
 export default function RegisterPage() {
+
+    const { handleSubmit, register, formState: { errors } } = useForm<registerData>({
+        resolver: zodResolver(registerSchema)
+    })
+
+    const onSubmit = (data: registerData) => {
+        console.log(data);
+    }
+
     return (
 
         <div>
@@ -70,26 +83,25 @@ export default function RegisterPage() {
                             </span>
                         </div>
 
-                        <form className="space-y-3 xl:space-y-4">
-                            <div className="grid grid-cols-2 gap-3 xl:gap-4">
+                        <form className="space-y-3 xl:space-y-4" onSubmit={handleSubmit(onSubmit)}>
+                            <div className="w-full">
                                 <div className="space-y-1.5">
-                                    <Label htmlFor="firstName" className="text-[11px] font-medium uppercase tracking-wider ">First Name</Label>
-                                    <Input id="firstName" placeholder="Alex" className="h-10 xl:h-11 rounded-md border-border " />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="lastName" className="text-[11px] font-medium uppercase tracking-wider ">Last Name</Label>
-                                    <Input id="lastName" placeholder="Smith" className="h-10 xl:h-11 rounded-md border-border " />
+                                    <Label htmlFor="firstName" className="text-[11px] font-medium uppercase tracking-wider ">FullName</Label>
+                                    <Input id="firstName" placeholder="Alex" className="h-10 xl:h-11 rounded-md border-border " {...register("fullName")} />
+                                    <p className="text-[11px] text-destructive">{errors.fullName?.message}</p>
                                 </div>
                             </div>
 
                             <div className="space-y-1.5">
                                 <Label htmlFor="email" className="text-[11px] font-medium uppercase tracking-wider ">Email Address</Label>
-                                <Input id="email" type="email" placeholder="name@aether.com" className="h-10 xl:h-11 rounded-md border-border" />
+                                <Input id="email" type="email" placeholder="name@aether.com" className="h-10 xl:h-11 rounded-md border-border" {...register("email")} />
+                                <p className="text-[11px] text-destructive">{errors.email?.message}</p>
                             </div>
 
                             <div className="space-y-1.5">
                                 <Label htmlFor="password" className="text-[11px] font-medium uppercase tracking-wider ">Password</Label>
-                                <Input id="password" type="password" placeholder="••••••••" className="h-10 xl:h-11 rounded-md border-border " />
+                                <Input id="password" type="password" placeholder="••••••••" className="h-10 xl:h-11 rounded-md border-border " {...register("password")} />
+                                <p className="text-[11px] text-destructive">{errors.password?.message}</p>
                             </div>
 
 
