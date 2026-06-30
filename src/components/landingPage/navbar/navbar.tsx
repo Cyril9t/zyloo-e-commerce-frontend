@@ -177,14 +177,14 @@ export default function Navbar() {
                             {states.map((item) => (
                                 <Link key={item.title} to={item.link}>
                                     {item.title === "My account" ? (
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
+                                        <DropdownMenu >
+                                            <DropdownMenuTrigger asChild >
                                                 <Button variant="ghost" size="icon-lg">
                                                     <User2Icon className="!h-5 !w-5" />
                                                 </Button>
                                             </DropdownMenuTrigger>
 
-                                            <DropdownMenuContent>
+                                            <DropdownMenuContent className="w-full p-4">
                                                 {user.map((u) => (
                                                     <DropdownMenuItem
                                                         key={u.title}

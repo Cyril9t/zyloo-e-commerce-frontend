@@ -10,16 +10,35 @@ import { useForm } from "react-hook-form";
 import { registerSchema } from "../../lib/schema/validate";
 import type { registerData } from "../../lib/schema/validate";
 import { zodResolver } from "@hookform/resolvers/zod"
+import { authReg } from "../../lib/auth/auth";
+import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 export default function RegisterPage() {
 
     const { handleSubmit, register, formState: { errors } } = useForm<registerData>({
         resolver: zodResolver(registerSchema)
-    })
+    });
 
-    const onSubmit = (data: registerData) => {
-        console.log(data);
+    const [isConfirm, setIsConfirm] = useState(true);
+
+    const { trigger, isMutating } = authReg();
+
+    const onSubmit = async (details: registerData) => {
+        try {
+            const user = trigger(details);
+
+            toast.promise(user, {
+                loading: "creating....",
+                success: (data) => data.Message,
+                error: "Operation failed"
+            })
+        } catch (errors) {
+            console.log(errors);
+
+        }
     }
+
 
     return (
 
@@ -31,9 +50,9 @@ export default function RegisterPage() {
                 <div className="relative hidden lg:flex flex-col justify-between p-8 bg-cover bg-center h-full"
                     style={{ backgroundImage: "url('/bg2.jpg')" }}>
                     <div className="absolute inset-0 bg-black/10" />
-                    <div className="relative z-10 font-bold text-2xl tracking-widest">AETHER</div>
+                    <div className="relative z-10 font-bold text-2xl tracking-widest">ZYLOO</div>
                     <div className="relative z-10 text-xs tracking-wider">
-                        © 2026 AETHER PREMIUM. ALL RIGHTS RESERVED.
+                        © 2026 ZYLOO PREMIUM. ALL RIGHTS RESERVED.
                     </div>
                 </div>
 
@@ -42,7 +61,7 @@ export default function RegisterPage() {
 
 
                     <div className="flex justify-between items-center lg:justify-end gap-6 text-xs tracking-wide">
-                        <span className="lg:hidden font-bold text-xl tracking-widest">AETHER</span>
+                        <span className="lg:hidden font-bold text-xl tracking-widest">ZYLOO</span>
                         <div className="flex gap-4">
                             <a href="#" className="hover:text-black transition-colors">Help</a>
                             <a href="#" className="hover:text-black transition-colors">Privacy</a>
@@ -53,7 +72,7 @@ export default function RegisterPage() {
                     <div className="mx-auto w-full max-w-[400px] space-y-4 xl:space-y-6 my-auto py-2">
                         <div className="space-y-1 text-center lg:text-left">
                             <h1 className="text-2xl xl:text-3xl font-light tracking-tight">Create Account</h1>
-                            <p className="text-xs xl:text-sm font-light">Join Aether to access premium features</p>
+                            <p className="text-xs xl:text-sm font-light">Join ZYLOO to access premium features</p>
                         </div>
 
 
@@ -94,7 +113,7 @@ export default function RegisterPage() {
 
                             <div className="space-y-1.5">
                                 <Label htmlFor="email" className="text-[11px] font-medium uppercase tracking-wider ">Email Address</Label>
-                                <Input id="email" type="email" placeholder="name@aether.com" className="h-10 xl:h-11 rounded-md border-border" {...register("email")} />
+                                <Input id="email" type="email" placeholder="name@ZYLOO.com" className="h-10 xl:h-11 rounded-md border-border" {...register("email")} />
                                 <p className="text-[11px] text-destructive">{errors.email?.message}</p>
                             </div>
 
@@ -106,7 +125,7 @@ export default function RegisterPage() {
 
 
                             <div className="flex items-start space-x-2 pt-1">
-                                <Checkbox id="terms" className="border-border mt-0.1 data-[state=checked]:bg-black data-[state=checked]:border-black" />
+                                <Checkbox id="terms" className="border-border mt-0.1 data-[state=checked]:bg-black data-[state=checked]:border-black" onClick={() => setIsConfirm(prev => !prev)} />
                                 <label htmlFor="terms" className="text-[11px] text-foreground/70 font-light leading-tight">
                                     I agree to the{" "}
                                     <a href="#" className="underline text-foreground">Terms of Service</a> and{" "}
@@ -114,7 +133,7 @@ export default function RegisterPage() {
                                 </label>
                             </div>
 
-                            <Button type="submit" className="w-full h-10 xl:h-11 bg-black text-white hover:bg-neutral-800 transition-all rounded-md font-normal tracking-wide mt-2">
+                            <Button disabled={isConfirm ? isConfirm : isMutating} type="submit" className="w-full h-10 xl:h-11 bg-black text-white hover:bg-neutral-800 transition-all rounded-md font-normal tracking-wide mt-2">
                                 Create Account
                             </Button>
                         </form>
@@ -129,7 +148,7 @@ export default function RegisterPage() {
 
 
                     <div className="flex justify-between items-center text-[11px] opacity-40 tracking-wider pt-2">
-                        <span className="lg:block hidden">© 2026 AETHER PREMIUM. ALL RIGHTS RESERVED.</span>
+                        <span className="lg:block hidden">© 2026 ZYLOO PREMIUM. ALL RIGHTS RESERVED.</span>
                         <span className="lg:hidden block" />
                         <div className="flex items-center gap-1.5 cursor-pointer hover:text-black transition-colors">
                             <Globe size={12} />

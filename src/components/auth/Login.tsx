@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 
 import { Eye, EyeOff, Globe } from "lucide-react";
 import { Button } from "../ui/button";
@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../lib/schema/validate";
 import type { loginData } from "../../lib/schema/validate";
+import { authLogin } from "../../lib/auth/auth";
+import { toast } from "sonner"
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = React.useState(false);
@@ -17,10 +19,25 @@ export default function LoginPage() {
         resolver: zodResolver(loginSchema)
     })
 
+    const { data, trigger, isMutating } = authLogin()
+
     const year = new Date(Date.now()).toLocaleString("en-US", { year: "numeric" })
 
-    const submit = (data: loginData) => {
-        console.log(data)
+    const submit = async (details: loginData) => {
+        try {
+
+            const user = trigger(details);
+            toast.promise(user, {
+                loading: "Processing....",
+                success: (msg) => msg.Message,
+                error: "Operation Failed"
+            })
+
+        } catch (err) {
+            console.log(err);
+        }
+
+
     }
     return (
 
@@ -104,7 +121,7 @@ export default function LoginPage() {
                                 </div>
                             </div>
 
-                            <Button type="submit" className="w-full h-11 bg-black text-white hover:bg-neutral-800 transition-all rounded-md font-normal tracking-wide mt-2">
+                            <Button disabled={isMutating} type="submit" className="w-full h-11 bg-black text-white hover:bg-neutral-800 transition-all rounded-md font-normal tracking-wide mt-2">
                                 Sign In
                             </Button>
                         </form>
