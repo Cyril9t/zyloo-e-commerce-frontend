@@ -1,0 +1,143 @@
+src/
+│
+├── app/
+│   ├── App.tsx
+│   ├── providers.tsx
+│   └── index.ts
+│
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   ├── logos/
+│   └── fonts/
+│
+├── components/
+│   ├── common/
+│   │   ├── PageHeader.tsx
+│   │   ├── SectionHeader.tsx
+│   │   ├── EmptyState.tsx
+│   │   ├── ErrorState.tsx
+│   │   ├── LoadingSkeleton.tsx
+│   │   └── Logo.tsx
+│   │
+│   ├── layout/
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── MobileNav.tsx
+│   │   └── UserMenu.tsx
+│   │
+│   └── ui/
+│       └── (Reusable shadcn wrappers if needed)
+│
+├── features/
+│
+│   ├── auth/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── schemas/
+│   │   ├── types/
+│   │   └── data/
+│   │
+│   ├── home/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── data/
+│   │
+│   ├── products/
+│   │   ├── components/
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── ProductGallery.tsx
+│   │   │   ├── ProductGrid.tsx
+│   │   │   ├── ProductRating.tsx
+│   │   │   ├── ProductFilter.tsx
+│   │   │   └── CategoryFilter.tsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── ProductsPage.tsx
+│   │   │   └── ProductDetailsPage.tsx
+│   │   │
+│   │   ├── data/
+│   │   ├── types/
+│   │   └── hooks/
+│   │
+│   ├── cart/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── types/
+│   │   └── data/
+│   │
+│   ├── checkout/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── types/
+│   │
+│   ├── wishlist/
+│   │   ├── components/
+│   │   └── pages/
+│   │
+│   ├── orders/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── data/
+│   │
+│   ├── profile/
+│   │   ├── components/
+│   │   └── pages/
+│   │
+│   └── admin/
+│       ├── dashboard/
+│       ├── products/
+│       ├── categories/
+│       ├── users/
+│       ├── orders/
+│       ├── coupons/
+│       └── shared/
+│
+├── layouts/
+│   ├── AuthLayout.tsx
+│   ├── CustomerLayout.tsx
+│   └── AdminLayout.tsx
+│
+├── routes/
+│   ├── AppRouter.tsx
+│   ├── ProtectedRoute.tsx
+│   ├── AdminRoute.tsx
+│   └── paths.ts
+│
+├── data/
+│   ├── products.ts
+│   ├── categories.ts
+│   ├── users.ts
+│   ├── orders.ts
+│   └── dashboard.ts
+│
+├── hooks/
+│   ├── useDebounce.ts
+│   ├── usePagination.ts
+│   ├── useLocalStorage.ts
+│   └── useMediaQuery.ts
+│
+├── lib/
+│   ├── utils.ts
+│   ├── constants.ts
+│   └── helpers.ts
+│
+├── services/
+│   └── (API services later)
+│
+├── types/
+│   ├── product.ts
+│   ├── order.ts
+│   ├── user.ts
+│   └── index.ts
+│
+├── utils/
+│   ├── formatCurrency.ts
+│   ├── formatDate.ts
+│   ├── validators.ts
+│   └── cn.ts
+│
+├── index.css
+├── main.tsx
+└── vite-env.d.ts
