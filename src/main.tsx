@@ -6,9 +6,8 @@ import './index.css'
 import App from './app/App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>,
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+  ,
 )

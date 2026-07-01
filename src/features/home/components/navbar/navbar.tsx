@@ -1,10 +1,12 @@
 import { Cuboid, Heart, Home, LogOut, Menu, Plane, PlugZap, Search, Settings, ShoppingCartIcon, SparklesIcon, SportShoe, User2Icon, X } from "lucide-react"
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
 import { Button } from "../../../../components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, } from "../../../../components/ui/dropdown-menu";
 import { ThemeToggle } from "../../../../components/theme/toggle-theme";
+import Logo from "../../../../components/common/Logo";
+import SearchBar from "../../../../components/common/searchBar";
+import NavbarLinks from "../../../../components/Layout/NavbarLinks";
 const states = [
     {
         link: "*",
@@ -73,67 +75,20 @@ const user = [
     },
 ]
 
-export default function Navbar() {
+export default function Navba() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     return (
         <div>
 
-            {isSearchOpen && (
-                <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-fadeIn">
-                    <div className="container mx-auto px-4 pt-4">
-                        <div className="rounded-2xl bg-card p-2 shadow-2xl animate-slideDown">
-                            <form className="flex items-center gap-3">
-                                <Search className="h-5 w-5 text-muted-foreground" />
-
-                                <input
-                                    type="text"
-                                    placeholder="Search for products..."
-                                    className="flex-1 bg-transparent text-lg outline-none"
-                                    autoFocus
-                                />
-
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                    onClick={() => setIsSearchOpen(false)}
-                                >
-                                    <X className="h-5 w-5" />
-                                </Button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            )}
-
             <header className="hidden md:block">
                 <div className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-(--color-background) px-4 backdrop-blur-md">
-                    <Link to={"/"}>
-                        <Button
-                            variant="ghost"
-                            className="flex items-center gap-2 rounded-lg border p-5 rounded-full"
-                        >
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xl font-medium text-primary-foreground">
-                                Z
-                            </div>
+                    <Logo />
 
-                            <div className="hidden text-left md:block">
-                                <p className="text-xl font-bold">Zyloo</p>
-                            </div>
-                        </Button>
+                    <SearchBar />
 
-                    </Link>
-
-                    <nav>
-                        <ul className="flex gap-8 font-bold">
-                            <li>New Arrivals</li>
-                            <li>Electronics</li>
-                            <li>Fashion</li>
-                            <li>Sports</li>
-                            <li>Home</li>
-                        </ul>
-                    </nav>
-
+                    <NavbarLinks />
                     {/* Actions */}
+
                     <div>
                         {/* Tablet */}
                         <div className="block lg:hidden">
@@ -164,15 +119,6 @@ export default function Navbar() {
 
 
                         <div className="hidden lg:flex items-center gap-2">
-                            <Button
-                                variant="ghost"
-                                className="rounded-3xl bg-foreground/10 p-4 text-black/80"
-                                onClick={() => setIsSearchOpen(true)}
-                            >
-                                <Search />
-                                Search
-                            </Button>
-
                             <ThemeToggle />
 
                             {states.map((item) => (

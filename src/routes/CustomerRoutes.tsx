@@ -9,11 +9,15 @@ import OrderSuccessPage from "../features/orders/pages/OrderSuccessPage";
 import OrdersPage from "../features/orders/pages/OrdersPage";
 import ProductDetailsPage from "../features/products/pages/ProductDetailsPage";
 import ProductsPage from "../features/products/pages/ProductsPage";
+import CustomerLayout from "../layouts/CustomerLayout";
 function CustomerRoutes() {
     return (
         <>
             <Routes>
-                <Route path={PATHS.customer.home} element={<HomePage />} />
+                <Route element={<CustomerLayout />} >
+
+                    <Route path={PATHS.customer.home} element={<HomePage />} />
+                </Route>
                 <Route path={PATHS.customer.cart} element={<CartPage />} />
                 <Route path={PATHS.customer.checkout} element={<CheckoutPage />} />
                 <Route path={PATHS.customer.profile} element={<ProfilePage />} />
