@@ -5,7 +5,7 @@ export default function HeroSection() {
     return (
         <section className="border-b ">
             <div className="grid  items-center gap-10 px-10 py-8 lg:grid-cols-2">
-                {/* Left Content */}
+
                 <div className="space-y-8">
                     <div className="inline-flex items-center gap-2 rounded-full border bg-muted px-4 py-2 text-sm">
                         <ShoppingBag className="h-4 w-4" />

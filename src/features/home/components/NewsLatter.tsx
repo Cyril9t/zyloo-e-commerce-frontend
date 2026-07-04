@@ -1,7 +1,7 @@
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 
-export default function Newsletter() {
+export default function Newslette() {
     return (
         <section className="container-page py-20">
             <div className="rounded-3xl border bg-card p-8 lg:p-12">

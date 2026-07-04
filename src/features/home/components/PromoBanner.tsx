@@ -10,7 +10,7 @@ interface ProductSlide {
     originalPrice?: string;
     badge?: string;
     image: string;
-    bgColor: string; // Tailwind gradient classes
+    bgColor: string;
     ctaText: string;
 }
 
@@ -54,6 +54,7 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
 
 export default function PromoBanner() {
     const [currentIndex, setCurrentIndex] = useState(0);
+
     const [isPaused, setIsPaused] = useState(false);
 
     const nextSlide = useCallback(() => {
@@ -70,18 +71,19 @@ export default function PromoBanner() {
 
         const interval = setInterval(() => {
             nextSlide();
-        }, 5000); // Changes slide every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
+
     }, [nextSlide, isPaused]);
 
     return (
         <div
-            className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-2xl shadow-2xl bg-foreground"
+            className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-2xl shadow-2xl bg-foreground dark:bg-muted"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
-            {/* Slide Wrapper */}
+
             <div
                 className="flex transition-transform duration-700 ease-out h-[500px] md:h-[450px]"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -91,13 +93,13 @@ export default function PromoBanner() {
                         key={product.id}
                         className={`w-full h-full flex-shrink-0 bg-gradient-to-r ${product.bgColor} relative flex flex-col md:flex-row items-center px-8 md:px-16 py-12 overflow-hidden`}
                     >
-                        {/* Ambient Background Glow */}
+
                         <div className="absolute -right-10 -top-10 w-72 h-72 rounded-full blur-3xl pointer-events-none" />
 
-                        {/* Left Content Column */}
-                        <div className="w-full md:w-full flex flex-col justify-center text-white z-10 space-y-4 md:space-y-5 text-center md:text-left">
+
+                        <div className="w-full md:w-full flex flex-col justify-center z-10 space-y-4 md:space-y-5 text-center md:text-left text-white">
                             {product.badge && (
-                                <div className="mx-auto md:mx-0 max-w-fit px-3 py-1 text-xs font-semibold uppercase tracking-wider  backdrop-blur-md border  rounded-full text-indigo-200">
+                                <div className="mx-auto md:mx-0 max-w-fit px-3 py-1 text-xs font-semibold uppercase tracking-wider  backdrop-blur-md border  rounded-full ">
                                     {product.badge}
                                 </div>
                             )}
@@ -130,7 +132,7 @@ export default function PromoBanner() {
                             </div>
                         </div>
 
-                        {/* Right Image Column */}
+
                         <div className="w-full md:w-full h-full relative flex items-center justify-center mt-6 md:mt-0 z-10">
                             <div className="relative w-full h-full md:w-full md:h-full group">
                                 {/* Product Drop Shadow Effect */}

@@ -17,10 +17,14 @@ function Newsletter() {
         <section className="py-6 md:py-2 px-10  mx-auto w-full mb-20">
             <Card className="relative overflow-hidden border  bg-gradient-to-b from-zinc-50 dark:from-zinc-900 dark:to-zinc-950 rounded-[0.5rem] md:p-16 lg:p-16 shadow-xl shadow-zinc-200/30 dark:shadow-none">
 
-                {/* Modern Designer Background Accents */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_100%)] pointer-events-none" />
+
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)]
+                 bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_100%)] pointer-events-none" />
+
                 <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-1xl pointer-events-none" />
                 <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/5 rounded-full blur-1xl pointer-events-none" />
+
+
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
                     {/* Left Side: Value Proposition */}

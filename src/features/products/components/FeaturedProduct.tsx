@@ -47,7 +47,7 @@ const products: Product[] = [
 
 export default function FeaturedProducts() {
     return (
-        <section className="container-page py-6 px-10 mt-10">
+        <section className="container-page py-4  mt-4">
 
             <h2 className="text-3xl font-bold">Featured Products</h2>
 
