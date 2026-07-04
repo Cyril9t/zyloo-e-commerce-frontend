@@ -6,10 +6,12 @@ import AdminOrdersPage from "../features/admin/orders/AdminOrdersPage";
 import CouponsPage from "../features/admin/coupons/CouponsPage";
 import UsersPage from "../features/admin/users/UsersPage";
 import AdminProductsPage from "../features/admin/products/AdminProductsPage";
+import AdminLayout from "../layouts/AdminLayout";
 export default function AdminRouter() {
     return (
         <>
             <Routes>
+                < Route path={PATHS.admin.dashboard} element={<AdminLayout />} />
                 <Route path={PATHS.admin.dashboard} element={<DashboardPage />} />
                 <Route path={PATHS.admin.categories} element={<CategoriesPage />} />
                 <Route path={PATHS.admin.orders} element={<AdminOrdersPage />} />
