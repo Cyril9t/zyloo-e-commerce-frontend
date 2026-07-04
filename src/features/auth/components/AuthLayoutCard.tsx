@@ -1,0 +1,21 @@
+import type { ReactNode } from "react";
+
+import { Card, CardContent } from "../../../components/ui/card";
+
+interface AuthLayoutCardProps {
+    children: ReactNode;
+}
+
+export default function AuthLayoutCard({
+    children,
+}: AuthLayoutCardProps) {
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-10">
+            <Card className="w-full max-w-md shadow-lg">
+                <CardContent className="space-y-8 p-8">
+                    {children}
+                </CardContent>
+            </Card>
+        </div>
+    );
+}
