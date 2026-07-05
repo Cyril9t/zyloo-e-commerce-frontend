@@ -43,9 +43,11 @@ export default function WhyChooseUs() {
                     {features.map(({ icon: Icon, title, description }, index) => (
                         <Card
                             key={title}
-                            className="group relative overflow-hidden border border-zinc-200/80 dark:border-zinc-800/60 bg-white dark:bg-zinc-900/50 rounded-2xl transition-all duration-300 hover:bg-zinc-50/50 dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700/80 shadow-sm hover:shadow-md"
+                            className="group relative overflow-hidden border border-zinc-200/80 dark:border-zinc-800/60 
+                            bg-white dark:bg-zinc-900/50 rounded-2xl transition-all duration-300 hover:bg-zinc-50/50 
+                            dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700/80 shadow-sm hover:shadow-md"
                         >
-                            <CardContent className="p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                            <CardContent className="p-6 md:p-6 flex flex-col sm:flex-row items-start gap-5">
                                 {/* Micro-interactive Icon Container */}
                                 <div className="relative flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-700 group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
                                     <Icon className="h-5 w-5 text-zinc-700 dark:text-zinc-300 group-hover:text-primary-foreground transition-colors duration-300" />

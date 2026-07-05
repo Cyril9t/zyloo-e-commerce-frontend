@@ -51,7 +51,7 @@ const premiumCategories: Category[] = [
 
 export default function ShopByCategory() {
     return (
-        <section className="w-full max-w-7xl mx-auto px-1 py-7 md:py-18">
+        <section className="w-full max-w-[95%] mx-auto px-1 py-7 md:py-18">
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
                 <div className="space-y-3">

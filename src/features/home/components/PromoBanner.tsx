@@ -79,10 +79,15 @@ export default function PromoBanner() {
 
     return (
         <div
-            className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-2xl shadow-2xl bg-foreground dark:bg-muted"
+            className="relative w-full max-w-[96%] mx-auto overflow-hidden rounded-2xl shadow-2xl "
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
+            <div
+                className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_100%)]"
+            />
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-1xl pointer-events-none" />
+            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/5 rounded-full blur-1xl pointer-events-none" />
 
             <div
                 className="flex transition-transform duration-700 ease-out h-[500px] md:h-[450px]"
@@ -97,7 +102,7 @@ export default function PromoBanner() {
                         <div className="absolute -right-10 -top-10 w-72 h-72 rounded-full blur-3xl pointer-events-none" />
 
 
-                        <div className="w-full md:w-full flex flex-col justify-center z-10 space-y-4 md:space-y-5 text-center md:text-left text-white">
+                        <div className="w-full md:w-full flex flex-col justify-center z-10 space-y-4 md:space-y-5 text-center md:text-left ">
                             {product.badge && (
                                 <div className="mx-auto md:mx-0 max-w-fit px-3 py-1 text-xs font-semibold uppercase tracking-wider  backdrop-blur-md border  rounded-full ">
                                     {product.badge}
@@ -105,10 +110,10 @@ export default function PromoBanner() {
                             )}
 
                             <div className="space-y-1">
-                                <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white">
+                                <h2 className="text-3xl md:text-5xl font-black tracking-tight ">
                                     {product.title}
                                 </h2>
-                                <p className="text-lg md:text-xl font-medium text-zinc-300">
+                                <p className="text-lg md:text-xl font-medium opacity-50">
                                     {product.subtitle}
                                 </p>
                             </div>
@@ -125,7 +130,7 @@ export default function PromoBanner() {
                             </div>
 
                             <div className="pt-2">
-                                <button className="group inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-xl font-semibold text-sm tracking-wide shadow-lg transition-all duration-200 hover:bg-zinc-100 hover:scale-[1.02] active:scale-[0.98]">
+                                <button className="group inline-flex items-center justify-center bg-white  px-6 py-3 rounded-xl font-semibold text-sm tracking-wide shadow-lg transition-all duration-200 hover:bg-zinc-100 hover:scale-[1.02] active:scale-[0.98]">
                                     {product.ctaText}
                                     <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                                 </button>

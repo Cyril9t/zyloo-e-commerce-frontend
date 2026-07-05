@@ -8,10 +8,13 @@ import Newsletter from "../components/landingPage/Newsletter";
 
 function HomePage() {
     return (
-        <div>
+        <div className="mx-auto max-w-[90%]">
             <HeroSection />
             <CategoriesSection />
-            <FeaturedProducts />
+            <div className="justify-self-center ">
+
+                <FeaturedProducts />
+            </div>
             <PromoBanner />
             <WhyChooseUs />
             <Newsletter />
