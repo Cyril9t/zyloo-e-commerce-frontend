@@ -1,0 +1,7 @@
+interface AdminCategory {
+    id: string;
+    name: string;
+    products: number;
+}
+
+export default AdminCategory

@@ -1,4 +1,4 @@
-import type { AdminCategory } from "@/features/admin/categories/types/category";
+import type { AdminCategory } from "../features/admin/categories/types/index";
 
 export const adminCategories: AdminCategory[] = [
     {
