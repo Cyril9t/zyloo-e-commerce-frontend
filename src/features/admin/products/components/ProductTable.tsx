@@ -3,9 +3,12 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import { adminProducts } from "../../../../mock/adminProducts";
 
+import DataTable from "../../shared/components/DataTable";
+import ConfirmDialog from "../../shared/components/ConfirmDialog";
+
 export default function ProductTable() {
     return (
-        <div className="overflow-hidden rounded-xl border">
+        <DataTable>
             <table className="w-full">
                 <thead className="bg-muted">
                     <tr>
@@ -56,18 +59,25 @@ export default function ProductTable() {
                                         <Pencil className="h-4 w-4" />
                                     </Button>
 
-                                    <Button
-                                        variant="destructive"
-                                        size="icon"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
+                                    <ConfirmDialog
+                                        title="Delete Product"
+                                        description="This action cannot be undone."
+                                        onConfirm={() => console.log("Delete Product")}
+                                        trigger={
+                                            <Button
+                                                variant="destructive"
+                                                size="icon"
+                                            >
+                                                <Trash2 className="h-4 w-4" />
+                                            </Button>
+                                        }
+                                    />
                                 </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-        </div>
+        </DataTable>
     );
 }
