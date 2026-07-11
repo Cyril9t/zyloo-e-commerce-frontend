@@ -23,9 +23,11 @@ export const PATHS = {
         dashboard: "/admin",
         products: "/admin/products",
         categories: "/admin/categories",
+        addProducts: "/admin/upload",
         orders: "/admin/orders",
         users: "/admin/users",
         coupons: "/admin/coupons",
+        settings: '/admin/settings'
     },
 
     shared: {

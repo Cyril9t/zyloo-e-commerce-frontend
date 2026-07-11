@@ -1,6 +1,7 @@
 import { Button } from "../../../../components/ui/button";
-
+import { Link } from "react-router-dom";
 import ProductTable from "../components/ProductTable";
+import { PATHS } from "../../../../routes/paths";
 
 export default function ProductsPage() {
     return (
@@ -15,10 +16,11 @@ export default function ProductsPage() {
                         Manage all store products.
                     </p>
                 </div>
-
-                <Button>
-                    Add Product
-                </Button>
+                <Link to={PATHS.admin.addProducts}>
+                    <Button>
+                        Add Product
+                    </Button>
+                </Link>
             </div>
 
             <ProductTable />
