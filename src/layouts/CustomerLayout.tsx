@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Navba from "../features/home/components/navbar/navbar";
+import Navbar from "../features/home/components/navbar/navbar";
 import Footer from "../features/home/components/landingPage/footer";
+import { useAuth } from "../context/AuhProvider";
 
 export default function CustomerLayout() {
     return (
         <div className="min-h-screen flex flex-col bg-background">
-            <Navba />
+            <Navbar />
             {/* <header className="h-16 border-b flex items-center px-6">
 
             </header> */}

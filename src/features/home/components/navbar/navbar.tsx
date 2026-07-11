@@ -1,5 +1,5 @@
 import { Cuboid, Heart, Home, LogOut, Menu, Plane, PlugZap, Search, Settings, ShoppingCartIcon, SparklesIcon, SportShoe, User2Icon, X } from "lucide-react"
-import { Link } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "../../../../components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, } from "../../../../components/ui/dropdown-menu";
@@ -7,6 +7,8 @@ import { ThemeToggle } from "../../../../components/theme/toggle-theme";
 import Logo from "../../../../components/common/Logo";
 import SearchBar from "../../../../components/common/searchBar";
 import NavbarLinks from "../../../../components/Layout/NavbarLinks";
+import { PATHS } from "../../../../routes/paths";
+
 const states = [
     {
         link: "*",
@@ -52,11 +54,13 @@ const MobileStates = [
     },
 ]
 
+
 const user = [
     {
         icons: <User2Icon />,
-        link: "/*",
-        title: "My Account"
+        link: PATHS.customer.profile,
+        title: "My Account",
+
     },
     {
         icons: <Cuboid />,
@@ -75,8 +79,10 @@ const user = [
     },
 ]
 
-export default function Navba() {
+export default function Navbar() {
+
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+
     return (
         <div>
 
@@ -125,6 +131,7 @@ export default function Navba() {
                                 <Link key={item.title} to={item.link}>
                                     {item.title === "My account" ? (
                                         <DropdownMenu >
+
                                             <DropdownMenuTrigger asChild >
                                                 <Button variant="ghost" size="icon-lg">
                                                     <User2Icon className="!h-5 !w-5" />
@@ -133,15 +140,19 @@ export default function Navba() {
 
                                             <DropdownMenuContent className="w-full p-4">
                                                 {user.map((u) => (
-                                                    <DropdownMenuItem
-                                                        key={u.title}
-                                                        className="p-3 px-4"
-                                                    >
-                                                        {u.icons}
-                                                        {u.title}
-                                                    </DropdownMenuItem>
+                                                    <Link to={u.link} key={u.title}>
+                                                        <DropdownMenuItem
+                                                            className="p-3 px-4"
+
+                                                        >
+                                                            {u.icons}
+                                                            {u.title}
+                                                        </DropdownMenuItem>
+                                                    </Link>
+
                                                 ))}
                                             </DropdownMenuContent>
+
                                         </DropdownMenu>
                                     ) : (
                                         <Button variant="ghost" size="icon-lg">

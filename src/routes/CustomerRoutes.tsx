@@ -12,52 +12,37 @@ import ProfilePage from "../features/profile/pages/ProfilePage";
 import OrdersPage from "../features/orders/pages/OrdersPage";
 import OrderDetailsPage from "../features/orders/pages/OrderDetailsPage";
 import OrderSuccessPage from "../features/orders/pages/OrderSuccessPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 function CustomerRoutes() {
     return (
         <Routes>
+
+
             <Route path="/" element={<CustomerLayout />}>
+
                 <Route path={PATHS.customer.home} element={<HomePage />} />
 
-                <Route
-                    path={PATHS.customer.products}
-                    element={<ProductListingPage />}
-                />
+                <Route element={<ProtectedRoute />} >
 
-                <Route
-                    path={PATHS.customer.productDetails}
-                    element={<ProductDetailsPage />}
-                />
+                    <Route path={PATHS.customer.products} element={<ProductListingPage />} />
 
-                <Route
-                    path={PATHS.customer.cart}
-                    element={<CartPage />}
-                />
+                    <Route path={PATHS.customer.productDetails} element={<ProductDetailsPage />} />
 
-                <Route
-                    path={PATHS.customer.checkout}
-                    element={<CheckoutPage />}
-                />
+                    <Route path={PATHS.customer.cart} element={<CartPage />} />
 
-                <Route
-                    path={PATHS.customer.profile}
-                    element={<ProfilePage />}
-                />
+                    <Route path={PATHS.customer.checkout} element={<CheckoutPage />} />
 
-                <Route
-                    path={PATHS.customer.orders}
-                    element={<OrdersPage />}
-                />
+                    <Route path={PATHS.customer.profile} element={<ProfilePage />} />
 
-                <Route
-                    path={PATHS.customer.orderDetails}
-                    element={<OrderDetailsPage />}
-                />
+                    <Route path={PATHS.customer.orders} element={<OrdersPage />} />
 
-                <Route
-                    path={PATHS.customer.orderSuccess}
-                    element={<OrderSuccessPage />}
-                />
+                    <Route path={PATHS.customer.orderDetails} element={<OrderDetailsPage />} />
+
+                    <Route path={PATHS.customer.orderSuccess} element={<OrderSuccessPage />} />
+
+                </Route>
+
             </Route>
         </Routes>
     );

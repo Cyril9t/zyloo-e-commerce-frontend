@@ -2,8 +2,13 @@ import AccountMenu from "../components/AccountMenu";
 import AddressCard from "../components/AddressCard";
 import ProfileAvatar from "../components/ProfileAvatar";
 import ProfileInfo from "../components/ProfileInfo";
+import { useAuth } from "../../../context/AuhProvider";
 
 export default function ProfilePage() {
+    const { user } = useAuth()
+
+    if (!user) return alert("LOGIN")
+
     return (
         <section className="container-page py-10">
             <div className="mb-8">

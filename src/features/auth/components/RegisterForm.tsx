@@ -1,20 +1,45 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
-
+import { Link, type Register } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
 import { Checkbox } from "../../../components/ui/checkbox";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
-
 import { PATHS } from "../../../routes/paths";
+import { registerSchema } from "../../../lib/schema/validate";
+import z from "zod";
+import { authReg } from "../../../lib/auth/auth";
+import type { registerData } from "../../../lib/schema/validate";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+interface info {
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+}
 
 export default function RegisterForm() {
+
+    const { handleSubmit, register, formState: { errors } } = useForm<registerData>({
+        resolver: zodResolver(registerSchema)
+    })
+    const { trigger, isMutating, error } = authReg()
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+    const submit = async (data: info) => {
+        console.log(data)
+        try {
+            const user = await trigger(data)
+            console.log(user);
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit(submit)} className="space-y-6">
             <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                     <Label htmlFor="firstName">
@@ -24,6 +49,7 @@ export default function RegisterForm() {
                     <Input
                         id="firstName"
                         placeholder="John"
+                        {...register("firstName")}
                     />
                 </div>
 
@@ -35,6 +61,7 @@ export default function RegisterForm() {
                     <Input
                         id="lastName"
                         placeholder="Doe"
+                        {...register("lastName")}
                     />
                 </div>
             </div>
@@ -48,6 +75,7 @@ export default function RegisterForm() {
                     id="email"
                     type="email"
                     placeholder="john@example.com"
+                    {...register("email")}
                 />
             </div>
 
@@ -61,6 +89,7 @@ export default function RegisterForm() {
                         id="password"
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
+                        {...register("password")}
                     />
 
                     <Button
