@@ -32,3 +32,15 @@ const trigger = async (url: string) => {
 export const validate = () => {
     return useSWRMutation("/user/me", trigger);
 }
+
+const logouts = async (url: string) => {
+    const res = await api.post(url)
+
+    return res.data
+}
+
+export const logout = () => {
+    return useSWRMutation("/auth/logout", logouts)
+
+
+}

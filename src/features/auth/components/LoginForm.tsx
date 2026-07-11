@@ -1,20 +1,57 @@
 import { useState } from "react";
 import { Eye, EyeOff, } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "../../../components/ui/button";
 import { Checkbox } from "../../../components/ui/checkbox";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { Separator } from "../../../components/ui/separator";
-
+import type { loginData } from "../../../lib/schema/validate";
+import { loginSchema } from "../../../lib/schema/validate";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { authLogin } from "../../../lib/auth/auth";
 import { PATHS } from "../../../routes/paths";
+import { toast } from "sonner";
+import { useAuth } from "../../../context/AuhProvider";
+
 
 export default function LoginForm() {
+    const { user: log, setUser } = useAuth();
+    const { trigger, isMutating } = authLogin()
     const [showPassword, setShowPassword] = useState(false);
 
+    const { handleSubmit, register, formState: { errors } } = useForm<loginData>({
+        resolver: zodResolver(loginSchema)
+    });
+
+    const navigate = useNavigate()
+
+    const submit = async (data: loginData) => {
+        try {
+            const login = trigger(data)
+            toast.promise(login, {
+                success: (data) => data.Message,
+                loading: "Processing...",
+                error: (data) => data.Error
+            })
+            const user = await login
+            console.log(user)
+            if (user.Message === "Login success") {
+                setUser(user.userInfo)
+                console.log(log, user.userInfo)
+                return navigate(PATHS.customer.home, { "replace": true })
+            }
+
+        } catch (error) {
+            console.log()
+
+        }
+    }
+
     return (
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit(submit)} className="space-y-6">
             {/* Email */}
 
             <div className="space-y-2">
@@ -26,6 +63,7 @@ export default function LoginForm() {
                     id="email"
                     type="email"
                     placeholder="john@example.com"
+                    {...register("email")}
                 />
             </div>
 
@@ -41,6 +79,7 @@ export default function LoginForm() {
                         id="password"
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
+                        {...register("password")}
                     />
 
                     <Button

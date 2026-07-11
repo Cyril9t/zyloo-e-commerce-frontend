@@ -16,7 +16,7 @@ const states = [
         title: "Whish List"
     },
     {
-        link: "*",
+        link: PATHS.customer.cart,
         icons: <ShoppingCartIcon className="!h-5 !w-5" />,
         title: "Cart"
     },

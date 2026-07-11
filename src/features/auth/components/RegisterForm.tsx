@@ -1,24 +1,19 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link, type Register } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
 import { Checkbox } from "../../../components/ui/checkbox";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { PATHS } from "../../../routes/paths";
 import { registerSchema } from "../../../lib/schema/validate";
-import z from "zod";
 import { authReg } from "../../../lib/auth/auth";
 import type { registerData } from "../../../lib/schema/validate";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { toast } from "sonner";
 
-interface info {
-    email: string,
-    firstName: string,
-    lastName: string,
-    password: string,
-}
+
 
 export default function RegisterForm() {
 
@@ -29,11 +24,22 @@ export default function RegisterForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const submit = async (data: info) => {
-        console.log(data)
+    const navigate = useNavigate()
+    const submit = async (data: registerData) => {
+
         try {
-            const user = await trigger(data)
-            console.log(user);
+            const registration = trigger(data)
+
+            toast.promise(registration, {
+                success: (data) => data.Message,
+                loading: "Processing...",
+                error: (data) => data.Message
+            })
+
+            const user = await registration
+
+            if (user.Message === "Registration successful") return navigate(PATHS.auth.login, { "replace": true })
+
         } catch (error) {
             console.log(error)
         }

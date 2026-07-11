@@ -35,14 +35,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
             try {
                 setIsLoading(true)
                 const userInfo = await trigger()
-
-                if (!userInfo.cookie) {
-                    console.log("no User found")
+                if (userInfo.Message === "No cookies found") {
+                    console.log("no user login", userInfo)
                     setIsLoading(false)
-                    return setUser(null)
+                    setUser(null)
+                } else if (userInfo.Message === "User") {
+                    console.log("user login", userInfo)
+                    setUser(userInfo);
+                    setIsLoading(false);
                 }
-                setUser(userInfo);
-                setIsLoading(false);
 
             } catch (error) {
                 console.log(error, "AuthContext")

@@ -5,9 +5,36 @@ import {
     LogOut,
 } from "lucide-react";
 
+import { logout } from "../../../lib/auth/auth";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
+import { toast } from "sonner";
+import { PATHS } from "../../../routes/paths";
+import { useAuth } from "../../../context/AuhProvider";
 
 export default function AccountMenu() {
+    const { trigger, error } = logout();
+    const { setUser } = useAuth()
+    const navigate = useNavigate();
+
+    const logOut = async () => {
+        try {
+            const loggedOut = trigger()
+            toast.promise(loggedOut, {
+                success: (data) => data.Message,
+                loading: "Processing..."
+            })
+            const details = await loggedOut
+            if (details.Message === "Logged out Successfully") {
+                setUser(null)
+                return navigate(PATHS.auth.login, { replace: true })
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error("Operation Failed")
+        }
+    }
+
     return (
         <div className="rounded-2xl border p-4">
             <div className="flex flex-col gap-2">
@@ -29,6 +56,7 @@ export default function AccountMenu() {
                 <Button
                     variant="destructive"
                     className="mt-4"
+                    onClick={logOut}
                 >
                     <LogOut className="mr-2 h-4 w-4" />
                     Logout
