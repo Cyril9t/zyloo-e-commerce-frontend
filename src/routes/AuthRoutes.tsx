@@ -5,18 +5,19 @@ import RegisterPage from "../features/auth/pages/RegisterPage";
 import ForgotPasswordPage from "../features/auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "../features/auth/pages/ResetPasswordPage";
 import AuthLayout from "../layouts/AuthLayout";
-
+import GuestRoute from "./Guest";
 export default function AuthRoutes() {
     return (
         <>
             <Routes>
+                <Route element={<GuestRoute />}>
 
+                    <Route path={PATHS.auth.login} element={<LoginPage />} />
+                    <Route path={PATHS.auth.register} element={<RegisterPage />} />
+                    <Route path={PATHS.auth.forgotPassword} element={<ForgotPasswordPage />} />
+                    <Route path={PATHS.auth.resetPassword} element={<ResetPasswordPage />} />
 
-                <Route path={PATHS.auth.login} element={<LoginPage />} />
-                <Route path={PATHS.auth.register} element={<RegisterPage />} />
-                <Route path={PATHS.auth.forgotPassword} element={<ForgotPasswordPage />} />
-                <Route path={PATHS.auth.resetPassword} element={<ResetPasswordPage />} />
-
+                </Route>
             </Routes>
         </>
     )

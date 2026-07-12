@@ -16,10 +16,9 @@ import { PATHS } from "../../../routes/paths";
 import { toast } from "sonner";
 import { useAuth } from "../../../context/AuhProvider";
 
-
 export default function LoginForm() {
-    const { user: log, setUser } = useAuth();
-    const { trigger, isMutating } = authLogin()
+    const { setUser } = useAuth();
+    const { trigger } = authLogin()
     const [showPassword, setShowPassword] = useState(false);
 
     const { handleSubmit, register, formState: { errors } } = useForm<loginData>({
@@ -37,11 +36,11 @@ export default function LoginForm() {
                 error: (data) => data.Error
             })
             const user = await login
-            console.log(user)
-            if (user.Message === "Login success") {
-                setUser(user.userInfo)
-                console.log(log, user.userInfo)
-                return navigate(PATHS.customer.home, { "replace": true })
+            setUser(user.userInfo);
+            if (user.userInfo.role === "ADMIN") {
+                navigate(PATHS.admin.dashboard, { replace: true });
+            } else {
+                navigate(PATHS.customer.home, { replace: true });
             }
 
         } catch (error) {
@@ -59,12 +58,16 @@ export default function LoginForm() {
                     Email
                 </Label>
 
-                <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    {...register("email")}
-                />
+                <div className="flex flex-col">
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="john@example.com"
+                        {...register("email")}
+                    />
+                    <small className="text-destructive">{errors.email?.message}</small>
+                </div>
+
             </div>
 
             {/* Password */}
@@ -75,12 +78,17 @@ export default function LoginForm() {
                 </Label>
 
                 <div className="relative">
-                    <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
-                        {...register("password")}
-                    />
+                    <div className="flex flex-col">
+                        <Input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            {...register("password")}
+                        />
+
+                        <small className="text-destructive">{errors.password?.message}</small>
+                    </div>
+
 
                     <Button
                         type="button"

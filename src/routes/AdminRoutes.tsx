@@ -9,21 +9,24 @@ import ProductsPage from "../features/admin/products/pages/ProductsPage";
 import AddProductPage from "../features/admin/products/pages/AddProductPage";
 import AdminLayout from "../layouts/AdminLayout";
 import AdminSettings from "../features/admin/settings/pages/adminSettings";
+import ProtectRole from "./ProtectRole";
 export default function AdminRouter() {
     return (
         <>
             <Routes>
-                < Route path={PATHS.admin.dashboard} element={<AdminLayout />} >
+                <Route element={<ProtectRole />} >
+                    < Route path={PATHS.admin.dashboard} element={<AdminLayout />} >
 
+                        <Route path={PATHS.admin.dashboard} element={<DashboardPage />} />
+                        <Route path={PATHS.admin.categories} element={<CategoriesPage />} />
+                        <Route path={PATHS.admin.orders} element={<AdminOrdersPage />} />
+                        <Route path={PATHS.admin.products} element={<ProductsPage />} />
+                        <Route path={PATHS.admin.users} element={<UsersPage />} />
+                        <Route path={PATHS.admin.coupons} element={<CouponsPage />} />
+                        <Route path={PATHS.admin.addProducts} element={<AddProductPage />} />
+                        <Route path={PATHS.admin.settings} element={<AdminSettings />} />
 
-                    <Route path={PATHS.admin.dashboard} element={<DashboardPage />} />
-                    <Route path={PATHS.admin.categories} element={<CategoriesPage />} />
-                    <Route path={PATHS.admin.orders} element={<AdminOrdersPage />} />
-                    <Route path={PATHS.admin.products} element={<ProductsPage />} />
-                    <Route path={PATHS.admin.users} element={<UsersPage />} />
-                    <Route path={PATHS.admin.coupons} element={<CouponsPage />} />
-                    <Route path={PATHS.admin.addProducts} element={<AddProductPage />} />
-                    <Route path={PATHS.admin.settings} element={<AdminSettings />} />
+                    </Route>
                 </Route>
             </Routes>
         </>

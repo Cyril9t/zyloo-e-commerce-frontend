@@ -52,23 +52,31 @@ export default function RegisterForm() {
                         First Name
                     </Label>
 
-                    <Input
-                        id="firstName"
-                        placeholder="John"
-                        {...register("firstName")}
-                    />
+                    <div className="flex flex-col">
+                        <Input
+                            id="firstName"
+                            placeholder="John"
+                            {...register("firstName")}
+                        />
+
+                        <small className="text-destructive">{errors.firstName?.message}</small>
+                    </div>
+
                 </div>
 
                 <div className="space-y-2">
                     <Label htmlFor="lastName">
                         Last Name
                     </Label>
+                    <div className="flex flex-col">
+                        <Input
+                            id="firstName"
+                            placeholder="Deo"
+                            {...register("lastName")}
+                        />
 
-                    <Input
-                        id="lastName"
-                        placeholder="Doe"
-                        {...register("lastName")}
-                    />
+                        <small className="text-destructive">{errors.lastName?.message}</small>
+                    </div>
                 </div>
             </div>
 
@@ -77,12 +85,15 @@ export default function RegisterForm() {
                     Email
                 </Label>
 
-                <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    {...register("email")}
-                />
+                <div className="flex flex-col">
+                    <Input
+                        id="firstName"
+                        placeholder="zyloo@gmail.com"
+                        {...register("email")}
+                    />
+
+                    <small className="text-destructive">{errors.email?.message}</small>
+                </div>
             </div>
 
             <div className="space-y-2">
@@ -91,12 +102,15 @@ export default function RegisterForm() {
                 </Label>
 
                 <div className="relative">
-                    <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
-                        {...register("password")}
-                    />
+                    <div className="flex flex-col">
+                        <Input
+                            id="firstName"
+                            placeholder="••••••••"
+                            {...register("password")}
+                        />
+
+                        <small className="text-destructive">{errors.password?.message}</small>
+                    </div>
 
                     <Button
                         type="button"
@@ -114,35 +128,7 @@ export default function RegisterForm() {
                 </div>
             </div>
 
-            <div className="space-y-2">
-                <Label htmlFor="confirmPassword">
-                    Confirm Password
-                </Label>
 
-                <div className="relative">
-                    <Input
-                        id="confirmPassword"
-                        type={showConfirmPassword ? "text" : "password"}
-                        placeholder="••••••••"
-                    />
-
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        onClick={() =>
-                            setShowConfirmPassword((prev) => !prev)
-                        }
-                        className="absolute right-1 top-1 h-8 w-8"
-                    >
-                        {showConfirmPassword ? (
-                            <EyeOff className="h-4 w-4" />
-                        ) : (
-                            <Eye className="h-4 w-4" />
-                        )}
-                    </Button>
-                </div>
-            </div>
 
             <div className="flex items-start gap-3">
                 <Checkbox id="terms" />

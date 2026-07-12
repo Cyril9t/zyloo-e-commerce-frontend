@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuhProvider";
 import { PATHS } from "./paths";
-export default function ProtectedRoute() {
 
+export default function AdminRoute() {
     const { user, isLoading } = useAuth();
 
     if (isLoading) {
@@ -13,7 +13,9 @@ export default function ProtectedRoute() {
         return <Navigate to={PATHS.auth.login} replace />;
     }
 
+    if (user.role !== "ADMIN") {
+        return <Navigate to={PATHS.customer.home} replace />;
+    }
+
     return <Outlet />;
 }
-
-
