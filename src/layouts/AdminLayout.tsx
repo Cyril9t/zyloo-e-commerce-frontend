@@ -2,19 +2,22 @@ import { Outlet } from "react-router-dom";
 
 import AdminSidebar from "../features/admin/shared/components/AdminSidebar";
 import AdminTopbar from "../features/admin/shared/components/AdminTopbar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "../components/ui/sidebar";
+import { SidebarOpenIcon } from "lucide-react";
+
+
 
 export default function AdminLayout() {
     return (
-        <div className="flex min-h-screen">
+        <SidebarProvider  >
             <AdminSidebar />
 
-            <div className="flex flex-1 flex-col">
+            <SidebarInset >
                 <AdminTopbar />
-
                 <main className="flex-1 p-6">
                     <Outlet />
                 </main>
-            </div>
-        </div>
+            </SidebarInset>
+        </SidebarProvider>
     );
 }

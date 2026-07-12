@@ -20,34 +20,32 @@ export default function RegisterForm() {
     const { handleSubmit, register, formState: { errors } } = useForm<registerData>({
         resolver: zodResolver(registerSchema)
     })
-    const { trigger, isMutating, error } = authReg()
+
+    const { trigger } = authReg()
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [checkbox, setCheckbox] = useState(true);
 
     const navigate = useNavigate()
     const submit = async (data: registerData) => {
 
         try {
             const registration = trigger(data)
-
             toast.promise(registration, {
                 success: (data) => data.Message,
                 loading: "Processing...",
-                error: (data) => data.Message
+                error: "Operation failed"
             })
-
             const user = await registration
-
             if (user.Message === "Registration successful") return navigate(PATHS.auth.login, { "replace": true })
-
         } catch (error) {
             console.log(error)
         }
     }
     return (
-        <form onSubmit={handleSubmit(submit)} className="space-y-6">
-            <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
+        <form onSubmit={handleSubmit(submit)} className="space-y-3">
+            <div className="grid gap-2 md:grid-cols-2">
+                <div className="space-y-1">
                     <Label htmlFor="firstName">
                         First Name
                     </Label>
@@ -55,6 +53,7 @@ export default function RegisterForm() {
                     <div className="flex flex-col">
                         <Input
                             id="firstName"
+                            type="text"
                             placeholder="John"
                             {...register("firstName")}
                         />
@@ -64,13 +63,14 @@ export default function RegisterForm() {
 
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <Label htmlFor="lastName">
                         Last Name
                     </Label>
                     <div className="flex flex-col">
                         <Input
                             id="firstName"
+                            type="text"
                             placeholder="Deo"
                             {...register("lastName")}
                         />
@@ -80,7 +80,7 @@ export default function RegisterForm() {
                 </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
                 <Label htmlFor="email">
                     Email
                 </Label>
@@ -88,6 +88,7 @@ export default function RegisterForm() {
                 <div className="flex flex-col">
                     <Input
                         id="firstName"
+                        type="email"
                         placeholder="zyloo@gmail.com"
                         {...register("email")}
                     />
@@ -96,7 +97,7 @@ export default function RegisterForm() {
                 </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
                 <Label htmlFor="password">
                     Password
                 </Label>
@@ -105,6 +106,7 @@ export default function RegisterForm() {
                     <div className="flex flex-col">
                         <Input
                             id="firstName"
+                            type="password"
                             placeholder="••••••••"
                             {...register("password")}
                         />
@@ -131,7 +133,7 @@ export default function RegisterForm() {
 
 
             <div className="flex items-start gap-3">
-                <Checkbox id="terms" />
+                <Checkbox id="terms" onClick={() => setCheckbox(prev => !prev)} />
 
                 <Label
                     htmlFor="terms"
@@ -146,6 +148,7 @@ export default function RegisterForm() {
                 type="submit"
                 className="w-full"
                 size="lg"
+                disabled={checkbox}
             >
                 Create Account
             </Button>

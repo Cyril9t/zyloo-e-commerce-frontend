@@ -12,12 +12,12 @@ export default function AuthHeader({
     subtitle,
 }: AuthHeaderProps) {
     return (
-        <div className="space-y-6 text-center">
+        <div className="space-y-3 text-center">
             <div className="flex justify-center">
                 <Logo />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
                 <h1 className="text-3xl font-bold">
                     {title}
                 </h1>

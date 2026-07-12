@@ -1,15 +1,16 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Card } from "../../../components/ui/card";
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../../routes/paths';
 
 interface Category {
     name: string;
     count: string;
     image: string;
-    sizeClass: string; // Tailors the Bento Grid composition
+    sizeClass: string;
 }
 
-// Real-world dummy data showcasing high-end catalog depth
 const premiumCategories: Category[] = [
     {
         name: "Apparel & Outerwear",
@@ -66,10 +67,12 @@ export default function ShopByCategory() {
                     </p>
                 </div>
 
-                <button className="group inline-flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-50 underline underline-offset-4 decoration-2 decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-primary transition-colors duration-200">
-                    View All Departments
-                    <ArrowUpRight className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </button>
+                <Link to={PATHS.customer.products}>
+                    <button className="group inline-flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-50 underline underline-offset-4 decoration-2 decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-primary transition-colors duration-200">
+                        View All Departments
+                        <ArrowUpRight className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </button>
+                </Link>
             </div>
 
 

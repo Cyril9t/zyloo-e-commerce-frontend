@@ -5,14 +5,14 @@ import { useAuth } from "../context/AuhProvider";
 
 export default function CustomerLayout() {
     return (
-        <div className="min-h-screen flex flex-col bg-background">
+        <div className=" flex flex-col bg-background">
             <Navbar />
             {/* <header className="h-16 border-b flex items-center px-6">
 
             </header> */}
 
             {/* Page Content */}
-            <main className="flex-1 px-4 md:px-8 py-6">
+            <main className="flex  ">
                 <Outlet />
             </main>
 

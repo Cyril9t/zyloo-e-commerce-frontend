@@ -11,9 +11,9 @@ import { PATHS } from "../../../../routes/paths";
 
 const states = [
     {
-        link: "*",
+        link: PATHS.customer.wishlist,
         icons: <Heart className="!h-5 !w-5" />,
-        title: "Whish List"
+        title: "Wishlist"
     },
     {
         link: PATHS.customer.cart,
@@ -21,7 +21,7 @@ const states = [
         title: "Cart"
     },
     {
-        link: "*",
+        link: PATHS.customer.profile,
         icons: <User2Icon className="!h-5 !w-5" />,
         title: "My account"
     },

@@ -113,25 +113,26 @@ export default function PromoBanner() {
                                 <h2 className="text-3xl md:text-5xl font-black tracking-tight ">
                                     {product.title}
                                 </h2>
-                                <p className="text-lg md:text-xl font-medium opacity-50">
+                                <p className="text-lg md:text-xl font-medium opacity-70">
                                     {product.subtitle}
                                 </p>
                             </div>
 
-                            <p className="text-sm md:text-base text-zinc-400 max-w-md line-clamp-2 md:line-clamp-none">
+                            <p className="text-sm md:text-base opacity-75 max-w-md line-clamp-2 md:line-clamp-none">
                                 {product.description}
                             </p>
 
                             <div className="flex items-baseline justify-center md:justify-start space-x-3">
-                                <span className="text-2xl md:text-3xl font-bold text-white">{product.price}</span>
+                                <span className="text-2xl md:text-3xl font-bold ">{product.price}</span>
                                 {product.originalPrice && (
-                                    <span className="text-sm md:text-base text-zinc-500 line-through font-medium">{product.originalPrice}</span>
+                                    <span className="text-sm md:text-base opacity-65 line-through font-medium">{product.originalPrice}</span>
                                 )}
                             </div>
 
                             <div className="pt-2">
-                                <button className="group inline-flex items-center justify-center bg-white  px-6 py-3 rounded-xl font-semibold text-sm tracking-wide shadow-lg transition-all duration-200 hover:bg-zinc-100 hover:scale-[1.02] active:scale-[0.98]">
+                                <button className="group inline-flex items-center justify-center bg-background  px-6 py-3 rounded-xl font-semibold text-sm tracking-wide shadow-lg transition-all duration-200 hover:bg-zinc-100 hover:scale-[1.02] active:scale-[0.98]">
                                     {product.ctaText}
+
                                     <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                                 </button>
                             </div>
@@ -156,14 +157,14 @@ export default function PromoBanner() {
             {/* Manual Navigation Arrows */}
             <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 z-20 opacity-0 group-hover:opacity-100 md:opacity-100"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black hover:bg-black/40 text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 z-20 opacity-0 group-hover:opacity-100 md:opacity-100"
                 aria-label="Previous slide"
             >
                 <ChevronLeft className="w-5 h-5" />
             </button>
             <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 z-20 opacity-0 group-hover:opacity-100 md:opacity-100"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black hover:bg-black/40 text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 z-20 opacity-0 group-hover:opacity-100 md:opacity-100"
                 aria-label="Next slide"
             >
                 <ChevronRight className="w-5 h-5" />

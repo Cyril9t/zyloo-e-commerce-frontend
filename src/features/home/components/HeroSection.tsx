@@ -1,4 +1,4 @@
-import { ArrowRight, ShoppingBag } from "lucide-react";
+import { ArrowRight, ShoppingBag, Store } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 
 export default function HeroSection() {
@@ -39,7 +39,7 @@ export default function HeroSection() {
                 {/* Right Content */}
                 <div className="flex items-center justify-center">
                     <div className="flex aspect-square w-full max-w-md items-center justify-center rounded-3xl border bg-muted">
-                        <ShoppingBag className="h-32 w-32 text-muted-foreground" />
+                        <Store className="h-32 w-32 text-muted-foreground" />
                     </div>
                 </div>
             </div>

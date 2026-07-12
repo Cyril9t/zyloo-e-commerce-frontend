@@ -33,7 +33,7 @@ export default function LoginForm() {
             toast.promise(login, {
                 success: (data) => data.Message,
                 loading: "Processing...",
-                error: (data) => data.Error
+                error: "Operation failed"
             })
             const user = await login
             setUser(user.userInfo);
@@ -44,16 +44,15 @@ export default function LoginForm() {
             }
 
         } catch (error) {
-            console.log()
-
+            console.log(error)
         }
     }
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="space-y-6">
+        <form onSubmit={handleSubmit(submit)} className="space-y-3">
             {/* Email */}
 
-            <div className="space-y-2">
+            <div className="space-y-1">
                 <Label htmlFor="email">
                     Email
                 </Label>
@@ -72,7 +71,7 @@ export default function LoginForm() {
 
             {/* Password */}
 
-            <div className="space-y-2">
+            <div className="space-y-1">
                 <Label htmlFor="password">
                     Password
                 </Label>
@@ -155,12 +154,7 @@ export default function LoginForm() {
                     Continue with Google
                 </Button>
 
-                <Button
-                    variant="outline"
-                    type="button"
-                >
 
-                </Button>
             </div>
 
             {/* Register */}

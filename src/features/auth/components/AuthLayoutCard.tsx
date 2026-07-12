@@ -12,9 +12,9 @@ export default function AuthLayoutCard({
     return (
         <div>
             <Navbar />
-            <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-10">
+            <div className="flex  items-center justify-center bg-muted/30 px-4 py-6">
                 <Card className="w-full max-w-md shadow-lg">
-                    <CardContent className="space-y-8 p-8">
+                    <CardContent className="space-y-4 p-8">
                         {children}
                     </CardContent>
                 </Card>

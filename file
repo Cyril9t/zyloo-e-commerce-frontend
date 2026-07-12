@@ -1,143 +1,224 @@
 src/
 │
 ├── app/
-│   ├── App.tsx
-│   ├── providers.tsx
-│   └── index.ts
+│ ├── App.tsx
+│ ├── providers.tsx
+│ └── index.ts
 │
 ├── assets/
-│   ├── images/
-│   ├── icons/
-│   ├── logos/
-│   └── fonts/
+│ ├── images/
+│ ├── icons/
+│ ├── logos/
+│ └── fonts/
 │
 ├── components/
-│   ├── common/
-│   │   ├── PageHeader.tsx
-│   │   ├── SectionHeader.tsx
-│   │   ├── EmptyState.tsx
-│   │   ├── ErrorState.tsx
-│   │   ├── LoadingSkeleton.tsx
-│   │   └── Logo.tsx
-│   │
-│   ├── layout/
-│   │   ├── Navbar.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Sidebar.tsx
-│   │   ├── MobileNav.tsx
-│   │   └── UserMenu.tsx
-│   │
-│   └── ui/
-│       └── (Reusable shadcn wrappers if needed)
+│ ├── common/
+│ │ ├── PageHeader.tsx
+│ │ ├── SectionHeader.tsx
+│ │ ├── EmptyState.tsx
+│ │ ├── ErrorState.tsx
+│ │ ├── LoadingSkeleton.tsx
+│ │ └── Logo.tsx
+│ │
+│ ├── layout/
+│ │ ├── Navbar.tsx
+│ │ ├── Footer.tsx
+│ │ ├── Sidebar.tsx
+│ │ ├── MobileNav.tsx
+│ │ └── UserMenu.tsx
+│ │
+│ └── ui/
+│ └── (Reusable shadcn wrappers if needed)
 │
 ├── features/
 │
-│   ├── auth/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── schemas/
-│   │   ├── types/
-│   │   └── data/
-│   │
-│   ├── home/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── data/
-│   │
-│   ├── products/
-│   │   ├── components/
-│   │   │   ├── ProductCard.tsx
-│   │   │   ├── ProductGallery.tsx
-│   │   │   ├── ProductGrid.tsx
-│   │   │   ├── ProductRating.tsx
-│   │   │   ├── ProductFilter.tsx
-│   │   │   └── CategoryFilter.tsx
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── ProductsPage.tsx
-│   │   │   └── ProductDetailsPage.tsx
-│   │   │
-│   │   ├── data/
-│   │   ├── types/
-│   │   └── hooks/
-│   │
-│   ├── cart/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── types/
-│   │   └── data/
-│   │
-│   ├── checkout/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── types/
-│   │
-│   ├── wishlist/
-│   │   ├── components/
-│   │   └── pages/
-│   │
-│   ├── orders/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── data/
-│   │
-│   ├── profile/
-│   │   ├── components/
-│   │   └── pages/
-│   │
-│   └── admin/
-│       ├── dashboard/
-│       ├── products/
-│       ├── categories/
-│       ├── users/
-│       ├── orders/
-│       ├── coupons/
-│       └── shared/
+│ ├── auth/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── schemas/
+│ │ ├── types/
+│ │ └── data/
+│ │
+│ ├── home/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ └── data/
+│ │
+│ ├── products/
+│ │ ├── components/
+│ │ │ ├── ProductCard.tsx
+│ │ │ ├── ProductGallery.tsx
+│ │ │ ├── ProductGrid.tsx
+│ │ │ ├── ProductRating.tsx
+│ │ │ ├── ProductFilter.tsx
+│ │ │ └── CategoryFilter.tsx
+│ │ │
+│ │ ├── pages/
+│ │ │ ├── ProductsPage.tsx
+│ │ │ └── ProductDetailsPage.tsx
+│ │ │
+│ │ ├── data/
+│ │ ├── types/
+│ │ └── hooks/
+│ │
+│ ├── cart/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── types/
+│ │ └── data/
+│ │
+│ ├── checkout/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ └── types/
+│ │
+│ ├── wishlist/
+│ │ ├── components/
+│ │ └── pages/
+│ │
+│ ├── orders/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ └── data/
+│ │
+│ ├── profile/
+│ │ ├── components/
+│ │ └── pages/
+│ │
+│ └── admin/
+│ ├── dashboard/
+│ ├── products/
+│ ├── categories/
+│ ├── users/
+│ ├── orders/
+│ ├── coupons/
+│ └── shared/
 │
 ├── layouts/
-│   ├── AuthLayout.tsx
-│   ├── CustomerLayout.tsx
-│   └── AdminLayout.tsx
+│ ├── AuthLayout.tsx
+│ ├── CustomerLayout.tsx
+│ └── AdminLayout.tsx
 │
 ├── routes/
-│   ├── AppRouter.tsx
-│   ├── ProtectedRoute.tsx
-│   ├── AdminRoute.tsx
-│   └── paths.ts
+│ ├── AppRouter.tsx
+│ ├── ProtectedRoute.tsx
+│ ├── AdminRoute.tsx
+│ └── paths.ts
 │
 ├── data/
-│   ├── products.ts
-│   ├── categories.ts
-│   ├── users.ts
-│   ├── orders.ts
-│   └── dashboard.ts
+│ ├── products.ts
+│ ├── categories.ts
+│ ├── users.ts
+│ ├── orders.ts
+│ └── dashboard.ts
 │
 ├── hooks/
-│   ├── useDebounce.ts
-│   ├── usePagination.ts
-│   ├── useLocalStorage.ts
-│   └── useMediaQuery.ts
+│ ├── useDebounce.ts
+│ ├── usePagination.ts
+│ ├── useLocalStorage.ts
+│ └── useMediaQuery.ts
 │
 ├── lib/
-│   ├── utils.ts
-│   ├── constants.ts
-│   └── helpers.ts
+│ ├── utils.ts
+│ ├── constants.ts
+│ └── helpers.ts
 │
 ├── services/
-│   └── (API services later)
+│ └── (API services later)
 │
 ├── types/
-│   ├── product.ts
-│   ├── order.ts
-│   ├── user.ts
-│   └── index.ts
+│ ├── product.ts
+│ ├── order.ts
+│ ├── user.ts
+│ └── index.ts
 │
 ├── utils/
-│   ├── formatCurrency.ts
-│   ├── formatDate.ts
-│   ├── validators.ts
-│   └── cn.ts
+│ ├── formatCurrency.ts
+│ ├── formatDate.ts
+│ ├── validators.ts
+│ └── cn.ts
 │
 ├── index.css
 ├── main.tsx
 └── vite-env.d.ts
+
+
+
+import {
+LayoutDashboard,
+Package,
+ShoppingCart,
+Users,
+Tags,
+Settings,
+} from "lucide-react";
+import { NavLink } from "react-router-dom";
+
+import Logo from "../../../../components/common/Logo"
+
+const links = [
+{
+title: "Dashboard",
+icon: LayoutDashboard,
+href: "/admin",
+},
+{
+title: "Products",
+icon: Package,
+href: "/admin/products",
+},
+{
+title: "Orders",
+icon: ShoppingCart,
+href: "/admin/orders",
+},
+{
+title: "Users",
+icon: Users,
+href: "/admin/users",
+},
+{
+title: "Categories",
+icon: Tags,
+href: "/admin/categories",
+},
+{
+title: "Settings",
+icon: Settings,
+href: "/admin/settings",
+},
+];
+
+export default function AdminSidebar() {
+return (
+<!-- <aside className="flex h-screen w-64 flex-col border-r bg-background">
+            <div className="border-b p-6">
+                <Logo />
+            </div>
+
+            <nav className="flex-1 space-y-2 p-4">
+                {links.map((link) => {
+                    const Icon = link.icon;
+
+                    return (
+                        <NavLink
+                            key={link.href}
+                            to={link.href}
+                            end={link.href === "/admin"}
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-lg px-4 py-3 transition ${isActive
+                                    ? "bg-primary text-primary-foreground"
+                                    : "hover:bg-muted"
+                                }`
+                            }
+                        >
+                            <Icon className="h-5 w-5" />
+
+                            {link.title}
+                        </NavLink>
+                    );
+                })}
+            </nav>
+        </aside>
+    );
+} -->
