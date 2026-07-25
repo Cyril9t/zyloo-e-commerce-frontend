@@ -8,24 +8,9 @@ import Logo from "../../../../components/common/Logo";
 import SearchBar from "../../../../components/common/searchBar";
 import NavbarLinks from "../../../../components/Layout/NavbarLinks";
 import { PATHS } from "../../../../routes/paths";
+import { useAuth } from "../../../../context/AuhProvider";
 
-const states = [
-    {
-        link: PATHS.customer.wishlist,
-        icons: <Heart className="!h-5 !w-5" />,
-        title: "Wishlist"
-    },
-    {
-        link: PATHS.customer.cart,
-        icons: <ShoppingCartIcon className="!h-5 !w-5" />,
-        title: "Cart"
-    },
-    {
-        link: PATHS.customer.profile,
-        icons: <User2Icon className="!h-5 !w-5" />,
-        title: "My account"
-    },
-]
+
 const MobileStates = [
     {
         link: "*",
@@ -54,35 +39,57 @@ const MobileStates = [
     },
 ]
 
+const states = [
+    {
+        link: PATHS.customer.wishlist,
+        icons: <Heart className="!h-5 !w-5" />,
+        title: "Wishlist"
+    },
+    {
+        link: PATHS.customer.cart,
+        icons: <ShoppingCartIcon className="!h-5 !w-5" />,
+        title: "Cart"
+    },
+    {
 
-const user = [
-    {
-        icons: <User2Icon />,
-        link: PATHS.customer.profile,
-        title: "My Account",
-
-    },
-    {
-        icons: <Cuboid />,
-        link: "/*",
-        title: "Orders"
-    },
-    {
-        icons: <Settings />,
-        link: "/*",
-        title: "Settings"
-    },
-    {
-        icons: <LogOut />,
-        link: "/*",
-        title: "Sign Out"
+        icons: <User2Icon className="!h-5 !w-5" />,
+        title: "My account"
     },
 ]
 
+
+
 export default function Navbar() {
 
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const { user: me } = useAuth();
 
+    const redirect = me?.role === "ADMIN";
+
+    const path = redirect ? PATHS?.admin?.dashboard : PATHS?.customer?.profile as string
+
+    const user = [
+        {
+            icons: <User2Icon />,
+            link: path,
+            title: "My Account",
+
+        },
+        {
+            icons: <Cuboid />,
+            link: "/*",
+            title: "Orders"
+        },
+        {
+            icons: <Settings />,
+            link: "/*",
+            title: "Settings"
+        },
+        {
+            icons: <LogOut />,
+            link: "/*",
+            title: "Sign Out"
+        },
+    ]
     return (
         <div>
 
@@ -128,7 +135,7 @@ export default function Navbar() {
                             <ThemeToggle />
 
                             {states.map((item) => (
-                                <Link key={item.title} to={item.link}>
+                                <Link key={item.title} to={""}>
                                     {item.title === "My account" ? (
                                         <DropdownMenu >
 

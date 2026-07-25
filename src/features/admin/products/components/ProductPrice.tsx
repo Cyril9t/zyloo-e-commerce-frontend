@@ -10,7 +10,7 @@ import { Switch } from "../../../../components/ui/switch";
 
 export default function PricingInventory() {
     return (
-        <Card className="border border-neutral-200/60 dark:border-neutral-800/60 bg-white dark:bg-neutral-900/20 shadow-2xs">
+        <Card className="border-none border-neutral-200/60 dark:border-neutral-800/60 bg-white dark:bg-neutral-900/20 shadow-2xs">
             <CardHeader className="p-6 pb-4 border-b border-neutral-100 dark:border-neutral-800/60">
                 <CardTitle className="text-xs font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Financial Ledger & Warehouse Logistical Parameters</CardTitle>
                 <CardDescription className="text-xs">Establish fiscal margin targets and warehouse unit-tracking parameters.</CardDescription>

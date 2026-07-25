@@ -2,7 +2,9 @@ import { Tag } from "lucide-react";
 import z from "zod";
 
 export const productInfoSchema = z.object({
-    tag: z.string(),
+    tagName: z.string(),
+    price: z.string().min(1, "please input price"),
+    stock: z.string().min(0, "Stock can not be empty"),
     name: z.string().min(1, "Product Name too short."),
     category: z.string().min(1, "what category is this item"),
     summary: z.string().min(3, "give brief summary for this item"),

@@ -34,11 +34,17 @@ interface ProductInfo {
 //     value: string;
 // }
 
+type ImagePreview = {
+    file: File;
+    preview: string;
+};
+
+
 export default function AddProductPage() {
 
     const ProductInformationAny = ProductInformation as any;
-
-    // const [tags, setTags] = React.useState<string[]>(["Premium", "Essentials", "Winter-26"]);
+    const ProductHeader = PageHeader as any
+    const ProductImage = ProductImages as any
     // const [tagInput, setTagInput] = React.useState("");
     // const [images, setImages] = React.useState<ProductImageFile[]>([
     //     { id: "img-1", url: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&q=80", name: "merino_front.jpg", size: "1.2 MB", isFeatured: true },
@@ -77,73 +83,49 @@ export default function AddProductPage() {
     //     setImages(images.filter(img => img.id !== id));
     // };
 
+    const [images, setImages] = useState<ImagePreview | []>([])
+    const [uploaded, setUploaded] = useState(false)
+    const [uploadProgress, setUploadProgress] = useState(0)
 
-    const { handleSubmit, register, formState: { errors } } = useForm<productInfoData>({
+    const { handleSubmit, register, formState: { errors }, reset } = useForm<productInfoData>({
         resolver: zodResolver(productInfoSchema)
     })
 
 
 
     return (
-        <TooltipProvider>
-            <Tooltip>
-                <div className="w-full min-h-screen dark:bg-neutral-950  dark:text-neutral-50 antialiased selection:bg-neutral-200">
 
-                    {/* Global Sticky Layout Top Navigation Header Wrapper */}
-                    <div className="sticky top-0 z-40 w-full bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60 transition-colors">
-                        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                            <PageHeader />
-                        </div>
-                    </div>
 
-                    <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className=" antialiased ">
 
-                        {/* Primary Grid Layout Frame: Desktop Two-Column, Mobile Stacked */}
-                        <div className="items-start">
 
-                            {/* LEFT COLUMN: Large Administrative Core Manifest Fields (8/12 Layout) */}
-                            <div className="lg:col-span-8 space-y-8">
-                                <ProductInformationAny
-                                    handleSubmit={handleSubmit} register={register} errors={errors}
-                                // tagInput={tagInput}
-                                // onTagInputChange={setTagInput}
-                                // onAddTag={handleAddTag}
-                                // onRemoveTag={handleRemoveTag}
-                                />
-                                <ProductImages
-
-                                />
-                                <PricingInventory />
-                                {/* <ProductVariants variants={variants} setVariants={setVariants} /> */}
-                                {/* <ShippingInformation /> */}
-                                {/* <ProductAttributes attributes={attributes} setAttributes={setAttributes} /> */}
-                                {/* <ProductSEO
-                                    // title={seoTitle}
-                                    // desc={seoDesc}
-                                    // onTitleChange={setSeoTitle}
-                                    // onDescChange={setSeoDesc}
-                                /> */}
-                                <AdvancedAccordion />
-                            </div>
-
-                            {/* RIGHT COLUMN: Sticky Publishing Panels & Platform Context (4/12 Layout) */}
-                            {/* <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-                                <PublishSettings publishDate={publishDate} setPublishDate={setPublishDate} />
-                                <CategorySection />
-                                <ProductStatistics />
-                            </div> */}
-
-                        </div>
-
-                        {/* Universal Bottom Layout Control Strip */}
-                        <div className="mt-8 pt-6 border-t border-neutral-200/60 dark:border-neutral-800/60">
-                            <ActionButtons />
-                        </div>
-
-                    </div>
+            <div className=" sticky top-0 z-40 w-full bg-foreground/80 rounded-tl-xl rounded-tr-xl backdrop-blur-md ">
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                    <ProductHeader handleSubmit={handleSubmit} setImages={setImages} setUploadProgress={setUploadProgress} setUploaded={setUploaded} reset={reset} images={images} />
                 </div>
-            </Tooltip>
-        </TooltipProvider>
+            </div>
+
+
+            <div className="lg:col-span-8 space-y-8">
+                <ProductInformationAny
+                    register={register} errors={errors}
+                />
+                <ProductImage
+                    setImages={setImages} uploaded={uploaded} uploadProgress={uploadProgress} images={images}
+                />
+                {/* <PricingInventory /> */}
+
+                <AdvancedAccordion />
+            </div>
+
+            <div className="mt-8 pt-6 border-t dark:border-neutral-800/60">
+                <ActionButtons />
+            </div>
+
+
+        </div>
+
+
     );
 }
 

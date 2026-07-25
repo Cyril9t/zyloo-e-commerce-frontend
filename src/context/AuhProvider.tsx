@@ -1,6 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { validate } from "../lib/auth/auth";
 import type { ReactNode } from "react";
+import type { ProductResponse } from "../features/products/pages/ProductListingPage";
+import { allProducts } from "../lib/actions";
+import type { productInfoData } from "../features/admin/products/types/product";
+import type { Products } from "../features/products/types/Product";
 
 interface User {
     id: string;
@@ -13,6 +17,7 @@ interface AuthContextType {
     user: User | null;
     isLoading: boolean;
     isMutating: boolean;
+    products: Products[]
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
@@ -25,8 +30,9 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-
+    const { trigger: fetchProducts } = allProducts()
     const { trigger, isMutating } = validate();
+    const [products, setProducts] = useState<Products[]>([]);
 
     useEffect(() => {
         const validateUser = async () => {
@@ -34,7 +40,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 const data = await trigger();
 
                 if (data.Message === "User") {
-                    // Change this if your backend returns data.user instead
+
                     setUser(data.decoded ?? data.userInfo ?? data);
                 } else {
                     setUser(null);
@@ -50,6 +56,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
         validateUser();
     }, []);
 
+    useEffect(() => {
+        const getAllProducts = async () => {
+            let isMounted = true;
+            try {
+                const response = (await fetchProducts()) as ProductResponse;
+                if (isMounted) {
+                    setProducts(response.product ?? []);
+                }
+            } catch (error) {
+                console.error(error);
+                if (isMounted) {
+                    setProducts([]);
+                }
+            }
+
+        }
+        getAllProducts();
+
+    }, [])
+
     return (
         <AuthContext.Provider
             value={{
@@ -57,6 +83,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 setUser,
                 isLoading,
                 isMutating,
+                products,
             }}
         >
             {children}

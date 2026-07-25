@@ -69,10 +69,10 @@ export default function AdminSidebar() {
         <Sidebar collapsible="icon"  >
 
             <SidebarHeader>
-                <SidebarMenu className="py-2">
+                <SidebarMenu className="py-4">
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <div className="p-6">
+                            <div className="p-7">
                                 <Logo />
                             </div>
                         </SidebarMenuButton>
@@ -91,7 +91,7 @@ export default function AdminSidebar() {
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton
                                             asChild
-                                            className="font-semibold text-[17px] hover:bg-muted data-[active=true]:bg-foreground data-[active=true]:text-primary data-[active=true]:font-bold transition-all"
+                                            className="text-[17px] hover:bg-muted data-[active=true]:bg-foreground data-[active=true]:text-primary data-[active=true]:font-bold transition-all"
                                         >
 
                                             <Link to={item.url}>
@@ -105,6 +105,7 @@ export default function AdminSidebar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
 
+
                 </SidebarGroup>
 
                 <SidebarFooter className="mt-auto">
@@ -112,26 +113,31 @@ export default function AdminSidebar() {
                         <SidebarGroupContent>
                             <SidebarMenu className="border-t-2 w-full py-5 ">
                                 <SidebarMenuItem>
-                                    <SidebarMenuButton className="hover:bg-muted/20 cursor-pointer">
-                                        <div className="flex gap-2 ">
-                                            <div>
-                                                <User size={20} />
+                                    <Link to={PATHS.customer.profile}>
+                                        <SidebarMenuButton className="hover:bg-muted/20 cursor-pointer">
+                                            <div className="flex gap-2 ">
+                                                <div>
+                                                    <User />
+                                                </div>
+                                                <div>Profile</div>
                                             </div>
-                                            <div>Profile</div>
-                                        </div>
-                                    </SidebarMenuButton>
+                                        </SidebarMenuButton>
+                                    </Link>
                                 </SidebarMenuItem>
 
                                 <SidebarMenuItem>
+
                                     <SidebarMenuButton
                                         // onClick={handleLogout}
                                         className="hover:bg-muted/20 cursor-pointer"
                                     >
+
                                         <div className="flex gap-2">
                                             <SquareArrowRightEnterIcon size={20} />
                                             <p>Logout</p>
                                         </div>
                                     </SidebarMenuButton>
+
                                 </SidebarMenuItem>
                             </SidebarMenu>
                         </SidebarGroupContent>

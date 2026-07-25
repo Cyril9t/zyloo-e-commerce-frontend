@@ -1,24 +1,31 @@
 import { Star, ShoppingCart, Heart, Eye } from "lucide-react";
 import { Button } from "../../../components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardFooter,
-} from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
-
-import type { Product } from "../types/Product";
+import type { Products } from "../types/Product";
 
 interface ProductCardProps {
-    product: Product;
+    product: Products;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+    const productImage =
+        product.images?.length
+            ? product.images[0].productImages
+            : "https://placehold.co/600x800?text=No+Image";
+
+    const category = product.category.length === 1
+        ? product?.category?.map((item) => item.name).join(", ")
+        : "Uncategorized";
+
+    const tags =
+        product.tag?.length
+            ? product.tag.map((item) => item.name).join(", ")
+            : "No Tag";
+
     return (
+
         <div>
             <div className=" flex gap-6 overflow-x-auto scroll-smooth scrollbar-none">
-
-
                 <div
                     key={product.id}
                     className=" mb-20 group relative shrink-0 w-[300px] h-[480px] bg-background border-2 rounded-3xl overflow-hidden"
@@ -26,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                     <div className="relative h-[60%] overflow-hidden">
                         <img
-                            src={product.image}
+                            src={productImage}
                             alt={product.name}
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
@@ -36,7 +43,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                             variant="outline"
                             className="absolute top-4 left-4 text-white"
                         >
-                            {product.category}
+                            {category}
                         </Badge>
 
 
@@ -73,14 +80,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                         </h3>
 
                         <p className="text-muted-foreground line-clamp-1 mt-2">
-                            {/* {product.description} */}
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In id atque adipisci voluptates consequatur expedita rem, voluptate temporibus ullam, doloribus consequuntur, dicta voluptatem ab porro recusandae quos aperiam quidem autem.
+
+                            {product.description}
                         </p>
                         <div className="flex products-center gap-1 mt-3">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm">{product.rating}</span>
+                            <span className="text-sm"> {product.rating ?? "N/A"}</span>
                             <span className="text-sm text-muted-foreground">
-                                ({product.reviews})
+                                ({product.reviews ?? 0})
                             </span>
                         </div>
                         <p className="text-xl font-bold mt-3">
@@ -92,56 +99,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
             </div>
 
-            {/* <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <div className="aspect-square overflow-hidden bg-muted">
-                    <img
-                        src={product.image}
-                        alt={product.name}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                </div>
-
-                <CardContent className="space-y-3 pt-4">
-                    <div>
-                        <p className="text-sm text-muted-foreground">
-                            {product.category}
-                        </p>
-
-                        <h3 className="font-semibold">
-                            {product.name}
-                        </h3>
-                    </div>
-
-                    <div className="flex products-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm">{product.rating}</span>
-                        <span className="text-sm text-muted-foreground">
-                            ({product.reviews})
-                        </span>
-                    </div>
-
-                    <div className="flex products-center gap-2">
-                        <span className="text-lg font-bold">
-                            ${product.price}
-                        </span>
-
-                        {product.originalPrice && (
-                            <span className="text-sm text-muted-foreground line-through">
-                                ${product.originalPrice}
-                            </span>
-                        )}
-                    </div>
-                </CardContent>
-
-                <CardFooter>
-                    <Button className="w-full">
-                        <ShoppingCart className="mr-2 h-4 w-4" />
-                        Add to Cart
-                    </Button>
-                </CardFooter>
-            </Card> */}
-
-
         </div>
     );
 }
+
+
+
+

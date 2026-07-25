@@ -4,7 +4,7 @@ import AdminSidebar from "../features/admin/shared/components/AdminSidebar";
 import AdminTopbar from "../features/admin/shared/components/AdminTopbar";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "../components/ui/sidebar";
 import { SidebarOpenIcon } from "lucide-react";
-
+import { TotalUsersContext } from "../context/userContext";
 
 
 export default function AdminLayout() {
@@ -14,9 +14,12 @@ export default function AdminLayout() {
 
             <SidebarInset >
                 <AdminTopbar />
-                <main className="flex-1 p-6">
-                    <Outlet />
-                </main>
+                <TotalUsersContext>
+
+                    <main className="flex-1 p-6">
+                        <Outlet />
+                    </main>
+                </TotalUsersContext>
             </SidebarInset>
         </SidebarProvider>
     );

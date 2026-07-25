@@ -5,8 +5,22 @@ import { adminProducts } from "../../../../mock/adminProducts";
 
 import DataTable from "../../shared/components/DataTable";
 import ConfirmDialog from "../../shared/components/ConfirmDialog";
+import { useAuth } from "../../../../context/AuhProvider";
+import type { Products } from "../../../products/types/Product";
 
 export default function ProductTable() {
+    const { products } = useAuth()
+
+    const cate = (product: any) => {
+        const category = product.length === 1
+            ? product?.map((item: any) => item.name)
+            : "Uncategorized";
+
+        return category
+    }
+
+    console.log(products)
+
     return (
         <DataTable>
             <table className="w-full">
@@ -21,7 +35,7 @@ export default function ProductTable() {
                 </thead>
 
                 <tbody>
-                    {adminProducts.map((product) => (
+                    {products.map((product) => (
                         <tr
                             key={product.id}
                             className="border-t"
@@ -29,7 +43,7 @@ export default function ProductTable() {
                             <td className="p-4">
                                 <div className="flex items-center gap-3">
                                     <img
-                                        src={product.image}
+                                        src={product?.images[0]?.productImages}
                                         alt={product.name}
                                         className="h-12 w-12 rounded-lg object-cover"
                                     />
@@ -39,7 +53,7 @@ export default function ProductTable() {
                             </td>
 
                             <td className="p-4">
-                                {product.category}
+                                {cate(product.category)}
                             </td>
 
                             <td className="p-4">

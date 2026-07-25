@@ -7,7 +7,32 @@ import UserStatusBadge from "./UserStatusBadge";
 
 import { adminUsers } from "../../../../mock/adminUsers";
 
+import { getAllUser, type users } from "../../../../context/userContext";
+import { data } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+interface userType {
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    role: string
+}
+
+
+interface usersArray {
+    data: []
+}
+
 export default function UserTable() {
+    const { data } = getAllUser()
+    const [users, setUsers] = useState([]) as any
+
+    useEffect(() => {
+        setUsers(data.users)
+    }, [data])
+
+
     return (
         <DataTable>
             <table className="w-full">
@@ -24,13 +49,13 @@ export default function UserTable() {
                 </thead>
 
                 <tbody>
-                    {adminUsers.map((user) => (
+                    {users.map((user: any) => (
                         <tr
                             key={user.id}
                             className="border-t"
                         >
                             <td className="p-4">
-                                {user.name}
+                                {user.firstName} {user.lastName}
                             </td>
 
                             <td className="p-4">
@@ -43,7 +68,7 @@ export default function UserTable() {
 
                             <td className="p-4">
                                 <UserStatusBadge
-                                    status={user.status}
+                                    status={"Active"}
                                 />
                             </td>
 
