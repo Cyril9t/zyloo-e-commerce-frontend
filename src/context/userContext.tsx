@@ -33,7 +33,6 @@ export function TotalUsersContext({ children }: children) {
 
         getUsers()
 
-        console.log(data)
     }, [])
 
     return (<usersContext.Provider value={{ data }}>{children}</usersContext.Provider>)

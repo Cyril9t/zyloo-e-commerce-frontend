@@ -1,5 +1,5 @@
-import { Cuboid, Heart, Home, LogOut, Menu, Plane, PlugZap, Search, Settings, ShoppingCartIcon, SparklesIcon, SportShoe, User2Icon, X } from "lucide-react"
-import { Link, replace, useNavigate } from "react-router-dom";
+import { Cuboid, Heart, Home, Menu, Plane, PlugZap, Search, Settings, ShoppingCartIcon, SparklesIcon, SportShoe, User2Icon, LogOut } from "lucide-react"
+import { data, Link, replace, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "../../../../components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, } from "../../../../components/ui/dropdown-menu";
@@ -9,7 +9,8 @@ import SearchBar from "../../../../components/common/searchBar";
 import NavbarLinks from "../../../../components/Layout/NavbarLinks";
 import { PATHS } from "../../../../routes/paths";
 import { useAuth } from "../../../../context/AuhProvider";
-
+import { logout } from "../../../../lib/auth/auth";
+import { toast } from "sonner";
 
 const MobileStates = [
     {
@@ -51,7 +52,7 @@ const states = [
         title: "Cart"
     },
     {
-
+        link: "",
         icons: <User2Icon className="!h-5 !w-5" />,
         title: "My account"
     },
@@ -61,33 +62,52 @@ const states = [
 
 export default function Navbar() {
 
-    const { user: me } = useAuth();
+    const { user: me, setUser } = useAuth();
+    const { trigger } = logout();
 
     const redirect = me?.role === "ADMIN";
 
     const path = redirect ? PATHS?.admin?.dashboard : PATHS?.customer?.profile as string
 
+    const navigate = useNavigate()
+
+    const LogOuts = async () => {
+        try {
+            const SignOut = trigger()
+            toast.promise(SignOut, {
+                success: (data) => data.Message,
+                loading: "Processing...",
+                error: "Operation Failed Please Try again"
+            })
+            const res = await SignOut
+            console.log(res);
+            setUser(null);
+            navigate(PATHS.auth.login, { replace: true })
+
+        } catch (error) {
+            console.log(error)
+            toast.error("Internal Error")
+        }
+    }
     const user = [
         {
             icons: <User2Icon />,
             link: path,
             title: "My Account",
+            action: ""
 
         },
         {
             icons: <Cuboid />,
-            link: "/*",
-            title: "Orders"
+            link: PATHS.customer.orders,
+            title: "Orders",
+            action: ""
         },
         {
             icons: <Settings />,
-            link: "/*",
-            title: "Settings"
-        },
-        {
-            icons: <LogOut />,
-            link: "/*",
-            title: "Sign Out"
+            link: "",
+            title: "Settings",
+            action: ""
         },
     ]
     return (
@@ -117,6 +137,7 @@ export default function Navbar() {
 
                                     <DropdownMenuContent className="mr-7 w-full p-3">
                                         {states.map((item) => (
+
                                             <DropdownMenuItem
                                                 key={item.title}
                                                 className="p-3 px-4"
@@ -135,7 +156,7 @@ export default function Navbar() {
                             <ThemeToggle />
 
                             {states.map((item) => (
-                                <Link key={item.title} to={""}>
+                                <Link key={item.title} to={item.link}>
                                     {item.title === "My account" ? (
                                         <DropdownMenu >
 
@@ -155,9 +176,21 @@ export default function Navbar() {
                                                             {u.icons}
                                                             {u.title}
                                                         </DropdownMenuItem>
+
+
+
                                                     </Link>
 
                                                 ))}
+                                                <DropdownMenuItem
+                                                    className="p-3 px-4"
+                                                    onClick={LogOuts}
+                                                >
+                                                    <LogOut />
+
+                                                    Sign Out
+
+                                                </DropdownMenuItem>
                                             </DropdownMenuContent>
 
                                         </DropdownMenu>

@@ -8,7 +8,8 @@ import type { Products } from "../features/products/types/Product";
 
 interface User {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     role: "ADMIN" | "CUSTOMER";
 }
@@ -56,6 +57,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         validateUser();
     }, []);
 
+
     useEffect(() => {
         const getAllProducts = async () => {
             let isMounted = true;
@@ -74,7 +76,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
         getAllProducts();
 
-    }, [])
+    }, [user])
 
     return (
         <AuthContext.Provider

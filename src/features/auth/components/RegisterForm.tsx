@@ -106,7 +106,7 @@ export default function RegisterForm() {
                     <div className="flex flex-col">
                         <Input
                             id="firstName"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
                             {...register("password")}
                         />

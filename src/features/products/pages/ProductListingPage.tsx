@@ -336,7 +336,7 @@ export default function ProductListingPage() {
                         <div>
                             <h1 className="text-lg font-bold uppercase tracking-tight">ZYLOO Modern Collection</h1>
                             <p className="text-xs text-muted-foreground mt-0.5">
-                                Displaying {filteredProducts.length} curated objects
+                                Displaying {filteredProducts.length} curated items
                             </p>
                         </div>
 
