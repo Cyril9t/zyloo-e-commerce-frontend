@@ -12,7 +12,7 @@ export default function CustomerLayout() {
             </header> */}
 
             {/* Page Content */}
-            <main className="flex  ">
+            <main className="flex mt-20 ">
                 <Outlet />
             </main>
 

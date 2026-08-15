@@ -14,6 +14,7 @@ import OrderDetailsPage from "../features/orders/pages/OrderDetailsPage";
 import OrderSuccessPage from "../features/orders/pages/OrderSuccessPage";
 import ProtectedRoute from "./ProtectedRoute";
 
+
 function CustomerRoutes() {
     return (
         <Routes>
@@ -44,6 +45,7 @@ function CustomerRoutes() {
                 </Route>
 
             </Route>
+
         </Routes>
     );
 }

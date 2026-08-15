@@ -10,13 +10,15 @@ export const PATHS = {
         home: "/",
         products: "/products",
         productDetails: "/products/:id",
+
         cart: "/cart",
         checkout: "/checkout",
         wishlist: "/wishlist",
         profile: "/profile",
         orders: "/orders",
         orderDetails: "/orders/:id",
-        orderSuccess: "/order-success",
+        orderSuccess: "/order-success/:id",
+
     },
 
     admin: {
@@ -24,6 +26,7 @@ export const PATHS = {
         products: "/admin/products",
         categories: "/admin/categories",
         addProducts: "/admin/upload",
+        addProductItem: "/admin/product-item/:id",
         orders: "/admin/orders",
         users: "/admin/users",
         coupons: "/admin/coupons",

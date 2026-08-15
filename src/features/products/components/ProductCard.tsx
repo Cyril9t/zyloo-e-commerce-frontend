@@ -1,13 +1,21 @@
-import { Star, ShoppingCart, Heart, Eye } from "lucide-react";
+import { Star, ShoppingCart, Heart, Eye, View, ViewIcon, LucideView } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import type { Products } from "../types/Product";
+import { createCart } from "../../../lib/actions";
+import { PATHS } from "../../../routes/paths";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { number } from "zod";
+
 
 interface ProductCardProps {
     product: Products;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+    const [price, setPrice] = useState(1)
+
     const productImage =
         product.images?.length
             ? product.images[0].productImages
@@ -21,6 +29,15 @@ export default function ProductCard({ product }: ProductCardProps) {
         product.tag?.length
             ? product.tag.map((item) => item.name).join(", ")
             : "No Tag";
+
+
+
+    useEffect(() => {
+        const prices = product?.productItems?.map((item) => (setPrice(item.price)))
+        console.log(price)
+    }, [])
+
+
 
     return (
 
@@ -64,13 +81,15 @@ export default function ProductCard({ product }: ProductCardProps) {
                                 <Eye className="w-5 h-5" />
                             </Button>
                         </div>
+                        <Link to={`/products/${product.id}`}>
 
-                        <button
-                            className="absolute bottom-0 left-0 right-0 bg-foreground text-background py-3 flex products-center justify-center gap-2 font-medium translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                        >
-                            <ShoppingCart className="w-5 h-5" />
-                            Add to Cart
-                        </button>
+                            <button
+                                className="absolute bottom-0 left-0 right-0 bg-foreground text-background py-3 flex products-center justify-center gap-2 font-medium translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                            >
+                                <LucideView className="w-5 h-5" />
+                                View Details
+                            </button>
+                        </Link>
                     </div>
 
 
@@ -85,14 +104,20 @@ export default function ProductCard({ product }: ProductCardProps) {
                         </p>
                         <div className="flex products-center gap-1 mt-3">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm"> {product.rating ?? "N/A"}</span>
+
                             <span className="text-sm text-muted-foreground">
-                                ({product.reviews ?? 0})
+                                ({product.reviews ?? 4})
                             </span>
                         </div>
-                        <p className="text-xl font-bold mt-3">
-                            ${product.price}
+
+                        <p className="text-xl font-bold mt-3" >
+                            $ {price}
                         </p>
+
+
+
+
+
                     </div>
 
                 </div>

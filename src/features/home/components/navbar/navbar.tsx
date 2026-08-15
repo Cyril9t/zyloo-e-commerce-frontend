@@ -11,6 +11,7 @@ import { PATHS } from "../../../../routes/paths";
 import { useAuth } from "../../../../context/AuhProvider";
 import { logout } from "../../../../lib/auth/auth";
 import { toast } from "sonner";
+import { getAllUser } from "../../../../context/userContext";
 
 const MobileStates = [
     {
@@ -50,6 +51,7 @@ const states = [
         link: PATHS.customer.cart,
         icons: <ShoppingCartIcon className="!h-5 !w-5" />,
         title: "Cart"
+
     },
     {
         link: "",
@@ -62,8 +64,9 @@ const states = [
 
 export default function Navbar() {
 
-    const { user: me, setUser } = useAuth();
+    const { user: me, setUser, cartCount } = useAuth();
     const { trigger } = logout();
+
 
     const redirect = me?.role === "ADMIN";
 
@@ -114,7 +117,7 @@ export default function Navbar() {
         <div>
 
             <header className="hidden md:block">
-                <div className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-(--color-background) px-4 backdrop-blur-md">
+                <div className="fixed w-full top-0  z-70 flex h-18 items-center justify-between border-b bg-(--color-background) px-4 backdrop-blur-md ">
                     <Logo />
 
                     <SearchBar />
@@ -195,8 +198,11 @@ export default function Navbar() {
 
                                         </DropdownMenu>
                                     ) : (
-                                        <Button variant="ghost" size="icon-lg">
+                                        <Button variant="ghost" size="icon-lg" className="relative">
                                             {item.icons}
+                                            {item.title === "Cart" ? <span className="absolute h-5  w-5 text-[10px] font-extrabold text-center place-content-center bg-sidebar-primary text-white rounded-full top-0 left-5 ">
+                                                {cartCount}
+                                            </span> : ""}
                                         </Button>
                                     )}
                                 </Link>

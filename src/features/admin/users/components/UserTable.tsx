@@ -29,7 +29,7 @@ export default function UserTable() {
     const [users, setUsers] = useState([]) as any
 
     useEffect(() => {
-        setUsers(data.users)
+        setUsers(data?.users)
     }, [data])
 
 
@@ -48,7 +48,7 @@ export default function UserTable() {
                     </tr>
                 </thead>
 
-                <tbody>
+                {/* <tbody>
                     {users.map((user: any) => (
                         <tr
                             key={user.id}
@@ -82,7 +82,7 @@ export default function UserTable() {
                             </td>
                         </tr>
                     ))}
-                </tbody>
+                </tbody> */}
             </table>
         </DataTable>
     );

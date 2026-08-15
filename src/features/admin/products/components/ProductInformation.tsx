@@ -26,29 +26,6 @@ export default function ProductInformation({ register, errors }: any) {
                         </div>
                     </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="prod-short-desc" className=" font-semibold">Product Summary</Label>
-                        <div className="flex flex-col">
-                            <Input id="prod-name" {...register("summary")} placeholder="Brief Summary of the item..." className=" focus-visible:ring-1 focus-visible:ring-neutral-950" />
-                            <small className="text-destructive">{errors.summary?.message}</small>
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="prod-short-desc" className=" font-semibold">Stock</Label>
-                        <div className="flex flex-col">
-                            <Input id="prod-short-desc" type="number" {...register("stock")} placeholder="Available Stocks e.g 1, 4 " className="h-9 focus-visible:ring-1" />
-                            <small className="text-destructive">{errors.stock?.message}</small>
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="prod-short-desc" className=" font-semibold">Price</Label>
-                        <div className="flex flex-col">
-                            <Input id="prod-short-desc" type="number" {...register("price")} placeholder="Product Price...$$ 0.00" className="h-9 focus-visible:ring-1" />
-                            <small className="text-destructive">{errors.price?.message}</small>
-                        </div>
-                    </div>
 
                     <div className="space-y-2">
 

@@ -16,6 +16,7 @@ export interface users {
 
 interface context {
     data: users
+
 }
 
 interface children {
@@ -27,6 +28,8 @@ const usersContext = createContext<null | context>(null)
 export function TotalUsersContext({ children }: children) {
 
     const { data, trigger } = totalUsers()
+
+
 
     useEffect(() => {
         const getUsers = async () => await trigger()

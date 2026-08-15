@@ -5,6 +5,9 @@ import type { ProductResponse } from "../features/products/pages/ProductListingP
 import { allProducts } from "../lib/actions";
 import type { productInfoData } from "../features/admin/products/types/product";
 import type { Products } from "../features/products/types/Product";
+import { cart } from "../lib/actions";
+import { date } from "zod/v3";
+import { el } from "zod/v4/locales";
 
 interface User {
     id: string;
@@ -14,12 +17,44 @@ interface User {
     role: "ADMIN" | "CUSTOMER";
 }
 
+export interface product {
+    name: string;
+    description: string
+}
+
+export type productItem = {
+    id: string;
+    productId: string,
+    price: number;
+    stock: number;
+    color: string;
+    image: string;
+    size: string | null
+    product: product
+}
+
+export type Data = {
+    id: string;
+    productItem: productItem;
+    quantity: number
+}
+
+interface carts {
+    cart: Data[]
+}
+
 interface AuthContextType {
     user: User | null;
     isLoading: boolean;
     isMutating: boolean;
     products: Products[]
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    setCartCount: React.Dispatch<React.SetStateAction<number>>;
+    cartCount: number,
+    data: carts,
+    items: Data[],
+    setItems: React.Dispatch<React.SetStateAction<Data[] | []>>;
+
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -34,6 +69,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { trigger: fetchProducts } = allProducts()
     const { trigger, isMutating } = validate();
     const [products, setProducts] = useState<Products[]>([]);
+    const [cartCount, setCartCount] = useState(0)
+    const { data, trigger: fetch } = cart()
+    const [items, setItems] = useState<Data[] | []>([]);
 
     useEffect(() => {
         const validateUser = async () => {
@@ -78,6 +116,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     }, [user])
 
+    const usersCArt = async () => {
+        try {
+            await fetch();
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        usersCArt();
+    }, [cartCount, user,])
+
+    useEffect(() => {
+        setCartCount(data?.cart?.length ?? 0)
+    }, [cartCount, data, items])
+
     return (
         <AuthContext.Provider
             value={{
@@ -86,6 +141,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 isLoading,
                 isMutating,
                 products,
+                cartCount,
+                setCartCount,
+                data,
+                items,
+                setItems,
+
             }}
         >
             {children}

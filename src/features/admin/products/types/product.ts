@@ -3,11 +3,8 @@ import z from "zod";
 
 export const productInfoSchema = z.object({
     tagName: z.string(),
-    price: z.string().min(1, "please input price"),
-    stock: z.string().min(0, "Stock can not be empty"),
     name: z.string().min(1, "Product Name too short."),
     category: z.string().min(1, "what category is this item"),
-    summary: z.string().min(3, "give brief summary for this item"),
     description: z.string().min(2, "give a short comprehensive StorFront rich manifest description for this item."),
 })
 
@@ -17,7 +14,5 @@ export interface AdminProduct {
     id: string;
     name: string;
     category: string;
-    price: number;
-    stock: number;
     image: string;
 }

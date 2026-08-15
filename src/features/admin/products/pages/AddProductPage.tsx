@@ -22,19 +22,7 @@ interface ProductInfo {
     tag: string
 }
 
-// export interface ProductVariantOption {
-//     id: string;
-//     name: string; // e.g., Size, Color
-//     values: string[];
-// }
-
-// export interface CustomAttribute {
-//     id: string;
-//     key: string;
-//     value: string;
-// }
-
-type ImagePreview = {
+export type ImagePreview = {
     file: File;
     preview: string;
 };
@@ -113,7 +101,6 @@ export default function AddProductPage() {
                 <ProductImage
                     setImages={setImages} uploaded={uploaded} uploadProgress={uploadProgress} images={images}
                 />
-                {/* <PricingInventory /> */}
 
                 <AdvancedAccordion />
             </div>

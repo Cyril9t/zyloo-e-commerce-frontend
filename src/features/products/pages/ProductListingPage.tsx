@@ -36,14 +36,16 @@ export interface ProductResponse {
 export default function ProductListingPage() {
     const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
     const [loading, setLoading] = useState<boolean>(false);
-    const { trigger } = allProducts();
     const { products } = useAuth()
 
     useEffect(() => {
         setLoading(true);
         const timer = setTimeout(() => setLoading(false), 300);
+        console.log(products)
         return () => clearTimeout(timer);
     }, [filters]);
+
+
 
 
     const handleCheckboxChange = (key: "categories" | "brands", value: string, checked: boolean) => {
@@ -239,70 +241,7 @@ export default function ProductListingPage() {
                         </div>
 
                         <div className="h-px bg-border/40" />
-
-
-                        <div>
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Colors</h4>
-                            <div className="flex flex-wrap gap-2.5">
-                                {[
-                                    { name: "Black", hex: "#000000" },
-                                    { name: "White", hex: "#FFFFFF", border: true },
-                                    { name: "Slate", hex: "#64748B" },
-                                    { name: "Crimson", hex: "#DC2626" },
-                                    { name: "Royal Blue", hex: "#2563EB" },
-                                    { name: "Olive", hex: "#65A30D" },
-                                ].map((c) => {
-                                    const isSelected = filters.colors.includes(c.name);
-                                    return (
-                                        <button
-                                            key={c.name}
-                                            type="button"
-                                            onClick={() => toggleColor(c.name)}
-                                            className={cn(
-                                                "relative h-7 w-7 rounded-full transition-transform duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1",
-                                                c.border && "border border-border"
-                                            )}
-                                            style={{ backgroundColor: c.hex }}
-                                            title={c.name}
-                                        >
-                                            {isSelected && (
-                                                <Check className={cn("absolute inset-0 m-auto h-4 w-4", c.name === "White" ? "text-black" : "text-white")} />
-                                            )}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
                         <div className="h-px bg-border/40" />
-
-
-                        <div>
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Sizes</h4>
-                            <div className="grid grid-cols-4 gap-2">
-                                {["XS", "S", "M", "L", "XL"].map((size) => {
-                                    const isSelected = filters.sizes.includes(size);
-                                    return (
-                                        <button
-                                            key={size}
-                                            type="button"
-                                            onClick={() => toggleSize(size)}
-                                            className={cn(
-                                                "h-9 border rounded text-xs font-semibold tracking-wider uppercase transition-all duration-200",
-                                                isSelected
-                                                    ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                                                    : "border-input bg-background hover:bg-muted text-muted-foreground"
-                                            )}
-                                        >
-                                            {size}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        <div className="h-px bg-border/40" />
-
 
                         <div>
                             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2.5">Minimum Rating</h4>

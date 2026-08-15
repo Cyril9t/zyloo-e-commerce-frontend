@@ -14,6 +14,13 @@ export interface ProductImage {
     productImages: string;
 }
 
+export interface ProductItems {
+    id: string,
+    price: number,
+    stock: number,
+
+}
+
 export interface Products {
     id: string;
     name: string;
@@ -21,7 +28,7 @@ export interface Products {
     price: number;
     stock: number;
     createdAt: string;
-
+    productItems: ProductItems[];
     category: Category[];
     tag: Tag[];
     images: ProductImage[];

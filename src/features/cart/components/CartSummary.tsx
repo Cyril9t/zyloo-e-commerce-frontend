@@ -36,7 +36,7 @@ export function CartSummary({ subtotal, shipping, tax, discount, onCheckout, isC
             <div className="space-y-3 text-sm font-medium">
                 <div className="flex justify-between text-muted-foreground">
                     <span>Subtotal</span>
-                    <span className="font-mono text-foreground">${subtotal.toLocaleString()}</span>
+                    <span className="font-mono text-foreground">${subtotal?.toLocaleString()}</span>
                 </div>
                 {discount > 0 && (
                     <div className="flex justify-between text-emerald-600">
@@ -91,12 +91,15 @@ export function CartSummary({ subtotal, shipping, tax, discount, onCheckout, isC
 
             {/* Primary Actions */}
             <div className="space-y-2.5 pt-2">
+
                 <Button
                     onClick={onCheckout}
                     disabled={isCartEmpty}
                     className="w-full h-11 text-xs font-semibold uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 group"
                 >
-                    Proceed to Checkout
+                    <Link to={PATHS.customer.checkout}>
+                        Proceed to Checkout
+                    </Link>
                     <ArrowRight className="h-3.5 w-3.5 transform transition-transform group-hover:translate-x-0.5" />
                 </Button>
 

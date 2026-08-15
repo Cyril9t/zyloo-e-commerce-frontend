@@ -1,21 +1,396 @@
-import ProductGallery from "../components/ProductGallery";
-import ProductInfo from "../components/ProductInfo";
-import ProductTabs from "../components/ProductTabs";
-import RelatedProducts from "../components/RelatedProducts";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import api from "../../../lib/api";
+import { createCart } from "../../../lib/actions";
 
-export default function ProductDetailPage() {
+import {
+    Star,
+    Heart,
+    Truck,
+    ShieldCheck,
+    RotateCcw,
+    ChevronRight,
+    Minus,
+    Plus,
+    Check,
+    ShoppingCart,
+} from "lucide-react";
+
+import { Button } from "../../../components/ui/button";
+import { Badge } from "../../../components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
+import { string } from "zod";
+import { map } from "zod/v3";
+import { PATHS } from "../../../routes/paths";
+import { toast } from "sonner";
+import { getAllUser } from "../../../context/userContext";
+import { useAuth } from "../../../context/AuhProvider";
+
+
+export interface Category {
+    id: string;
+    name: string;
+}
+
+export interface Image {
+    id: string;
+    productImages: string;
+}
+
+export interface ProductItem {
+    id: string;
+    color: string | null,
+    createdAt: string,
+    price: number,
+    productId: string,
+    size: string | null,
+    stock: number,
+    image: string,
+    updatedAt: string
+}
+
+export interface Tag {
+    id: string;
+    name: string;
+}
+
+export interface ProductDetails {
+    id: string;
+    name: string;
+    description: string;
+    userId: string;
+    createdAt: string;
+    updatedAt: string;
+    category: Category[];
+    images: Image[];
+    productItems: ProductItem[];
+    tags: Tag[];
+}
+
+
+
+export default function ProductDetailsPage() {
+
+    const { id } = useParams();
+    const { trigger } = createCart()
+    const { setCartCount } = useAuth()
+    const [selectedImage, setSelectedImage] = useState<string>("")
+    const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const [selectedColor, setSelectedColor] = useState<string | null>(null);
+    const [color, setColor] = useState<string | null>(null);
+    const [productItemId, setProductItemId] = useState<string | null>("")
+    const [quantity, setQuantity] = useState<number>(1);
+    const [selectedPrice, setSelectedPrice] = useState<number | null>(1);
+    const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
+    const [stock, setStock] = useState<number | null>(1)
+    const [productDetail, setProductDetail] = useState<ProductDetails | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        console.log(id)
+
+        const productDetail = async () => {
+
+            try {
+                const res = await api.get(`/product/productsDetails/${id}`)
+                const data = res.data
+                setProductDetail(data.ProductDetails)
+
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        productDetail();
+
+    }, [id])
+
+
+    const AddToCart = async () => {
+        try {
+            setIsLoading(true)
+            if (!productItemId) {
+                setIsLoading(false)
+                toast.warning("SelectItem To add to cart")
+                return
+            }
+
+            const res = await trigger({ productItemId: productItemId as string, quantity: quantity })
+            const data = await res
+            setCartCount(prev => prev + 1)
+            console.log(data)
+            toast.success("Item added to Cart")
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            console.log(error)
+        }
+    }
+
+
+
+
+    useEffect(() => {
+        const initCol = productDetail?.productItems[0]?.color ?? null
+
+        setSelectedColor(initCol)
+
+    }, [productDetail])
+
+
+    useEffect(() => {
+
+        setSelectedColor(color);
+    }, [color,]);
+
+    useEffect(() => {
+        const price = productDetail?.productItems[0]?.price
+        const stocks = productDetail?.productItems[0]?.stock
+        setSelectedPrice(price ?? null)
+        setStock(stocks ?? null)
+    })
+
+
     return (
-        <section className="container-page py-10">
-            <div className="grid gap-12 lg:grid-cols-2">
-                <ProductGallery />
-                <ProductInfo />
-            </div>
+        <div className="w-full min-h-screen bg-neutral-50/60 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased selection:bg-neutral-200">
+            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+                <div className="flex items-center gap-2 text-[14px] text-neutral-400 font-medium">
+                    <Link to={PATHS.customer.products}>
+                        <span>Shop</span>
+                    </Link>
+                    <ChevronRight className="h-3 w-3" />
+                    {productDetail?.category?.map((p) => {
+                        return (
+                            <span>
+                                {p.name}
+                            </span>
+                        )
+                    })
+                    }
+                    <ChevronRight className="h-3 w-3" />
+                    <span className="text-neutral-900 dark:text-neutral-100 font-semibold truncate">{productDetail?.name}</span>
+                </div>
 
-            <div className="mt-16">
-                <ProductTabs />
-            </div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-            <RelatedProducts />
-        </section>
+                    <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-4 ">
+
+                        <div className="flex-1 aspect-4/5 rounded-lg overflow-hidden border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-100 dark:bg-neutral-900 relative h-150">
+                            <img
+                                src={!selectedImage ? productDetail?.productItems[0]?.image : selectedImage}
+                                alt={productDetail?.name}
+                                className="h-full w-full object-cover object-center"
+                            />
+                            <Badge className="absolute top-4 left-4 bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-xs">
+                                {productDetail?.tags.map((t, key) => {
+                                    return (
+                                        <span key={key}>
+                                            {t.name}
+                                        </span>
+                                    )
+                                })}
+                            </Badge>
+                        </div>
+
+                    </div>
+
+                    <div className="lg:col-span-5 space-y-6 mt-4">
+                        <div className="space-y-2 border-b border-neutral-100 dark:border-neutral-800/60 pb-6">
+                            <div className="flex items-center justify-between gap-4">
+                                <span className="text-xl font-mono text-neutral-400">sku</span>
+                                <div className="text-xl flex items-center gap-4 font-mono font-bold text-neutral-700 dark:text-neutral-300">
+                                    <div className="flex">
+                                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                    </div>
+                                    <span className=" text-neutral-400 font-normal">15 reviews</span>
+                                </div>
+                            </div>
+                            <h1 className="text-2xl font-bold tracking-tight text-neutral-950 dark:text-neutral-50">
+                                {productDetail?.name}
+                            </h1>
+                            <div className="flex items-baseline gap-3 font-mono pt-1">
+
+
+
+
+                                <span className="text-xl font-bold text-neutral-950 dark:text-white">
+                                    ${selectedPrice}
+                                </span>
+
+
+
+                            </div>
+                        </div>
+
+                        <div className="space-y-2.5">
+                            <label className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+                                Color: <span className="text-neutral-900 dark:text-white font-normal">{selectedColor}</span>
+                            </label>
+                            <div className="flex items-center gap-3">
+                                {productDetail?.productItems?.map((c) => (
+                                    <button
+                                        key={c.id}
+                                        style={{ backgroundColor: `${c.color}` }}
+                                        className={`h-7 w-7 rounded-full border border-neutral-300 dark:border-neutral-700 flex items-center justify-center transition-transform ${selectedColor === c.color ? "ring-2 ring-neutral-950 dark:ring-white ring-offset-2 dark:ring-offset-neutral-950 scale-110" : "hover:scale-105"
+                                            }`}
+                                    >
+                                        {c.color == selectedColor && (
+                                            <Check className={`h-3 w-3 ${selectedColor ? "text-neutral-900" : "text-white"}`} />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+
+
+                        <div className="space-y-2.5">
+                            <div className="flex items-center justify-between text-xs">
+                                <label className="font-bold uppercase tracking-wider text-neutral-400">Size</label>
+                                <button className="text-neutral-500 hover:text-neutral-950 dark:hover:text-white font-semibold underline">Size Guide</button>
+                            </div>
+                            <div className="grid grid-cols-5 gap-2">
+
+                                <Button
+                                    variant="outline"
+                                    className="h-9 text-xs font-semibold bg-background  border-border "
+
+                                >
+                                    {selectedSize}
+                                </Button>
+
+                            </div>
+                        </div>
+
+                        <div className="space-y-3 pt-2">
+                            <div className="flex items-center gap-3">
+                                <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-neutral-900 h-10 px-1">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="h-8 w-8 text-neutral-400"
+                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                    >
+                                        <Minus className="h-3 w-3" />
+                                    </Button>
+                                    <span className="w-8 text-center text-xs font-mono font-bold">{quantity}</span>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="h-8 w-8 text-neutral-400"
+                                        onClick={() => setQuantity(quantity + 1)}
+
+                                    >
+                                        <Plus className="h-3 w-3" />
+                                    </Button>
+                                </div>
+
+                                <Button onClick={AddToCart} disabled={isLoading} className="flex-1 h-10 text-xs font-bold uppercase tracking-wider bg-neutral-950 dark:bg-neutral-50 text-white dark:text-neutral-950 hover:opacity-90">
+                                    <ShoppingCart className="h-3.5 w-3.5 mr-2" /> Add to Cart
+                                </Button>
+
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    onClick={() => setIsWishlisted(!isWishlisted)}
+                                    className="h-10 w-10 border-neutral-200 dark:border-neutral-800"
+                                >
+                                    <Heart className={`h-4 w-4 ${isWishlisted ? "fill-rose-500 text-rose-500" : "text-neutral-400"}`} />
+                                </Button>
+                            </div>
+
+                            <p className="text-[14px] opacity-80 text-center font-medium">
+                                In stock ({stock} units remaining) — Ships within 24 hours.
+                            </p>
+                        </div>
+
+
+                        <div className="grid grid-cols-3 gap-2 pt-4 border-t border-neutral-100 dark:border-neutral-800/60 text-[11px] text-neutral-500 font-medium">
+                            <div className="flex items-center gap-2">
+                                <Truck className="h-4 w-4 text-neutral-400 shrink-0" />
+                                <span>Free Shipping</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <RotateCcw className="h-4 w-4 text-neutral-400 shrink-0" />
+                                <span>30-Day Returns</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <ShieldCheck className="h-4 w-4 text-neutral-400 shrink-0" />
+                                <span>2-Yr Warranty</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div className="flex sm:flex-row gap-3 shrink-0">
+                    {productDetail?.productItems?.map((img, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => {
+                                setProductItemId(img.id)
+                                setSelectedImage(img?.image)
+                                setSelectedPrice(img.price)
+                                setSelectedSize(img.size)
+                                setColor(img.color)
+                                setStock(img.stock)
+                            }}
+                            className={`relative h-16 w-16 sm:h-35 sm:w-35 rounded-md overflow-hidden border bg-white dark:bg-neutral-900 transition-all ${selectedImage === img.image
+                                ? "border-neutral-950 dark:border-white ring-1 ring-neutral-950 dark:ring-white"
+                                : "border-neutral-200 dark:border-neutral-800 opacity-70 hover:opacity-100"
+                                }`}
+                        >
+                            <img src={img.image} alt="" className="h-full w-full object-cover" />
+                        </button>
+                    ))}
+                </div>
+
+
+                <div className="pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60 max-w-4xl">
+                    <Tabs defaultValue="details">
+                        <TabsList className="bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 h-9 p-1 mb-6">
+                            <TabsTrigger value="details" className="text-xs px-4 h-7 font-medium">Details & Fit</TabsTrigger>
+                            <TabsTrigger value="fabric" className="text-xs px-4 h-7 font-medium">Fabric & Care</TabsTrigger>
+                            <TabsTrigger value="reviews" className="text-xs px-4 h-7 font-medium">Reviews 12</TabsTrigger>
+                        </TabsList>
+
+                        <TabsContent value="details" className="space-y-4 text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                            <p>{productDetail?.description}</p>
+                            <ul className="list-disc pl-4 space-y-1 text-neutral-500">
+                                <li>Structured lapel collars with padded internal architecture</li>
+                                <li>Interior passport & card slots</li>
+                                <li>Hand-stitched horn buttons</li>
+                            </ul>
+                        </TabsContent>
+
+                        <TabsContent value="fabric" className="text-xs text-neutral-600 dark:text-neutral-300 space-y-2">
+                            <p><strong>Composition:</strong> 70% Mulberry Silk, 30% Virgin Wool.</p>
+                            <p><strong>Care:</strong> Dry clean only. Do not tumble dry. Low-heat iron with cloth buffer.</p>
+                        </TabsContent>
+
+                        <TabsContent value="reviews" className="space-y-4">
+                            <div className="flex items-center gap-3 p-4 rounded-md bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60">
+                                <Avatar className="h-8 w-8">
+                                    <AvatarFallback className="text-[10px] font-bold">SJ</AvatarFallback>
+                                </Avatar>
+                                <div className="space-y-0.5">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-xs font-bold text-neutral-900 dark:text-white">Sarah J.</span>
+                                        <div className="flex text-amber-400"><Star className="h-3 w-3 fill-amber-400" /></div>
+                                    </div>
+                                    <p className="text-xs text-neutral-500">Exquisite draping and weight. Perfectly tailored for seasonal layering.</p>
+                                </div>
+                            </div>
+                        </TabsContent>
+                    </Tabs>
+                </div>
+
+            </main>
+        </div>
     );
 }

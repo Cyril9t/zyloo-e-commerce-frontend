@@ -45,7 +45,7 @@ export default function ProductImages({ uploaded, uploadProgress, setImages, ima
 
                 {/* Drag and Drop Visual Platform Area */}
                 <div className="relative border border-dashed border-neutral-300 dark:border-neutral-700 rounded-lg p-8 text-center bg-neutral-50/50 dark:bg-neutral-900/40 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer group flex flex-col items-center justify-center">
-                    <input type="file" multiple onChange={fileUpload} className="h-full w-full z-30 absolute opacity-0" />
+                    <input type="file" onChange={fileUpload} className="h-full w-full z-30 absolute opacity-0" />
                     <UploadCloud className="h-8 w-8 text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-50 transition-colors mb-3 stroke-[1.5]" />
                     <span className="text-xs font-bold text-neutral-950 dark:text-neutral-50 tracking-tight">Stream assets via local system files</span>
                     <p className="text-[11px] text-neutral-400 mt-1 font-medium">Drag and drop raw structures or browse arrays (PNG, JPEG, WEBP up to 15MB each)</p>
