@@ -1,12 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuhProvider";
 import { PATHS } from "./paths";
+import ECommercePageLoader from "../components/common/UniversalLoadingState";
 export default function ProtectedRoute() {
 
     const { user, isLoading } = useAuth();
 
     if (isLoading) {
-        return <h1>Loading...</h1>;
+        return <ECommercePageLoader variant="grid" fullScreen={true} />;
     }
 
     if (!user) {

@@ -11,8 +11,8 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 function Newsletter() {
     return (
 
-        <section className="py-6 md:py-2 px-10  mx-auto w-full  mb-20">
-            <Card className="relative overflow-hidden border  bg-gradient-to-b from-zinc-50 dark:from-zinc-900 dark:to-zinc-950 rounded-[0.5rem] md:p-16 lg:p-16 shadow-xl shadow-zinc-200/30 dark:shadow-none">
+        <section className="py-6 md:py-8 lg:py-12 px-2 sm:px-4 md:px-8 lg:px-10 mx-auto w-full mb-16 md:mb-20 lg:mb-24">
+            <Card className="relative overflow-hidden border bg-gradient-to-b from-zinc-50 dark:from-zinc-900 dark:to-zinc-950 rounded-xl md:rounded-2xl p-6 sm:p-10 md:p-12 lg:p-16 shadow-lg md:shadow-xl shadow-zinc-200/30 dark:shadow-none">
 
 
                 <div

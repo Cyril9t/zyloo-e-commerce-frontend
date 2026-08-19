@@ -1,8 +1,9 @@
 
 import { Search, Star, SlidersHorizontal, RotateCcw, X, ArrowUpDown, Check } from "lucide-react";
 import ProductGrid from "../components/ProductGrid";
+import SearchBar from "../../../components/common/searchBar";
 import { useEffect, useMemo, useState } from "react";
-import { allProducts } from "../../../lib/actions";
+import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 import { cn } from "../../../utils/cn";
 import type { Products } from "../types/Product";
 import { useAuth } from "../../../context/AuhProvider";
@@ -36,12 +37,16 @@ export interface ProductResponse {
 export default function ProductListingPage() {
     const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
     const [loading, setLoading] = useState<boolean>(false);
-    const { products } = useAuth()
+    const [filterMenuOpen, setFilterMenuOpen] = useState<boolean>(false);
+    const { products, hangTight } = useAuth()
+
+
+
 
     useEffect(() => {
-        setLoading(true);
+        setLoading(true)
         const timer = setTimeout(() => setLoading(false), 300);
-        console.log(products)
+
         return () => clearTimeout(timer);
     }, [filters]);
 
@@ -137,41 +142,54 @@ export default function ProductListingPage() {
             });
     }, [products, filters]);
 
+    if (hangTight) return <ECommercePageLoader variant="grid" fullScreen={false} />
+
     return (
         <div className="w-full bg-background text-foreground antialiased selection:bg-neutral-200">
+            {/* Search Bar at Top */}
+            <div className="md:hidden block w-full border-b border-border/60 bg-background px-4 py-3 sm:px-6 sm:py-4">
+                <SearchBar />
+            </div>
 
             <div className=" w-full flex flex-col lg:flex-row  border-x border-border/40 ">
 
-                <aside className=" flex flex-col bg-background border-r border-border/60 lg:h-[calc(100vh-0.8rem)] lg:sticky lg:top-16 pb-7 z-20  lg:w-[18%]">
-                    <div className="flex items-center justify-between p-4 pb-3">
+                {/* Mobile Filter Toggle Button */}
+                <div className="lg:hidden flex items-center justify-between p-4 border-b border-border/60 bg-background">
+                    <button
+                        onClick={() => setFilterMenuOpen(!filterMenuOpen)}
+                        className="flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-md border border-border hover:bg-muted transition-colors"
+                    >
+                        <SlidersHorizontal className="h-4 w-4" />
+                        Filters
+                    </button>
+                    <div className="text-xs text-muted-foreground">
+                        {filteredProducts.length} items
+                    </div>
+                </div>
+
+                {/* Filter Sidebar - Hidden on mobile, visible on lg */}
+                <aside className={`absolute lg:relative top-16 left-0 right-0 lg:top-auto lg:right-auto flex flex-col bg-background border-b lg:border-b-0 lg:border-r border-border/60 lg:h-[calc(100vh-0.8rem)] lg:sticky lg:top-16 pb-7 z-40 lg:w-[18%] max-h-[calc(100vh-8rem)] overflow-y-auto lg:max-h-none lg:overflow-y-auto ${filterMenuOpen ? 'block' : 'hidden lg:flex'}`}>
+                    <div className="flex items-center justify-between p-4 pb-3 sticky top-0 bg-background z-10">
                         <div className="flex items-center gap-2 font-semibold tracking-tight text-xs uppercase">
                             <SlidersHorizontal className="h-4 w-4" />
                             <span>Filters</span>
                         </div>
-                        <button
-                            onClick={() => setFilters(INITIAL_FILTERS)}
-                            className="flex items-center text-xs font-normal text-muted-foreground hover:text-foreground transition-colors p-1"
-                        >
-                            <RotateCcw className="h-3 w-3 mr-1.5" />
-                            Clear All
-                        </button>
-                    </div>
-
-                    <div className="px-4 pb-4">
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
-                            <input
-                                type="text"
-                                placeholder="Search collection..."
-                                value={filters.search}
-                                onChange={(e) => setFilters((prev) => ({ ...prev, search: e.target.value }))}
-                                className="w-full bg-muted/40 border border-input rounded-md pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-ring transition-all"
-                            />
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setFilters(INITIAL_FILTERS)}
+                                className="flex items-center text-xs font-normal text-muted-foreground hover:text-foreground transition-colors p-1"
+                            >
+                                <RotateCcw className="h-3 w-3 mr-1.5" />
+                                Clear
+                            </button>
+                            <button
+                                onClick={() => setFilterMenuOpen(false)}
+                                className="lg:hidden p-1 hover:bg-muted rounded"
+                            >
+                                <X className="h-4 w-4" />
+                            </button>
                         </div>
                     </div>
-
-                    <div className="h-px bg-border/60 mx-4" />
-
 
                     <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-2 space-y-6">
 
@@ -269,11 +287,19 @@ export default function ProductListingPage() {
                     </div>
                 </aside>
 
-                <main className=" flex-1 p-6 lg:p-8  w-100%">
+                {/* Mobile Filter Overlay Backdrop */}
+                {filterMenuOpen && (
+                    <div
+                        className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+                        onClick={() => setFilterMenuOpen(false)}
+                    />
+                )}
+
+                <main className=" flex-1 p-4 lg:p-8  w-full">
                     {/* Top Sorting Bar Controls */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-5 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/40 pb-4 mb-5">
                         <div>
-                            <h1 className="text-lg font-bold uppercase tracking-tight">ZYLOO Modern Collection</h1>
+                            <h1 className="text-base sm:text-lg font-bold uppercase tracking-tight">ZYLOO Modern Collection</h1>
                             <p className="text-xs text-muted-foreground mt-0.5">
                                 Displaying {filteredProducts.length} curated items
                             </p>
@@ -296,34 +322,34 @@ export default function ProductListingPage() {
 
                     {/* Active Filtering Badge Bar */}
                     {hasActiveFilters && (
-                        <div className="flex flex-wrap items-center gap-1.5 mb-6 text-xs font-medium animate-in fade-in duration-200">
-                            <span className="text-muted-foreground uppercase tracking-wider mr-1 text-[10px] font-bold">Active:</span>
+                        <div className="flex flex-wrap items-center gap-1 mb-5 text-xs font-medium animate-in fade-in duration-200">
+                            <span className="text-muted-foreground uppercase tracking-wider text-[10px] font-bold mr-0.5">Active:</span>
                             {filters.categories.map((cat) => (
-                                <span key={cat} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted border text-foreground">
-                                    {cat} <X className="h-3 w-3 cursor-pointer" onClick={() => removeFilter("categories", cat)} />
+                                <span key={cat} className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted border text-foreground text-xs">
+                                    {cat} <X className="h-3 w-3 cursor-pointer hover:text-primary" onClick={() => removeFilter("categories", cat)} />
                                 </span>
                             ))}
                             {filters.brands.map((brand) => (
-                                <span key={brand} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted border text-foreground">
-                                    {brand} <X className="h-3 w-3 cursor-pointer" onClick={() => removeFilter("brands", brand)} />
+                                <span key={brand} className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted border text-foreground text-xs">
+                                    {brand} <X className="h-3 w-3 cursor-pointer hover:text-primary" onClick={() => removeFilter("brands", brand)} />
                                 </span>
                             ))}
                             {filters.colors.map((color) => (
-                                <span key={color} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted border text-foreground">
-                                    {color} <X className="h-3 w-3 cursor-pointer" onClick={() => removeFilter("colors", color)} />
+                                <span key={color} className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted border text-foreground text-xs">
+                                    {color} <X className="h-3 w-3 cursor-pointer hover:text-primary" onClick={() => removeFilter("colors", color)} />
                                 </span>
                             ))}
                             {filters.sizes.map((size) => (
-                                <span key={size} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted border text-foreground">
-                                    {size} <X className="h-3 w-3 cursor-pointer" onClick={() => removeFilter("sizes", size)} />
+                                <span key={size} className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted border text-foreground text-xs">
+                                    {size} <X className="h-3 w-3 cursor-pointer hover:text-primary" onClick={() => removeFilter("sizes", size)} />
                                 </span>
                             ))}
                             {filters.rating && (
-                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted border text-foreground">
-                                    {filters.rating}+ Stars <X className="h-3 w-3 cursor-pointer" onClick={() => removeFilter("rating", null)} />
+                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted border text-foreground text-xs">
+                                    {filters.rating}+ Stars <X className="h-3 w-3 cursor-pointer hover:text-primary" onClick={() => removeFilter("rating", null)} />
                                 </span>
                             )}
-                            <button onClick={() => setFilters(INITIAL_FILTERS)} className="text-xs font-bold text-primary underline underline-offset-4 ml-1.5">
+                            <button onClick={() => setFilters(INITIAL_FILTERS)} className="text-xs font-bold text-primary underline underline-offset-2 ml-1">
                                 Clear all
                             </button>
                         </div>
@@ -331,15 +357,7 @@ export default function ProductListingPage() {
 
                     {/* Catalog Listing Grid */}
                     {loading ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {Array.from({ length: 3 }).map((_, i) => (
-                                <div key={i} className="space-y-4 animate-pulse">
-                                    <div className="bg-muted aspect-[4/5] rounded-lg" />
-                                    <div className="h-4 bg-muted rounded w-2/3" />
-                                    <div className="h-3 bg-muted rounded w-1/3" />
-                                </div>
-                            ))}
-                        </div>
+                        <ECommercePageLoader variant="grid" fullScreen={false} />
                     ) : filteredProducts.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-20 border border-dashed rounded-xl bg-muted/5">
                             <p className="text-xs font-medium text-muted-foreground tracking-wide">No premium objects match your selections.</p>

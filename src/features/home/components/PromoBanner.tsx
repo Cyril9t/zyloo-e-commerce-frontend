@@ -79,7 +79,7 @@ export default function PromoBanner() {
 
     return (
         <div
-            className="relative w-full max-w-[96%] mx-auto overflow-hidden rounded-2xl shadow-2xl "
+            className="relative w-full max-w-[96%] mx-auto overflow-hidden rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl px-2 md-:px-10 md:-py-20"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -90,13 +90,13 @@ export default function PromoBanner() {
             <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/5 rounded-full blur-1xl pointer-events-none" />
 
             <div
-                className="flex transition-transform duration-700 ease-out h-[500px] md:h-[450px]"
+                className="flex transition-transform duration-700 ease-out h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px]"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
                 {PREMIUM_PRODUCTS.map((product) => (
                     <div
                         key={product.id}
-                        className={`w-full h-full flex-shrink-0 bg-gradient-to-r ${product.bgColor} relative flex flex-col md:flex-row items-center px-8 md:px-16 py-12 overflow-hidden`}
+                        className={`w-full h-full flex-shrink-0 bg-gradient-to-r ${product.bgColor} relative flex flex-col md:flex-row items-center px-4 sm:px-8 md:px-12 lg:px-16 py-8 md:py-12 lg:py-16 overflow-hidden`}
                     >
 
                         <div className="absolute -right-10 -top-10 w-72 h-72 rounded-full blur-3xl pointer-events-none" />

@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { PATHS } from "../../../routes/paths";
 import { useParams } from "react-router-dom";
 import api from "../../../lib/api";
+import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 
 
 interface PurchasedItem {
@@ -72,7 +73,7 @@ export default function OrderSuccessPage() {
             try {
                 const Order = await api.get(`/Order/OrderSuccess/${id}`)
                 const data = await Order.data
-                console.log(data)
+
                 setOrderDetails(data?.OrderSuccess)
                 setLoading(false)
             } catch (error) {
@@ -84,9 +85,7 @@ export default function OrderSuccessPage() {
     }, [id])
 
 
-    if (isLoading) return (<p>
-        Loading
-    </p>)
+    if (isLoading) return (<ECommercePageLoader variant="list" fullScreen={false} />)
 
 
 
@@ -123,7 +122,6 @@ export default function OrderSuccessPage() {
                     </p>
                 </div>
 
-                {/* Order Summary & Tracking Card */}
                 <Card className="  shadow-2xs">
                     <CardHeader className="p-4 sm:p-3 border-b border-border dark:border-neutral-800/60 flex flex-row items-center justify-between">
                         <div className="space-y-0.5">
@@ -135,28 +133,27 @@ export default function OrderSuccessPage() {
                         </Badge>
                     </CardHeader>
 
-                    <CardContent className="p-4 sm:p-6 space-y-6">
+                    <CardContent className="p-4 sm:p-1 space-y-6">
 
-                        {/* Delivery Info Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800/60 text-xs">
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 rounded-lg text-xs">
                             <div className="space-y-1">
                                 <div className="flex items-center gap-1.5 text-neutral-500 font-bold uppercase tracking-wider text-[12px]">
-                                    <Calendar className="h-3.5 w-3.5" /> Estimated Delivery
+                                    <Calendar className="h-4 w-4" /> Estimated Delivery
                                 </div>
-                                <div className="font-bold text-neutral-900 dark:text-white">{orderDetails?.orderDate}</div>
+                                <div className="font-bold text-[11px] text-neutral-900 dark:text-white">{orderDetails?.orderDate}</div>
                             </div>
 
                             <div className="space-y-1">
                                 <div className="flex items-center gap-1.5 text-neutral-600 font-bold uppercase tracking-wider text-[12px]">
-                                    <MapPin className="h-5 w-5" /> Ship To
+                                    <MapPin className="h-4 w-4" /> Ship To
                                 </div>
                                 <div className="font-medium  truncate">{orderDetails?.Address[0].StreetAddress}{' '},{orderDetails?.Address[0].state},{' '}{orderDetails?.Address[0].postalCode}</div>
                             </div>
                         </div>
 
-                        {/* Itemized Order List */}
-                        <div className="space-y-4 mt-6 mb-3">
-                            <div className="text-xl font-bold uppercase tracking-wider text-neutral-600">
+                        <div className="space-y-4 mt-6 mb-3 p-5">
+                            <div className="text-[15px] font-bold uppercase tracking-wider text-neutral-600">
                                 Order Items ({orderDetails?.OderItem?.length})
                             </div>
 
@@ -168,8 +165,8 @@ export default function OrderSuccessPage() {
                                         </div>
 
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="text-[15px] font-bold text-neutral-900 dark:text-white truncate">{item.name}</h4>
-                                            <p className="text-[14px] text-neutral-600 font-medium">{item.color} • {item.size} • Qty: {item.quantity}</p>
+                                            <h4 className="text-[14px] font-bold text-neutral-900 dark:text-white truncate">{item.name}</h4>
+                                            <p className="text-[11px] text-neutral-600 font-medium">{item.color} • {item.size} • Qty: {item.quantity}</p>
                                         </div>
 
                                         <div className="text-[16px] font-mono font-bold text-neutral-950 dark:text-white">
@@ -184,7 +181,7 @@ export default function OrderSuccessPage() {
 
                     <CardFooter className="p-4 sm:p-6 bg-neutral-50/30 dark:bg-neutral-900/30 border-t border-neutral-100 dark:border-neutral-800/60 flex flex-col sm:flex-row gap-3">
                         <Button className="w-full sm:flex-1 h-9 text-xs font-bold uppercase tracking-wider bg-neutral-950 dark:bg-neutral-50 text-white dark:text-neutral-950 hover:opacity-90">
-                            <Link to={PATHS.customer.orderDetails} className="flex">
+                            <Link to={`/orders/${orderDetails?.orderid}`} className="flex">
                                 View OrderDetails <ArrowRight className="h-3.5 w-3.5 ml-2" />
                             </Link>
                         </Button>
@@ -194,8 +191,8 @@ export default function OrderSuccessPage() {
                     </CardFooter>
                 </Card>
 
-                {/* Secondary Support Note */}
-                <div className="text-center text-xs text-neutral-400 space-y-1">
+
+                <div className="text-center text-xs text-neutral-6  00 space-y-1">
                     <p>Need to make changes to your order? Contact support within 2 hours.</p>
                     <p className="font-semibold text-neutral-900 dark:text-neutral-200">support@zyloo.com</p>
                 </div>

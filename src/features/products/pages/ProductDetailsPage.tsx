@@ -97,7 +97,7 @@ export default function ProductDetailsPage() {
                 const data = res.data
                 setProductDetail(data.ProductDetails)
 
-                console.log(data)
+
             } catch (error) {
                 console.log(error)
             }
@@ -120,7 +120,7 @@ export default function ProductDetailsPage() {
             const res = await trigger({ productItemId: productItemId as string, quantity: quantity })
             const data = await res
             setCartCount(prev => prev + 1)
-            console.log(data)
+
             toast.success("Item added to Cart")
             setIsLoading(false)
         } catch (error) {
@@ -154,49 +154,40 @@ export default function ProductDetailsPage() {
 
 
     return (
-        <div className="w-full min-h-screen bg-neutral-50/60 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased selection:bg-neutral-200">
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-                <div className="flex items-center gap-2 text-[14px] text-neutral-400 font-medium">
+        <div className="w-full min-h-screen ">
+            <main className="max-w-350 mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 space-y-8 sm:space-y-10 md:space-y-12">
+                <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-neutral-400 font-medium flex-wrap">
                     <Link to={PATHS.customer.products}>
                         <span>Shop</span>
                     </Link>
                     <ChevronRight className="h-3 w-3" />
-                    {productDetail?.category?.map((p) => {
-                        return (
-                            <span>
-                                {p.name}
-                            </span>
-                        )
-                    })
-                    }
+                    {productDetail?.category?.map((p, idx) => (
+                        <span key={idx}>{p.name}</span>
+                    ))}
                     <ChevronRight className="h-3 w-3" />
                     <span className="text-neutral-900 dark:text-neutral-100 font-semibold truncate">{productDetail?.name}</span>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-start">
 
-                    <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-4 ">
+                    <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 md:gap-4">
 
-                        <div className="flex-1 aspect-4/5 rounded-lg overflow-hidden border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-100 dark:bg-neutral-900 relative h-150">
+                        <div className="flex-1 rounded-lg overflow-hidden border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-100 dark:bg-neutral-900 relative h-64 sm:h-96 md:h-125 lg:h-auto lg:aspect-4/5">
                             <img
                                 src={!selectedImage ? productDetail?.productItems[0]?.image : selectedImage}
                                 alt={productDetail?.name}
                                 className="h-full w-full object-cover object-center"
                             />
-                            <Badge className="absolute top-4 left-4 bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-xs">
-                                {productDetail?.tags.map((t, key) => {
-                                    return (
-                                        <span key={key}>
-                                            {t.name}
-                                        </span>
-                                    )
-                                })}
+                            <Badge className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 font-bold text-[8px] sm:text-[10px] uppercase tracking-wider px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-xs">
+                                {productDetail?.tags.map((t, key) => (
+                                    <span key={key}>{t.name}</span>
+                                ))}
                             </Badge>
                         </div>
 
                     </div>
 
-                    <div className="lg:col-span-5 space-y-6 mt-4">
+                    <div className="lg:col-span-5 space-y-4 sm:space-y-5 md:space-y-6">
                         <div className="space-y-2 border-b border-neutral-100 dark:border-neutral-800/60 pb-6">
                             <div className="flex items-center justify-between gap-4">
                                 <span className="text-xl font-mono text-neutral-400">sku</span>
@@ -226,20 +217,20 @@ export default function ProductDetailsPage() {
                             </div>
                         </div>
 
-                        <div className="space-y-2.5">
+                        <div className="space-y-2   sm:space-y-2.5">
                             <label className="text-xs font-bold uppercase tracking-wider text-neutral-400">
-                                Color: <span className="text-neutral-900 dark:text-white font-normal">{selectedColor}</span>
+                                Color: <span className="text-neutral-900 dark:text-white font-normal text-xs">{selectedColor}</span>
                             </label>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 sm:gap-3 flex-wrap mt-3">
                                 {productDetail?.productItems?.map((c) => (
                                     <button
                                         key={c.id}
                                         style={{ backgroundColor: `${c.color}` }}
-                                        className={`h-7 w-7 rounded-full border border-neutral-300 dark:border-neutral-700 flex items-center justify-center transition-transform ${selectedColor === c.color ? "ring-2 ring-neutral-950 dark:ring-white ring-offset-2 dark:ring-offset-neutral-950 scale-110" : "hover:scale-105"
+                                        className={`h-6 w-6 sm:h-7 sm:w-7 rounded-full border border-neutral-300 dark:border-neutral-700 flex items-center justify-center transition-transform ${selectedColor === c.color ? "ring-2 ring-neutral-950 dark:ring-white ring-offset-2 dark:ring-offset-neutral-950 scale-110" : "hover:scale-105"
                                             }`}
                                     >
                                         {c.color == selectedColor && (
-                                            <Check className={`h-3 w-3 ${selectedColor ? "text-neutral-900" : "text-white"}`} />
+                                            <Check className={`h-2.5 w-2.5 sm:h-3 sm:w-3 ${selectedColor ? "text-neutral-900" : "text-white"}`} />
                                         )}
                                     </button>
                                 ))}
@@ -248,16 +239,16 @@ export default function ProductDetailsPage() {
 
 
 
-                        <div className="space-y-2.5">
+                        <div className="space-y-2 sm:space-y-2.5">
                             <div className="flex items-center justify-between text-xs">
                                 <label className="font-bold uppercase tracking-wider text-neutral-400">Size</label>
-                                <button className="text-neutral-500 hover:text-neutral-950 dark:hover:text-white font-semibold underline">Size Guide</button>
+                                <button className="text-neutral-500 hover:text-neutral-950 dark:hover:text-white font-semibold underline text-xs">Size Guide</button>
                             </div>
-                            <div className="grid grid-cols-5 gap-2">
+                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5 sm:gap-2">
 
                                 <Button
                                     variant="outline"
-                                    className="h-9 text-xs font-semibold bg-background  border-border "
+                                    className="h-8 sm:h-9 text-xs font-semibold bg-background border-border"
 
                                 >
                                     {selectedSize}
@@ -266,22 +257,22 @@ export default function ProductDetailsPage() {
                             </div>
                         </div>
 
-                        <div className="space-y-3 pt-2">
-                            <div className="flex items-center gap-3">
-                                <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-neutral-900 h-10 px-1">
+                        <div className="space-y-2 sm:space-y-3 pt-1 sm:pt-2">
+                            <div className="flex  flex-row items-center gap-2 sm:gap-3">
+                                <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-neutral-900 h-9 sm:h-10 px-1">
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="h-8 w-8 text-neutral-400"
+                                        className="h-7 w-7 sm:h-8 sm:w-8 text-neutral-400"
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                                     >
                                         <Minus className="h-3 w-3" />
                                     </Button>
-                                    <span className="w-8 text-center text-xs font-mono font-bold">{quantity}</span>
+                                    <span className="w-6 sm:w-8 text-center text-xs font-mono font-bold">{quantity}</span>
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="h-8 w-8 text-neutral-400"
+                                        className="h-7 w-7 sm:h-8 sm:w-8 text-neutral-400"
                                         onClick={() => setQuantity(quantity + 1)}
 
                                     >
@@ -289,37 +280,37 @@ export default function ProductDetailsPage() {
                                     </Button>
                                 </div>
 
-                                <Button onClick={AddToCart} disabled={isLoading} className="flex-1 h-10 text-xs font-bold uppercase tracking-wider bg-neutral-950 dark:bg-neutral-50 text-white dark:text-neutral-950 hover:opacity-90">
-                                    <ShoppingCart className="h-3.5 w-3.5 mr-2" /> Add to Cart
+                                <Button onClick={AddToCart} disabled={isLoading} className="md:h-10 md:w-70">
+                                    <ShoppingCart className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1 sm:mr-2" /> Add to Cart
                                 </Button>
 
                                 <Button
                                     variant="outline"
                                     size="icon"
                                     onClick={() => setIsWishlisted(!isWishlisted)}
-                                    className="h-10 w-10 border-neutral-200 dark:border-neutral-800"
+                                    className="h-9 w-9 sm:h-10 sm:w-10 border-neutral-200 dark:border-neutral-800"
                                 >
                                     <Heart className={`h-4 w-4 ${isWishlisted ? "fill-rose-500 text-rose-500" : "text-neutral-400"}`} />
                                 </Button>
                             </div>
 
-                            <p className="text-[14px] opacity-80 text-center font-medium">
+                            <p className="text-xs sm:text-sm opacity-80 text-center font-medium">
                                 In stock ({stock} units remaining) — Ships within 24 hours.
                             </p>
                         </div>
 
 
-                        <div className="grid grid-cols-3 gap-2 pt-4 border-t border-neutral-100 dark:border-neutral-800/60 text-[11px] text-neutral-500 font-medium">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 pt-3 sm:pt-4 border-t border-neutral-100 dark:border-neutral-800/60 text-xs sm:text-[11px] text-neutral-500 font-medium">
                             <div className="flex items-center gap-2">
-                                <Truck className="h-4 w-4 text-neutral-400 shrink-0" />
+                                <Truck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-neutral-400 shrink-0" />
                                 <span>Free Shipping</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <RotateCcw className="h-4 w-4 text-neutral-400 shrink-0" />
+                                <RotateCcw className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-neutral-400 shrink-0" />
                                 <span>30-Day Returns</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <ShieldCheck className="h-4 w-4 text-neutral-400 shrink-0" />
+                                <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-neutral-400 shrink-0" />
                                 <span>2-Yr Warranty</span>
                             </div>
                         </div>
@@ -328,7 +319,7 @@ export default function ProductDetailsPage() {
 
 
                 </div>
-                <div className="flex sm:flex-row gap-3 shrink-0">
+                <div className="flex gap-2 sm:gap-3 shrink-0 overflow-x-auto pb-2">
                     {productDetail?.productItems?.map((img, idx) => (
                         <button
                             key={idx}
@@ -340,7 +331,7 @@ export default function ProductDetailsPage() {
                                 setColor(img.color)
                                 setStock(img.stock)
                             }}
-                            className={`relative h-16 w-16 sm:h-35 sm:w-35 rounded-md overflow-hidden border bg-white dark:bg-neutral-900 transition-all ${selectedImage === img.image
+                            className={`relative h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-32 lg:w-32 rounded-md overflow-hidden border bg-white dark:bg-neutral-900 transition-all shrink-0 ${selectedImage === img.image
                                 ? "border-neutral-950 dark:border-white ring-1 ring-neutral-950 dark:ring-white"
                                 : "border-neutral-200 dark:border-neutral-800 opacity-70 hover:opacity-100"
                                 }`}
@@ -351,39 +342,39 @@ export default function ProductDetailsPage() {
                 </div>
 
 
-                <div className="pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60 max-w-4xl">
+                <div className="pt-6 sm:pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60 max-w-4xl">
                     <Tabs defaultValue="details">
-                        <TabsList className="bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 h-9 p-1 mb-6">
-                            <TabsTrigger value="details" className="text-xs px-4 h-7 font-medium">Details & Fit</TabsTrigger>
-                            <TabsTrigger value="fabric" className="text-xs px-4 h-7 font-medium">Fabric & Care</TabsTrigger>
-                            <TabsTrigger value="reviews" className="text-xs px-4 h-7 font-medium">Reviews 12</TabsTrigger>
+                        <TabsList className="bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 h-8 sm:h-9 p-1 mb-4 sm:mb-6 w-full sm:w-auto">
+                            <TabsTrigger value="details" className="text-xs px-2 sm:px-4 h-6 sm:h-7 font-medium">Details & Fit</TabsTrigger>
+                            <TabsTrigger value="fabric" className="text-xs px-2 sm:px-4 h-6 sm:h-7 font-medium">Fabric & Care</TabsTrigger>
+                            <TabsTrigger value="reviews" className="text-xs px-2 sm:px-4 h-6 sm:h-7 font-medium">Reviews 12</TabsTrigger>
                         </TabsList>
 
-                        <TabsContent value="details" className="space-y-4 text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                        <TabsContent value="details" className="space-y-3 sm:space-y-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
                             <p>{productDetail?.description}</p>
-                            <ul className="list-disc pl-4 space-y-1 text-neutral-500">
+                            <ul className="list-disc pl-4 sm:pl-5 space-y-1 sm:space-y-2 text-neutral-500">
                                 <li>Structured lapel collars with padded internal architecture</li>
                                 <li>Interior passport & card slots</li>
                                 <li>Hand-stitched horn buttons</li>
                             </ul>
                         </TabsContent>
 
-                        <TabsContent value="fabric" className="text-xs text-neutral-600 dark:text-neutral-300 space-y-2">
+                        <TabsContent value="fabric" className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 space-y-2 sm:space-y-3">
                             <p><strong>Composition:</strong> 70% Mulberry Silk, 30% Virgin Wool.</p>
                             <p><strong>Care:</strong> Dry clean only. Do not tumble dry. Low-heat iron with cloth buffer.</p>
                         </TabsContent>
 
-                        <TabsContent value="reviews" className="space-y-4">
-                            <div className="flex items-center gap-3 p-4 rounded-md bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60">
-                                <Avatar className="h-8 w-8">
+                        <TabsContent value="reviews" className="space-y-3 sm:space-y-4">
+                            <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-md bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60">
+                                <Avatar className="h-7 w-7 sm:h-8 sm:w-8 shrink-0">
                                     <AvatarFallback className="text-[10px] font-bold">SJ</AvatarFallback>
                                 </Avatar>
-                                <div className="space-y-0.5">
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-xs font-bold text-neutral-900 dark:text-white">Sarah J.</span>
+                                <div className="space-y-0.5 flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                        <span className="text-xs sm:text-sm font-bold text-neutral-900 dark:text-white">Sarah J.</span>
                                         <div className="flex text-amber-400"><Star className="h-3 w-3 fill-amber-400" /></div>
                                     </div>
-                                    <p className="text-xs text-neutral-500">Exquisite draping and weight. Perfectly tailored for seasonal layering.</p>
+                                    <p className="text-xs sm:text-sm text-neutral-500">Exquisite draping and weight. Perfectly tailored for seasonal layering.</p>
                                 </div>
                             </div>
                         </TabsContent>

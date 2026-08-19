@@ -61,13 +61,13 @@ export default function CheckoutPage() {
 
     const ChackOut = async (data: AddressType) => {
         setLoading(true)
-        // console.log(data, itemsInfo)
+
 
         if (!data || !itemsInfo) return console.log("NO DATA AVAILABLE")
         try {
             const res = await api.post("/checkOut/checkOuts", { firstName: data.firstName, lastName: data.lastName, email: data.email, state: data.state, StreetAddress: data.StreetAddress, postalCode: data.postalCode, city: data.city, paymentMethod: paymentMethod, name: itemsInfo?.productItem.product.name, color: itemsInfo?.productItem.color, quantity: itemsInfo?.quantity, image: itemsInfo?.productItem.image, size: itemsInfo?.productItem.size, price: itemsInfo?.productItem.price, total: total, item: items })
             const order = await res.data
-            console.log(order)
+
             reset();
             await api.delete("/cart/deleteCarts")
 
@@ -80,15 +80,13 @@ export default function CheckoutPage() {
         }
     }
 
-    useEffect(() => {
-        console.log(itemsInfo)
-    }, [])
+
 
     return (
         <div className="w-full min-h-screen bg-background">
 
             {/* Header / Security Navbar */}
-            <header className="sticky top-0 ">
+            <header className="hidden md:block sticky top-10 h-13 z-100 ">
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <Link to={PATHS?.customer?.cart}>
                         <Button variant="default" size="sm" className="h-9 gap-2 text-xs font-semibold ">
@@ -186,7 +184,9 @@ export default function CheckoutPage() {
                                         <small className="text-destructive">{errors.city?.message}</small>
                                     </div>
                                     <div className="space-y-1.5">
-                                        <Label className="text-[15px] font-semibold text-neutral-700 dark:text-neutral-300">State / Region</Label>
+                                        <Label className="text-[15px] flex-row font-semibold text-neutral-700 dark:text-neutral-300">
+                                            <span>State/</span><span>Region</span>
+                                        </Label>
                                         <Input {...register("state")} placeholder="NY" className="h-9 text-xs bg-neutral-50 dark:bg-neutral-900 border-neutral-200/80 dark:border-neutral-800" />
                                         <small className="text-destructive">{errors.state?.message}</small>
                                     </div>

@@ -4,8 +4,6 @@ import { PATHS } from "../../routes/paths";
 const links = [
     { label: "Home", to: PATHS.customer.home },
     { label: "Shop", to: PATHS.customer.products },
-    { label: "Categories", to: "#" },
-    { label: "Deals", to: "#" },
 ];
 
 export default function NavbarLinks() {
@@ -17,10 +15,10 @@ export default function NavbarLinks() {
                     to={link.to}
                     className={({ isActive }) =>
                         [
-                            "text-sm font-medium transition-colors",
+                            " font-medium transition-colors",
                             isActive
-                                ? "text-foreground"
-                                : "text-muted-foreground hover:text-foreground",
+                                ? "text-foreground/60 tracking-widest"
+                                : "p-3 px-4  hover:text-muted-foreground",
                         ].join(" ")
                     }
                 >

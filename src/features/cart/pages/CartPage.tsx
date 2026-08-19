@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../../routes/paths";
 import { useAuth } from "../../../context/AuhProvider";
 import type { Data } from "../../../context/AuhProvider";
+import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 
 export default function CartPage() {
 
-    const { data, items, setItems } = useAuth();
+    const { data, items, setItems, cartMutating } = useAuth();
     // const [items, setItems] = useState<Data[] | []>([]);
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export default function CartPage() {
     const shipping = subtotal > 250 || subtotal === 0 ? 0 : 20;
     const tax = Math.round(subtotal * 0.08);
 
+    if (cartMutating) return <ECommercePageLoader variant="detail" fullScreen={false} />
 
     return (
         <div className="w-full min-h-screen bg-background text-foreground antialiased selection:bg-neutral-200">

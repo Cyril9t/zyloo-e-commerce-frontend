@@ -4,11 +4,11 @@ import { Card, CardContent } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import type { UserProfileData } from "../pages/ProfilePage";
 import { useAuth } from "../../../context/AuhProvider";
-
+import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 export default function ProfileOverview({ profile }: { profile: UserProfileData }) {
-    const { user } = useAuth()
+    const { user, isMutating } = useAuth()
 
-    if (!user) return <p>Loading...</p>
+    if (isMutating) return <ECommercePageLoader variant="default" fullScreen={false} />
     return (
         <Card className=" bg-background border border-muted-foreground  shadow-xs  overflow-hidden">
             <CardContent className="p-6 text-center flex flex-col items-center">
@@ -17,7 +17,7 @@ export default function ProfileOverview({ profile }: { profile: UserProfileData 
                 <div className="relative group cursor-pointer mb-4">
                     <Avatar className="h-34 w-34 ring-3 ring-muted-foreground transition-transform duration-300 group-hover:scale-[1.02]">
                         <AvatarImage src={profile.avatarUrl} alt={user?.lastName} />
-                        <AvatarFallback className="text-3xl bg-border">{user?.firstName[0]}</AvatarFallback>
+                        <AvatarFallback className="text-3xl bg-border">{user?.firstName[0] ?? " "}</AvatarFallback>
                     </Avatar>
                     <div className="absolute bottom-0 right-1 p-2 bg-foreground rounded-full text-background border border-background shadow-sm transition-opacity opacity-90 group-hover:opacity-100">
                         <Camera className="h-3.5 w-3.5" />

@@ -39,7 +39,7 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Right Column: Premium Feature Cards */}
-                <div className="lg:col-span-8 grid gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-1">
+                <div className="lg:col-span-8 grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {features.map(({ icon: Icon, title, description }, index) => (
                         <Card
                             key={title}

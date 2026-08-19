@@ -1,6 +1,6 @@
-import { Cuboid, Heart, Home, Menu, Plane, PlugZap, Search, Settings, ShoppingCartIcon, SparklesIcon, SportShoe, User2Icon, LogOut } from "lucide-react"
-import { data, Link, replace, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Cuboid, Heart, Menu, Settings, ShoppingCartIcon, User2Icon, LogOut } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom";
+
 import { Button } from "../../../../components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, } from "../../../../components/ui/dropdown-menu";
 import { ThemeToggle } from "../../../../components/theme/toggle-theme";
@@ -11,33 +11,24 @@ import { PATHS } from "../../../../routes/paths";
 import { useAuth } from "../../../../context/AuhProvider";
 import { logout } from "../../../../lib/auth/auth";
 import { toast } from "sonner";
-import { getAllUser } from "../../../../context/userContext";
+import { FloatingDock } from "../../../../components/Layout/framer";
 
 const MobileStates = [
     {
-        link: "*",
-        icons: <Plane className="justify-self-center " />,
-        title: "New Arrivals",
+        link: PATHS.customer.wishlist,
+        icons: <Heart className="!h-5 !w-5" />,
+        title: "Wishlist"
     },
     {
-        link: "*",
-        icons: <PlugZap className="justify-self-center" />,
-        title: "Electronics",
+        link: PATHS.customer.orders,
+        icons: <Cuboid />,
+        title: "Orders"
+
     },
     {
-        link: "*",
-        icons: <SparklesIcon className="justify-self-center " />,
-        title: "Fashion"
-    },
-    {
-        link: "*",
-        icons: <SportShoe className="justify-self-center" />,
-        title: "Sport"
-    },
-    {
-        link: "*",
-        icons: <Home className="justify-self-center " />,
-        title: "Home"
+        link: PATHS.customer.profile,
+        icons: <User2Icon className="!h-5 !w-5" />,
+        title: "Account"
     },
 ]
 
@@ -143,7 +134,7 @@ export default function Navbar() {
 
                                             <DropdownMenuItem
                                                 key={item.title}
-                                                className="p-3 px-4"
+                                                className="p-3 px-4 "
                                             >
                                                 {item.icons}
                                                 {item.title}
@@ -173,7 +164,7 @@ export default function Navbar() {
                                                 {user.map((u) => (
                                                     <Link to={u.link} key={u.title}>
                                                         <DropdownMenuItem
-                                                            className="p-3 px-4"
+
 
                                                         >
                                                             {u.icons}
@@ -213,17 +204,11 @@ export default function Navbar() {
             </header>
 
             <div className="block md:hidden">
-                <header className="flex h-16 items-center justify-between border-b bg-(--color-background) px-4 font-bold backdrop-blur-md">
-                    <Button
-                        variant="ghost"
-                        className="flex items-center gap-2 rounded-lg border px-2 py-1"
-                    >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xl font-medium text-primary-foreground">
-                            Z
-                        </div>
+                <header className=" flex h-16 items-center justify-between border-b bg-(--color-background) px-4 font-bold backdrop-blur-md">
 
-                        <p className="text-xl font-medium">Zyloo</p>
-                    </Button>
+                    <div >
+                        <Logo />
+                    </div>
 
                     <div className="flex gap-3">
                         <ThemeToggle />
@@ -234,35 +219,22 @@ export default function Navbar() {
                                     <Menu />
                                 </Button>
                             </DropdownMenuTrigger>
-
                             <DropdownMenuContent>
-                                {states.map((item) => (
-                                    <DropdownMenuItem
-                                        key={item.title}
-                                        className="p-3 px-3"
-                                    >
-                                        {item.icons}
-                                        {item.title}
-                                    </DropdownMenuItem>
+                                {MobileStates.map((item) => (
+                                    <Link to={item.link} key={item.title}>
+                                        <DropdownMenuItem
+                                            className="p-3 px-3"
+                                        >
+                                            {item.icons}
+                                            {item.title}
+                                        </DropdownMenuItem>
+                                    </Link>
                                 ))}
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
                 </header>
-
-                {/* Bottom Navigation */}
-                <div className="fixed bottom-0 z-30 flex w-full justify-between border-t bg-(--color-background) p-3 backdrop-blur-md">
-                    {MobileStates.map((item) => (
-                        <Button
-                            key={item.title}
-                            variant="ghost"
-                            className="flex flex-col"
-                        >
-                            {item.icons}
-                            <p className="text-[10px] font-bold">{item.title}</p>
-                        </Button>
-                    ))}
-                </div>
+                <FloatingDock />
             </div>
         </div>
     )

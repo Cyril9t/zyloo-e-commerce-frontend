@@ -47,6 +47,8 @@ interface AuthContextType {
     user: User | null;
     isLoading: boolean;
     isMutating: boolean;
+    cartMutating: boolean;
+    hangTight: boolean;
     products: Products[]
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
     setCartCount: React.Dispatch<React.SetStateAction<number>>;
@@ -66,11 +68,11 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const { trigger: fetchProducts } = allProducts()
+    const { trigger: fetchProducts, isMutating: hangTight } = allProducts()
     const { trigger, isMutating } = validate();
     const [products, setProducts] = useState<Products[]>([]);
     const [cartCount, setCartCount] = useState(0)
-    const { data, trigger: fetch } = cart()
+    const { data, trigger: fetch, isMutating: cartMutating } = cart()
     const [items, setItems] = useState<Data[] | []>([]);
 
     useEffect(() => {
@@ -146,6 +148,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 data,
                 items,
                 setItems,
+                hangTight,
+                cartMutating
 
             }}
         >
