@@ -2,10 +2,10 @@ import { AlertCircle, CheckCircle2, Heart, Minus, Plus, Trash2 } from "lucide-re
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { Card } from "../../../components/ui/card";
-import type { Data } from "../../../context/AuhProvider";
+import type { Data } from "../../../context/AuthProvider";
 import { createCart } from "../../../lib/actions";
 import api from "../../../lib/api";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 import { toast } from "sonner";
 import ConfirmDialog from "../../admin/shared/components/ConfirmDialog";
 
@@ -72,7 +72,7 @@ export default function CartItemCard({ items, onUpdateQuantity, onRemove }: Cart
                                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                     <div>
                                         <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground/90 block mb-0.5">
-                                            {item?.productItem?.product?.description}
+                                            {item?.productItem?.product?.tags.map((t) => (t?.name))}
                                         </span>
                                         <h3 className="text-sm font-medium text-foreground tracking-tight leading-snug group-hover:text-primary transition-colors">
                                             {item?.productItem?.product?.name}

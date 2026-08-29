@@ -35,7 +35,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     useEffect(() => {
         const prices = product?.productItems?.map((item) => (setPrice(item.price)))
-        console.log(price)
+
     }, [])
 
     const handleTouchStart = () => {
@@ -57,19 +57,19 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 
     return (
-
-        <div>
-            <div className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-none">
+        <div className="w-full overflow-hidden px-2 py-4">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 md:overflow-x-auto scroll-smooth scrollbar-none">
                 <div
                     key={product.id}
-                    className={`mb-20 group relative shrink-0 w-full h-full md:w-[300px] md:h-[480px] bg-background border-2 rounded-3xl overflow-hidden transition-all duration-300 cursor-pointer ${isActive ? 'shadow-lg' : ''}`}
+                    className={`group relative shrink-0 w-full md:w-[300px] h-auto md:h-[480px] bg-background border rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 cursor-pointer flex flex-row md:flex-col ${isActive ? 'shadow-lg border-primary' : 'border-border'}`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                 >
 
-                    <div className="relative h-[60%] overflow-hidden">
+                    {/* Image Section */}
+                    <div className="relative w-[110px] sm:w-[140px] md:w-full h-auto md:h-[60%] shrink-0 overflow-hidden bg-muted">
                         <img
                             src={productImage}
                             alt={product.name}
@@ -77,32 +77,33 @@ export default function ProductCard({ product }: ProductCardProps) {
                         />
 
                         <Badge
-                            variant="outline"
-                            className="absolute top-4 left-4 text-white"
+                            variant="secondary"
+                            className="absolute top-2 left-2 text-[10px] md:text-xs font-semibold bg-black/60 text-white backdrop-blur-md px-2 py-0.5"
                         >
                             {category}
                         </Badge>
 
-
-                        <div className={`absolute top-4 right-4 flex flex-col gap-2 transition-all duration-300 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
+                        {/* Quick Action Icons */}
+                        <div className={`absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-1.5 transition-all duration-300 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-100 md:opacity-0 md:translate-x-4'}`}>
                             <Button
-                                variant="outline"
+                                variant="secondary"
                                 size="icon"
-                                className="rounded-full"
+                                className="h-7 w-7 md:h-9 md:w-9 rounded-full bg-background/80 backdrop-blur-md shadow-sm"
                             >
-                                <Heart className="w-5 h-5" />
+                                <Heart className="w-3.5 h-3.5 md:w-5 md:h-5" />
                             </Button>
 
                             <Button
-                                variant="outline"
+                                variant="secondary"
                                 size="icon"
-                                className="rounded-full"
+                                className="h-7 w-7 md:h-9 md:w-9 rounded-full bg-background/80 backdrop-blur-md shadow-sm"
                             >
-                                <Eye className="w-5 h-5" />
+                                <Eye className="w-3.5 h-3.5 md:w-5 md:h-5" />
                             </Button>
                         </div>
-                        <Link to={`/products/${product.id}`}>
 
+                        {/* Desktop View Details Button */}
+                        <Link to={`/products/${product.id}`} className="hidden md:block">
                             <button
                                 className={`absolute bottom-0 left-0 right-0 bg-foreground text-background py-3 flex items-center justify-center gap-2 font-medium transition-all duration-300 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
                             >
@@ -113,31 +114,42 @@ export default function ProductCard({ product }: ProductCardProps) {
                     </div>
 
 
-                    <div className="h-[40%] p-4">
-                        <h3 className="text-xl font-bold truncate">
-                            {product.name}
-                        </h3>
+                    {/* Content Section */}
+                    <div className="flex-1 min-w-0 p-3 md:p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 className="text-sm md:text-xl font-bold truncate">
+                                {product.name}
+                            </h3>
 
-                        <p className="text-muted-foreground line-clamp-1 mt-2">
-                            {product.description}
-                        </p>
-                        <div className="flex items-center gap-1 mt-3">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-
-                            <span className="text-sm text-muted-foreground">
-                                ({product.reviews ?? 4})
-                            </span>
+                            <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 mt-1">
+                                {product.description}
+                            </p>
                         </div>
 
-                        <p className="text-xl font-bold mt-3">
-                            $ {price}
-                        </p>
+                        <div className="mt-2 md:mt-0 flex items-center justify-between">
+                            <div>
+                                <div className="flex items-center gap-1">
+                                    {/* <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" /> */}
+                                    <span className="text-xs text-muted-foreground">
+                                        {/* ({product.reviews ?? 4}) */}
+                                    </span>
+                                </div>
+
+                                <p className="text-sm md:text-xl font-bold">
+                                    ₦ {price}
+                                </p>
+                            </div>
+
+                            <Link to={`/products/${product.id}`} className="block md:hidden">
+                                <Button size="sm" className="h-8 w-8 p-0 rounded-lg">
+                                    <LucideView className="w-4 h-4" />
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
 
                 </div>
-
             </div>
-
         </div>
     );
 }

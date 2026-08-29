@@ -36,30 +36,30 @@ export function CartSummary({ subtotal, shipping, tax, discount, onCheckout, isC
             <div className="space-y-3 text-sm font-medium">
                 <div className="flex justify-between text-muted-foreground">
                     <span>Subtotal</span>
-                    <span className="font-mono text-foreground">${subtotal?.toLocaleString()}</span>
+                    <span className="font-mono text-foreground">₦{subtotal?.toLocaleString()}</span>
                 </div>
                 {discount > 0 && (
                     <div className="flex justify-between text-emerald-600">
                         <span>Discount Applied</span>
-                        <span className="font-mono">-${discount.toLocaleString()}</span>
+                        <span className="font-mono">-₦{discount.toLocaleString()}</span>
                     </div>
                 )}
                 <div className="flex justify-between text-muted-foreground">
                     <span>Estimated Shipping</span>
                     <span className="font-mono text-foreground">
-                        {shipping === 0 ? "Complimentary" : `$${shipping.toLocaleString()}`}
+                        {shipping === 0 ? "Complimentary" : `₦${shipping.toLocaleString()}`}
                     </span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                     <span>Estimated Tax</span>
-                    <span className="font-mono text-foreground">${tax.toLocaleString()}</span>
+                    <span className="font-mono text-foreground">₦{tax.toLocaleString()}</span>
                 </div>
 
                 <Separator className="bg-border/40 my-2" />
 
                 <div className="flex justify-between items-baseline pt-1">
                     <span className="text-base font-semibold text-foreground">Grand Total</span>
-                    <span className="text-lg font-mono font-bold text-foreground">${grandTotal.toLocaleString()}</span>
+                    <span className="text-lg font-mono font-bold text-foreground">₦{grandTotal.toLocaleString()}</span>
                 </div>
             </div>
 

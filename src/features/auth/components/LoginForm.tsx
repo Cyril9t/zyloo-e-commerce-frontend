@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { authLogin } from "../../../lib/auth/auth";
 import { PATHS } from "../../../routes/paths";
 import { toast } from "sonner";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 export default function LoginForm() {
     const { setUser } = useAuth();
@@ -29,22 +29,24 @@ export default function LoginForm() {
 
     const submit = async (data: loginData) => {
         try {
-            const login = trigger(data)
-            toast.promise(login, {
-                success: (data) => data.Message,
-                loading: "Processing...",
-                error: "Operation failed"
-            })
+            const login = await trigger(data)
+
             const user = await login
+            toast.success(user?.Message)
             setUser(user.userInfo);
+
             if (user.userInfo.role === "ADMIN") {
                 navigate(PATHS.admin.dashboard, { replace: true });
             } else {
                 navigate(PATHS.customer.home, { replace: true });
             }
 
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
+            console.log(error?.response?.data?.Message)
+            toast.error(error?.response?.data?.Message)
+
+
         }
     }
 

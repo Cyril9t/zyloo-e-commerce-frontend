@@ -13,6 +13,8 @@ import OrdersPage from "../features/orders/pages/OrdersPage";
 import OrderDetailsPage from "../features/orders/pages/OrderDetailsPage";
 import OrderSuccessPage from "../features/orders/pages/OrderSuccessPage";
 import ProtectedRoute from "./ProtectedRoute";
+import Payments from "../features/verifypayments/page/PaymentVerification";
+import WishlistPage from "../features/wishlist/pages/WishlistPage";
 
 
 function CustomerRoutes() {
@@ -41,6 +43,11 @@ function CustomerRoutes() {
                     <Route path={PATHS.customer.orderDetails} element={<OrderDetailsPage />} />
 
                     <Route path={PATHS.customer.orderSuccess} element={<OrderSuccessPage />} />
+
+                    <Route path={PATHS.customer.paymentsVerification} element={<Payments />} />
+                    <Route path={PATHS.customer.wishlist} element={<WishlistPage />} />
+
+
 
                 </Route>
 

@@ -11,6 +11,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import AdminSettings from "../features/admin/settings/pages/adminSettings";
 import ProtectRole from "./ProtectRole";
 import AddProductItems from "../features/admin/Product-Item/pages/ProductItems";
+import EditProductPage from "../features/admin/products/pages/EditProductPage";
 export default function AdminRouter() {
     return (
         <>
@@ -27,6 +28,7 @@ export default function AdminRouter() {
                         <Route path={PATHS.admin.addProducts} element={<AddProductPage />} />
                         <Route path={PATHS.admin.settings} element={<AdminSettings />} />
                         <Route path={PATHS.admin.addProductItem} element={<AddProductItems />} />
+                        <Route path={PATHS.admin.editProduct} element={<EditProductPage />} />
 
                     </Route>
                 </Route>

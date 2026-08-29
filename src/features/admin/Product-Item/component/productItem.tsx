@@ -121,7 +121,7 @@ function ProductItem() {
 
                             <div className="space-y-2">
                                 <Label htmlFor="prod-price" className="text-xs font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
-                                    Price ($)
+                                    Price (₦)
                                 </Label>
                                 <div className="relative">
                                     <Input
@@ -276,6 +276,7 @@ function ProductItem() {
                         </div>
 
                     </form>
+                    <br />
                     <Button
                         disabled={isLoading}
                         type="submit"

@@ -1,12 +1,11 @@
 import { Pencil, Trash2 } from "lucide-react";
-
 import { Button } from "../../../../components/ui/button";
-import { adminProducts } from "../../../../mock/adminProducts";
-
 import DataTable from "../../shared/components/DataTable";
 import ConfirmDialog from "../../shared/components/ConfirmDialog";
-import { useAuth } from "../../../../context/AuhProvider";
-import type { Products } from "../../../products/types/Product";
+import { useAuth } from "../../../../context/AuthProvider";
+import { Link, useParams } from "react-router-dom";
+import api from "../../../../lib/api";
+import { toast } from "sonner";
 
 export default function ProductTable() {
     const { products } = useAuth()
@@ -19,7 +18,17 @@ export default function ProductTable() {
         return category
     }
 
-    console.log(products)
+    const handleDelete = async (id: string) => {
+        try {
+            const deletProduct = await api.delete(`/product/delete-product/${id}`)
+            const res = await deletProduct.data;
+            console.log(res)
+            toast.success("Product Deleted Successfully")
+        } catch (error) {
+            console.log("Internal Error", error)
+            toast.error("Server Error")
+        }
+    }
 
     return (
         <DataTable>
@@ -29,7 +38,7 @@ export default function ProductTable() {
                         <th className="p-4 text-left">Product</th>
                         <th className="p-4 text-left">Category</th>
                         <th className="p-4 text-left">Price</th>
-                        <th className="p-4 text-left">Stock</th>
+
                         <th className="p-4 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -57,26 +66,25 @@ export default function ProductTable() {
                             </td>
 
                             <td className="p-4">
-                                ${product.price}
+                                ₦{product?.productItems?.map((p) => (p.price))}
                             </td>
 
-                            <td className="p-4">
-                                {product.stock}
-                            </td>
 
                             <td className="p-4">
                                 <div className="flex justify-end gap-2">
-                                    <Button
-                                        variant="outline"
-                                        size="icon"
-                                    >
-                                        <Pencil className="h-4 w-4" />
-                                    </Button>
+                                    <Link to={`/admin/Update-product/${product.id}`}>
+                                        <Button
+                                            variant="outline"
+                                            size="icon"
+                                        >
+                                            <Pencil className="h-4 w-4" />
+                                        </Button>
+                                    </Link>
 
                                     <ConfirmDialog
                                         title="Delete Product"
                                         description="This action cannot be undone."
-                                        onConfirm={() => console.log("Delete Product")}
+                                        onConfirm={() => handleDelete(product.id)}
                                         trigger={
                                             <Button
                                                 variant="destructive"

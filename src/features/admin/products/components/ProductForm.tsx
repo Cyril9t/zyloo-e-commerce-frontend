@@ -1,72 +1,83 @@
+import { toast } from "sonner";
+import { useState } from "react";
+import api from "../../../../lib/api";
+import { useForm } from "react-hook-form";
+import ProductImages from "./ProductImage";
+import { PATHS } from "../../../../routes/paths";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ProductInformation from "./ProductInformation";
 import { Button } from "../../../../components/ui/button";
-import { Input } from "../../../../components/ui/input";
-import { Label } from "../../../../components/ui/label";
+import { useParams, useNavigate } from "react-router-dom";
+import { productInfoSchema, type productInfoData } from "../types/product";
+
 
 export default function ProductForm() {
+    const { id } = useParams()
+    const [images, setImages] = useState([])
+    const [uploaded, setUploaded] = useState(false)
+    const [uploadProgress, setUploadProgress] = useState(0)
+    const [isLoading, setIsloading] = useState(false)
+    const { handleSubmit, register, formState: { errors }, reset } = useForm<productInfoData>({
+        resolver: zodResolver(productInfoSchema)
+    })
+
+    const navigate = useNavigate()
+
+    const sendUpdate = async (data: productInfoData) => {
+        try {
+            setUploaded(false)
+            setIsloading(true)
+
+            if (!data) return
+
+            const formData = new FormData();
+
+            formData.append("productInfo", JSON.stringify(data))
+
+            images?.forEach((img: any) => {
+                formData.append("images", img.file);
+            });
+
+            await api.put(`/product/update/${id}`, formData, {
+                onUploadProgress: (progressEvent) => {
+                    const percent = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 1))
+                    setUploadProgress(percent)
+                }
+            })
+            toast.success("Product Updated!..")
+            setIsloading(false)
+            navigate(PATHS.admin.products, { replace: true })
+            setUploaded(true)
+            reset()
+
+        } catch (error) {
+            console.log(error)
+            setIsloading(false)
+            setUploaded(false)
+            toast.error("Server Error")
+        } finally {
+            if (uploaded) {
+
+                setImages([])
+            }
+
+        }
+    }
+
+
     return (
-        <form className="space-y-6">
-            <div className="space-y-2">
-                <Label htmlFor="name">
-                    Product Name
-                </Label>
 
-                <Input
-                    id="name"
-                    placeholder="Wireless Headphones"
-                />
-            </div>
+        <div className="lg:col-span-8 space-y-8">
+            <ProductInformation
+                register={register} errors={errors}
+            />
+            <ProductImages
+                setImages={setImages} uploaded={uploaded} uploadProgress={uploadProgress} images={images}
+            />
 
-            <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                    <Label htmlFor="category">
-                        Category
-                    </Label>
-
-                    <Input
-                        id="category"
-                        placeholder="Electronics"
-                    />
-                </div>
-
-                <div className="space-y-2">
-                    <Label htmlFor="price">
-                        Price
-                    </Label>
-
-                    <Input
-                        id="price"
-                        type="number"
-                        placeholder="299"
-                    />
-                </div>
-            </div>
-
-            <div className="space-y-2">
-                <Label htmlFor="stock">
-                    Stock
-                </Label>
-
-                <Input
-                    id="stock"
-                    type="number"
-                    placeholder="20"
-                />
-            </div>
-
-            <div className="space-y-2">
-                <Label htmlFor="image">
-                    Image URL
-                </Label>
-
-                <Input
-                    id="image"
-                    placeholder="https://..."
-                />
-            </div>
-
-            <Button type="submit">
-                Save Product
+            <Button variant={"default"} disabled={isLoading} onClick={handleSubmit(sendUpdate)}>
+                Save Update
             </Button>
-        </form>
+        </div>
     );
 }

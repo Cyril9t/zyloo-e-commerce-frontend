@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { PATHS } from "../../routes/paths";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../context/AuhProvider";
+import { useAuth } from "../../context/AuthProvider";
 const navItems = [
     { id: "store", label: "Store", icon: Store, link: PATHS.customer.products },
     { id: "home", label: "Home", icon: Home, link: PATHS.customer.home },

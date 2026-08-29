@@ -4,7 +4,7 @@ import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import type { AddressItem } from "../pages/ProfilePage";
 import { cn } from "../../../lib/utils";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 const MOCK_ADDRESSES: AddressItem[] = [
     { id: "a1", type: "Home", fullName: "Alexander Vanguard", street: "742 Evergreen Terrace", cityStateZip: "Springfield, OR 97477", isDefault: true },
     { id: "a2", type: "Office", fullName: "Vanguard Studio LLC", street: "100 Broadway Suite 4B", cityStateZip: "New York, NY 10005", isDefault: false }

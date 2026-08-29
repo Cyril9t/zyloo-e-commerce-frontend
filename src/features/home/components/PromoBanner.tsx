@@ -10,7 +10,6 @@ interface ProductSlide {
     originalPrice?: string;
     badge?: string;
     image: string;
-    bgColor: string;
     ctaText: string;
 }
 
@@ -24,7 +23,6 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
         price: "$249.00",
         originalPrice: "$299.00",
         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
-        bgColor: "",
         ctaText: "Shop Sound"
     },
     {
@@ -35,7 +33,6 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
         description: "Crafted with surgical-grade stainless steel and scratch-resistant sapphire crystal. Waterproof up to 100m.",
         price: "$580.00",
         image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
-        bgColor: "",
         ctaText: "Explore Craft"
     },
     {
@@ -47,14 +44,12 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
         price: "$145.00",
         originalPrice: "$175.00",
         image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
-        bgColor: "",
         ctaText: "Gear Up"
     }
 ];
 
 export default function PromoBanner() {
     const [currentIndex, setCurrentIndex] = useState(0);
-
     const [isPaused, setIsPaused] = useState(false);
 
     const nextSlide = useCallback(() => {
@@ -65,7 +60,6 @@ export default function PromoBanner() {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + PREMIUM_PRODUCTS.length) % PREMIUM_PRODUCTS.length);
     };
 
-
     useEffect(() => {
         if (isPaused) return;
 
@@ -74,81 +68,67 @@ export default function PromoBanner() {
         }, 5000);
 
         return () => clearInterval(interval);
-
     }, [nextSlide, isPaused]);
 
     return (
         <div
-            className="relative w-full max-w-[96%] mx-auto overflow-hidden rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl px-2 md-:px-10 md:-py-20"
+            className="group relative w-full max-w-7xl mx-auto overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
+            {/* Slide Container */}
             <div
-                className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_100%)]"
-            />
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-1xl pointer-events-none" />
-            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/5 rounded-full blur-1xl pointer-events-none" />
-
-            <div
-                className="flex transition-transform duration-700 ease-out h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px]"
+                className="flex transition-transform duration-700 ease-out"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
                 {PREMIUM_PRODUCTS.map((product) => (
                     <div
                         key={product.id}
-                        className={`w-full h-full flex-shrink-0 bg-gradient-to-r ${product.bgColor} relative flex flex-col md:flex-row items-center px-4 sm:px-8 md:px-12 lg:px-16 py-8 md:py-12 lg:py-16 overflow-hidden`}
+                        className="w-full flex-shrink-0 relative flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-12 py-6 md:py-10 gap-8"
                     >
-
-                        <div className="absolute -right-10 -top-10 w-72 h-72 rounded-full blur-3xl pointer-events-none" />
-
-
-                        <div className="w-full md:w-full flex flex-col justify-center z-10 space-y-4 md:space-y-5 text-center md:text-left ">
+                        {/* Content Section */}
+                        <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4 text-center md:text-left">
                             {product.badge && (
-                                <div className="mx-auto md:mx-0 max-w-fit px-3 py-1 text-xs font-semibold uppercase tracking-wider  backdrop-blur-md border  rounded-full ">
+                                <div className="mx-auto md:mx-0 max-w-fit px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-foreground/5 text-foreground rounded-full border border-border">
                                     {product.badge}
                                 </div>
                             )}
 
                             <div className="space-y-1">
-                                <h2 className="text-3xl md:text-5xl font-black tracking-tight ">
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
                                     {product.title}
                                 </h2>
-                                <p className="text-lg md:text-xl font-medium opacity-70">
+                                <p className="text-base sm:text-lg font-medium text-muted-foreground">
                                     {product.subtitle}
                                 </p>
                             </div>
 
-                            <p className="text-sm md:text-base opacity-75 max-w-md line-clamp-2 md:line-clamp-none">
+                            <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto md:mx-0 line-clamp-3">
                                 {product.description}
                             </p>
 
-                            <div className="flex items-baseline justify-center md:justify-start space-x-3">
-                                <span className="text-2xl md:text-3xl font-bold ">{product.price}</span>
+                            <div className="flex items-baseline justify-center md:justify-start space-x-3 pt-1">
+                                <span className="text-2xl sm:text-3xl font-bold text-foreground">{product.price}</span>
                                 {product.originalPrice && (
-                                    <span className="text-sm md:text-base opacity-65 line-through font-medium">{product.originalPrice}</span>
+                                    <span className="text-base text-muted-foreground line-through font-medium">{product.originalPrice}</span>
                                 )}
                             </div>
 
                             <div className="pt-2">
-                                <button className="group inline-flex items-center justify-center bg-background  px-6 py-3 rounded-xl font-semibold text-sm tracking-wide shadow-lg transition-all duration-200 hover:bg-zinc-100 hover:scale-[1.02] active:scale-[0.98]">
+                                <button className="group/btn inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold text-sm tracking-wide shadow-md transition-all duration-200 hover:opacity-90 active:scale-[0.98]">
                                     {product.ctaText}
-
-                                    <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                                    <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
                                 </button>
                             </div>
                         </div>
 
-
-                        <div className="w-full md:w-full h-full relative flex items-center justify-center mt-6 md:mt-0 z-10">
-                            <div className="relative w-full h-full md:w-full md:h-full group">
-                                {/* Product Drop Shadow Effect */}
-                                <div className="absolute rounded-full filter blur-2xl transform scale-75 translate-y-8" />
-                                <img
-                                    src={product.image}
-                                    alt={product.title}
-                                    className="w-full h-full object-cover rounded-2xl transform transition-transform duration-500 hover:scale-105"
-                                />
-                            </div>
+                        {/* Image Section */}
+                        <div className="w-full md:w-1/2 h-64 sm:h-80 md:h-96 relative flex items-center justify-center">
+                            <img
+                                src={product.image}
+                                alt={product.title}
+                                className="w-full h-full object-cover rounded-2xl border border-border shadow-md transform transition-transform duration-500 hover:scale-[1.02]"
+                            />
                         </div>
                     </div>
                 ))}
@@ -157,26 +137,26 @@ export default function PromoBanner() {
             {/* Manual Navigation Arrows */}
             <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black hover:bg-black/40 text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 z-20 opacity-0 group-hover:opacity-100 md:opacity-100"
+                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background text-foreground transition-all border border-border shadow-md z-30 opacity-0 group-hover:opacity-100"
                 aria-label="Previous slide"
             >
                 <ChevronLeft className="w-5 h-5" />
             </button>
             <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black hover:bg-black/40 text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 z-20 opacity-0 group-hover:opacity-100 md:opacity-100"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background text-foreground transition-all border border-border shadow-md z-30 opacity-0 group-hover:opacity-100"
                 aria-label="Next slide"
             >
                 <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* Slide Indicators (Dots) */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+            {/* Slide Indicators */}
+            <div className="flex justify-center space-x-2 pt-4">
                 {PREMIUM_PRODUCTS.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/40'
+                        className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-8 bg-primary' : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
                             }`}
                         aria-label={`Go to slide ${index + 1}`}
                     />

@@ -8,7 +8,7 @@ import Logo from "../../../../components/common/Logo";
 import SearchBar from "../../../../components/common/searchBar";
 import NavbarLinks from "../../../../components/Layout/NavbarLinks";
 import { PATHS } from "../../../../routes/paths";
-import { useAuth } from "../../../../context/AuhProvider";
+import { useAuth } from "../../../../context/AuthProvider";
 import { logout } from "../../../../lib/auth/auth";
 import { toast } from "sonner";
 import { FloatingDock } from "../../../../components/Layout/framer";
@@ -45,7 +45,7 @@ const states = [
 
     },
     {
-        link: "",
+        link: PATHS.customer.profile,
         icons: <User2Icon className="!h-5 !w-5" />,
         title: "My account"
     },
@@ -108,13 +108,13 @@ export default function Navbar() {
         <div>
 
             <header className="hidden md:block">
-                <div className="fixed w-full top-0  z-70 flex h-18 items-center justify-between border-b bg-(--color-background) px-4 backdrop-blur-md ">
+                <div className="fixed w-full top-0  z-70 flex h-18 items-center justify-between border-b bg-(--color-background)/40 px-4 backdrop-blur-lg ">
                     <Logo />
 
                     <SearchBar />
 
                     <NavbarLinks />
-                    {/* Actions */}
+
 
                     <div>
                         {/* Tablet */}
@@ -132,13 +132,16 @@ export default function Navbar() {
                                     <DropdownMenuContent className="mr-7 w-full p-3">
                                         {states.map((item) => (
 
-                                            <DropdownMenuItem
-                                                key={item.title}
-                                                className="p-3 px-4 "
-                                            >
-                                                {item.icons}
-                                                {item.title}
-                                            </DropdownMenuItem>
+                                            <Link to={item.link} key={item.title}>
+
+                                                <DropdownMenuItem
+
+                                                    className="p-3 px-4 "
+                                                >
+                                                    {item.icons}
+                                                    {item.title}
+                                                </DropdownMenuItem>
+                                            </Link>
                                         ))}
                                     </DropdownMenuContent>
                                 </DropdownMenu>
@@ -198,6 +201,7 @@ export default function Navbar() {
                                     )}
                                 </Link>
                             ))}
+
                         </div>
                     </div>
                 </div>
@@ -230,6 +234,15 @@ export default function Navbar() {
                                         </DropdownMenuItem>
                                     </Link>
                                 ))}
+                                <DropdownMenuItem
+                                    className="p-3 px-4"
+                                    onClick={LogOuts}
+                                >
+                                    <LogOut />
+
+                                    Sign Out
+
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>

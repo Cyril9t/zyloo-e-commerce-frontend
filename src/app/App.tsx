@@ -1,6 +1,6 @@
 import { Toaster } from "sonner"
 import AppRouter from "../routes/AppRouter"
-import { AuthProvider } from "../context/AuhProvider"
+import { AuthProvider } from "../context/AuthProvider"
 import { TotalUsersContext } from "../context/userContext"
 
 function App() {

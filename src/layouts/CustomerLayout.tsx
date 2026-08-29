@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../features/home/components/navbar/navbar";
 import Footer from "../features/home/components/landingPage/footer";
-import { useAuth } from "../context/AuhProvider";
+import { useAuth } from "../context/AuthProvider";
 
 export default function CustomerLayout() {
     return (

@@ -5,7 +5,7 @@ import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../components/ui/select";
 import { Button } from "../../../components/ui/button";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 export default function PersonalInformation({ profile, onUpdate }: { profile: UserProfileData; onUpdate: Dispatch<SetStateAction<UserProfileData>> }) {
     const { user } = useAuth()

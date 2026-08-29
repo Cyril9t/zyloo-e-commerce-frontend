@@ -36,8 +36,8 @@ export default function HeroSection() {
                     </div>
 
                     <div className="space-y-3 md:space-y-4">
-                        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-                            Discover Products You'll Love
+                        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-7xl">
+                            Elevate Your Everyday
                         </h1>
 
                         <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">

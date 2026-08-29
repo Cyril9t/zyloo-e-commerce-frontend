@@ -18,7 +18,7 @@ export const PATHS = {
         orders: "/orders",
         orderDetails: "/orders/:id",
         orderSuccess: "/order-success/:id",
-
+        paymentsVerification: "/verifyPayment"
     },
 
     admin: {
@@ -26,6 +26,7 @@ export const PATHS = {
         products: "/admin/products",
         categories: "/admin/categories",
         addProducts: "/admin/upload",
+        editProduct: "/admin/Update-product/:id",
         addProductItem: "/admin/product-item/:id",
         orders: "/admin/orders",
         users: "/admin/users",

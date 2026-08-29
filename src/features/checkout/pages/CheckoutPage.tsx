@@ -21,18 +21,17 @@ import { Label } from "../../../components/ui/label";
 import { Separator } from "../../../components/ui/separator";
 import { Link, useNavigate } from "react-router-dom";
 import { PATHS } from "../../../routes/paths";
-import { useAuth, type Data, type productItem } from "../../../context/AuhProvider";
+import { useAuth, type Data, type productItem } from "../../../context/AuthProvider";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Address } from "../data";
 import type { AddressType } from "../data";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cart } from "../../../lib/actions";
 import api from "../../../lib/api";
-import { date, email, size } from "zod";
+
+import { toast } from "sonner";
 
 export default function CheckoutPage() {
-    const { trigger } = cart()
     const { items } = useAuth()
     const [paymentMethod, setPaymentMethod] = useState<"card" | "express">("card");
     const [loading, setLoading] = useState(false)
@@ -44,10 +43,12 @@ export default function CheckoutPage() {
 
     const [itemsInfo, setItemsIfo] = useState<Data>()
     const subtotal = items.reduce((acc, item) => acc + item.productItem.price * item.quantity, 0);
-    const shipping = 0.00;
-    const discount = discountApplied ? subtotal * 0.1 : 0;
-    const tax = (subtotal - discount) * 0.08;
-    const total = subtotal - discount + shipping + tax;
+
+    const discount = subtotal > 300 ? 30 : 0;
+    const shipping = subtotal > 250 || subtotal === 0 ? 0 : 20;
+    const tax = Math.round(subtotal * 0.08);
+
+    const total = subtotal + shipping + tax - discount;
 
     const navigate = useNavigate()
 
@@ -63,22 +64,28 @@ export default function CheckoutPage() {
         setLoading(true)
 
 
+
         if (!data || !itemsInfo) return console.log("NO DATA AVAILABLE")
         try {
             const res = await api.post("/checkOut/checkOuts", { firstName: data.firstName, lastName: data.lastName, email: data.email, state: data.state, StreetAddress: data.StreetAddress, postalCode: data.postalCode, city: data.city, paymentMethod: paymentMethod, name: itemsInfo?.productItem.product.name, color: itemsInfo?.productItem.color, quantity: itemsInfo?.quantity, image: itemsInfo?.productItem.image, size: itemsInfo?.productItem.size, price: itemsInfo?.productItem.price, total: total, item: items })
             const order = await res.data
 
             reset();
-            await api.delete("/cart/deleteCarts")
 
-            await trigger()
+            if (order?.Message === "Payment initialized") {
+                window.location.href = order?.authorization_url;
+                console.log(order.authorization_url)
+                return
+            }
 
             navigate(`/order-success/${order.OrderPlaced.id}`)
-        } catch (error) {
+        } catch (error: any) {
             setLoading(false)
             console.log(error)
+            toast.error(error?.response?.data?.Message)
         }
     }
+
 
 
 
@@ -301,13 +308,14 @@ export default function CheckoutPage() {
                                                 </span>
                                             </div>
 
+
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="text-2xs font-bold text-neutral-900 dark:text-white truncate">{item.productItem.product.name}</h4>
                                                 <p className="text-[13px] text-neutral-400 font-medium">{item?.productItem?.color} • {item.productItem.size}</p>
                                             </div>
 
                                             <div className="text-xs font-mono font-bold text-neutral-950 dark:text-white">
-                                                ${(item.productItem.price * item.quantity).toFixed(2)}
+                                                ₦{(item.productItem.price * item.quantity).toFixed(2)}
                                             </div>
                                         </div>
                                     )
@@ -345,15 +353,15 @@ export default function CheckoutPage() {
                                 <div className="space-y-2 text-xs font-medium">
                                     <div className="flex justify-between text-neutral-500">
                                         <span>Subtotal</span>
-                                        <span className="font-mono text-neutral-900 dark:text-white">${subtotal.toFixed(2)}</span>
+                                        <span className="font-mono text-neutral-900 dark:text-white">₦{subtotal.toFixed(2)}</span>
                                     </div>
 
-                                    {discountApplied && (
-                                        <div className="flex justify-between text-emerald-600 dark:text-emerald-400">
-                                            <span>Discount</span>
-                                            <span className="font-mono">-${discount.toFixed(2)}</span>
-                                        </div>
-                                    )}
+
+                                    <div className="flex justify-between text-emerald-600 dark:text-emerald-400">
+                                        <span>Discount</span>
+                                        <span className="font-mono">-₦{discount.toFixed(2)}</span>
+                                    </div>
+
 
                                     <div className="flex justify-between text-neutral-500">
                                         <span>Shipping</span>
@@ -362,14 +370,14 @@ export default function CheckoutPage() {
 
                                     <div className="flex justify-between text-neutral-500">
                                         <span>Estimated Tax</span>
-                                        <span className="font-mono text-neutral-900 dark:text-white">${tax.toFixed(2)}</span>
+                                        <span className="font-mono text-neutral-900 dark:text-white">₦{tax.toFixed(2)}</span>
                                     </div>
 
                                     <Separator className="bg-neutral-100 dark:bg-neutral-800/60 my-2" />
 
                                     <div className="flex justify-between items-baseline text-sm font-bold text-neutral-950 dark:text-white pt-1">
                                         <span>Total due</span>
-                                        <span className="font-mono text-2xl ">${total.toFixed(2)}</span>
+                                        <span className="font-mono text-2xl ">₦{total.toFixed(2)}</span>
                                     </div>
                                 </div>
                             </CardContent>

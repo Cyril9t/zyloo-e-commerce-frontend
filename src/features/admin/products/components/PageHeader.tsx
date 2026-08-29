@@ -39,13 +39,9 @@ export default function PageHeader({ uploaded, setUploaded, setUploadProgress, s
                 }
             })
 
-
             const res = uploadPromise.data
-
-            console.log(res)
-
             setIsloading(false)
-
+            toast.success("Product Uploaded")
             navigate(`/admin/product-item/${res?.product?.id}`, { replace: true })
 
             setUploaded(true)

@@ -17,9 +17,14 @@ interface User {
     role: "ADMIN" | "CUSTOMER";
 }
 
+export interface tags {
+    name: string
+}
+
 export interface product {
     name: string;
-    description: string
+    description: string;
+    tags: tags[]
 }
 
 export type productItem = {
@@ -118,6 +123,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     }, [user])
 
+
     const usersCArt = async () => {
         try {
             await fetch();
@@ -128,6 +134,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     useEffect(() => {
+
         usersCArt();
     }, [cartCount, user,])
 

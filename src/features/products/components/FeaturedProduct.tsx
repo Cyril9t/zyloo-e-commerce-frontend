@@ -1,52 +1,14 @@
 import ProductCard from "../../products/components/ProductCard";
-import type { Product } from "../../products/types/Product";
+import { useAuth } from "../../../context/AuthProvider";
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
 import { MoveRightIcon, Zap } from "lucide-react";
 import { PATHS } from "../../../routes/paths";
 
-const products: Product[] = [
-    {
-        id: "1",
-        name: "Wireless Headphones",
-        category: "Electronics",
-        price: 299,
-        originalPrice: 349,
-        image: "https: picsum.photos/500?random=1",
-        rating: 4.8,
-        reviews: 124,
-    },
-    {
-        id: "2",
-        name: "Modern Chair",
-        category: "Furniture",
-        price: 180,
-        image: "https: picsum.photos/500?random=2",
-        rating: 4.6,
-        reviews: 87,
-    },
-    {
-        id: "3",
-        name: "Running Shoes",
-        category: "Fashion",
-        price: 120,
-        originalPrice: 150,
-        image: "https: picsum.photos/500?random=3",
-        rating: 4.9,
-        reviews: 310,
-    },
-    {
-        id: "4",
-        name: "Smart Watch",
-        category: "Accessories",
-        price: 250,
-        image: "https: picsum.photos/500?random=4",
-        rating: 4.7,
-        reviews: 201,
-    },
-];
+
 
 export default function FeaturedProducts() {
+    const { products } = useAuth()
     return (
         <section className="container-page py-6 md:py-8 lg:py-10 mt-4 md:mt-6 lg:mt-8">
 
@@ -73,7 +35,7 @@ export default function FeaturedProducts() {
                 </Link>
             </div>
             <div className="grid gap-4 sm:gap-5 md:gap-6 lg:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {products.map((product) => (
+                {products?.splice(0, 4)?.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

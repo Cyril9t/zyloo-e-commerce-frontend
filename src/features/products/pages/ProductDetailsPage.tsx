@@ -25,7 +25,7 @@ import { map } from "zod/v3";
 import { PATHS } from "../../../routes/paths";
 import { toast } from "sonner";
 import { getAllUser } from "../../../context/userContext";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 
 export interface Category {
@@ -81,7 +81,7 @@ export default function ProductDetailsPage() {
     const [color, setColor] = useState<string | null>(null);
     const [productItemId, setProductItemId] = useState<string | null>("")
     const [quantity, setQuantity] = useState<number>(1);
-    const [selectedPrice, setSelectedPrice] = useState<number | null>(1);
+    const [selectedPrice, setSelectedPrice] = useState<number | null>();
     const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
     const [stock, setStock] = useState<number | null>(1)
     const [productDetail, setProductDetail] = useState<ProductDetails | null>(null)
@@ -146,10 +146,10 @@ export default function ProductDetailsPage() {
     }, [color,]);
 
     useEffect(() => {
-        const price = productDetail?.productItems[0]?.price
-        const stocks = productDetail?.productItems[0]?.stock
-        setSelectedPrice(price ?? null)
-        setStock(stocks ?? null)
+        // const price = productDetail?.productItems[0]?.price
+        // const stocks = productDetail?.productItems[0]?.stock
+        // setSelectedPrice(price ?? null)
+        // setStock(stocks ?? null)
     })
 
 
@@ -209,7 +209,7 @@ export default function ProductDetailsPage() {
 
 
                                 <span className="text-xl font-bold text-neutral-950 dark:text-white">
-                                    ${selectedPrice}
+                                    ₦{selectedPrice}
                                 </span>
 
 
@@ -221,7 +221,7 @@ export default function ProductDetailsPage() {
                             <label className="text-xs font-bold uppercase tracking-wider text-neutral-400">
                                 Color: <span className="text-neutral-900 dark:text-white font-normal text-xs">{selectedColor}</span>
                             </label>
-                            <div className="flex items-center gap-2 sm:gap-3 flex-wrap mt-3">
+                            <div className="flex items-center gap-4 sm:gap-4 flex-wrap mt-3">
                                 {productDetail?.productItems?.map((c) => (
                                     <button
                                         key={c.id}

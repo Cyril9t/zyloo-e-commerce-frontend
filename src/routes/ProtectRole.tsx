@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuhProvider";
+import { useAuth } from "../context/AuthProvider";
 import { PATHS } from "./paths";
 
 export default function AdminRoute() {

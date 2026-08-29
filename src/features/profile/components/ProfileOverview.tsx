@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avat
 import { Card, CardContent } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import type { UserProfileData } from "../pages/ProfilePage";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 export default function ProfileOverview({ profile }: { profile: UserProfileData }) {
     const { user, isMutating } = useAuth()

@@ -4,17 +4,17 @@ import { EmptyCart } from "../components/EmptyCart";
 import { CartSummary } from "../components/CartSummary";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../../routes/paths";
-import { useAuth } from "../../../context/AuhProvider";
-import type { Data } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
+import type { Data } from "../../../context/AuthProvider";
 import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 
 export default function CartPage() {
 
     const { data, items, setItems, cartMutating } = useAuth();
-    // const [items, setItems] = useState<Data[] | []>([]);
 
     useEffect(() => {
         setItems(data?.cart)
+
     }, [data])
 
     const handleUpdateQuantity = (id: string, delta: number) => {

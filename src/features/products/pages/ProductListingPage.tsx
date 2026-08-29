@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 import { cn } from "../../../utils/cn";
 import type { Products } from "../types/Product";
-import { useAuth } from "../../../context/AuhProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 export interface FilterState {
     search: string;
@@ -287,6 +287,7 @@ export default function ProductListingPage() {
                     </div>
                 </aside>
 
+
                 {/* Mobile Filter Overlay Backdrop */}
                 {filterMenuOpen && (
                     <div
@@ -295,7 +296,7 @@ export default function ProductListingPage() {
                     />
                 )}
 
-                <main className=" flex-1 p-4 lg:p-8  w-full">
+                <main className=" flex-1 p-4 lg:p-8  w-full h-screen overflow-scroll scrollbar-none">
                     {/* Top Sorting Bar Controls */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/40 pb-4 mb-5">
                         <div>
