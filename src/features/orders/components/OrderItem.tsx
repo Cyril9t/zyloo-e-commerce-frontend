@@ -1,4 +1,4 @@
-import type { OrderItem as OrderItemType } from "../types/order";
+import type { OrderItem as OrderItemType } from "../types/Order";
 
 interface OrderItemProps {
     item: OrderItemType;

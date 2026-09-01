@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
@@ -12,6 +12,7 @@ import type { registerData } from "../../../lib/schema/validate";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner";
+import { useState } from "react";
 
 
 
@@ -23,7 +24,7 @@ export default function RegisterForm() {
 
     const { trigger } = authReg()
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
     const [checkbox, setCheckbox] = useState(true);
 
     const navigate = useNavigate()

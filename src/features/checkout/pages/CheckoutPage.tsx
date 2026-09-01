@@ -21,7 +21,7 @@ import { Label } from "../../../components/ui/label";
 import { Separator } from "../../../components/ui/separator";
 import { Link, useNavigate } from "react-router-dom";
 import { PATHS } from "../../../routes/paths";
-import { useAuth, type Data, type productItem } from "../../../context/AuthProvider";
+import { useAuth, type Data, } from "../../../context/AuthProvider";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Address } from "../data";

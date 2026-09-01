@@ -2,23 +2,22 @@ import { useEffect, useState } from "react";
 
 import {
     CheckCircle2,
-    Package,
-    Truck,
+
+
     ArrowRight,
-    Download,
+
     ShoppingBag,
-    Mail,
-    Share2,
+
     Calendar,
     MapPin
 } from "lucide-react";
 
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { Link } from "react-router-dom";
-import { PATHS } from "../../../routes/paths";
+
 import { useParams } from "react-router-dom";
 import api from "../../../lib/api";
 import ECommercePageLoader from "../../../components/common/UniversalLoadingState";

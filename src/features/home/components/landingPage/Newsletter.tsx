@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Mail, Sparkles, ArrowRight } from 'lucide-react';
 import { Card } from "../../../../components/ui/card";
 import { Button } from "../../../../components/ui/button";
-import CursorRingField from '../../../../components/originkit/ui/cursor-ring-field';
+
 
 export default function Newsletter() {
     const [email, setEmail] = useState('');

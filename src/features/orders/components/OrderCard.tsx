@@ -5,8 +5,9 @@ import { Button } from "../../../components/ui/button";
 import { Card, CardContent } from "../../../components/ui/card";
 import { PATHS } from "../../../routes/paths";
 
-import type { Order } from "../types/order";
+
 import OrderStatusBadge from "./OrderStatusBadge";
+import type { Order } from "../types/Order";
 
 interface OrderCardProps {
     order: Order;

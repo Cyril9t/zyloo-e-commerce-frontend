@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "
 import { useEffect, useState } from "react";
 import { Order } from "../../../lib/actions";
 import { Link } from "react-router-dom";
-import { PATHS } from "../../../routes/paths";
+
 import OrderPageSkeleton from "../../../components/common/LoadingState";
 
 

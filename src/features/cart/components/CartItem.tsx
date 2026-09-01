@@ -3,7 +3,7 @@ import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { Card } from "../../../components/ui/card";
 import type { Data } from "../../../context/AuthProvider";
-import { createCart } from "../../../lib/actions";
+
 import api from "../../../lib/api";
 import { useAuth } from "../../../context/AuthProvider";
 import { toast } from "sonner";

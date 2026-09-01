@@ -1,5 +1,5 @@
 import HeroSection from "../components/HeroSection";
-import FeaturedProducts from "../../products/components/FeaturedProduct";
+
 import CategoriesSection from "../components/categorieSection";
 import PromoBanner from "../components/PromoBanner";
 import WhyChooseUs from "../components/WhyChooseUs";

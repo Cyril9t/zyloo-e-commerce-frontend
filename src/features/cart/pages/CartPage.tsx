@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import CartItemCard from "../components/CartItem";
 import { EmptyCart } from "../components/EmptyCart";
 import { CartSummary } from "../components/CartSummary";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../../routes/paths";
 import { useAuth } from "../../../context/AuthProvider";
-import type { Data } from "../../../context/AuthProvider";
+
 import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 
 export default function CartPage() {
