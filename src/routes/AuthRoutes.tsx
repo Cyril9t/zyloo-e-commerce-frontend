@@ -3,7 +3,7 @@ import { PATHS } from "./paths";
 import LoginPage from "../features/auth/pages/LoginPage";
 import RegisterPage from "../features/auth/pages/RegisterPage";
 import ForgotPasswordPage from "../features/auth/pages/ForgotPasswordPage";
-import ResetPasswordPage from "../features/auth/pages/ResetPasswordPage"; import AuthLayout from "../layouts/AuthLayout";
+import ResetPasswordPage from "../features/auth/pages/ResetPasswordPage";
 import GuestRoute from "./Guest";
 export default function AuthRoutes() {
     return (

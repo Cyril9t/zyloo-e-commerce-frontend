@@ -30,7 +30,7 @@ export default function EnhancedProductCard() {
                 {productList.map((item) => (
                     <div
                         key={item.id}
-                        className=" mb-20 group relative shrink-0 w-[300px] h-[480px] bg-background border-2 rounded-3xl overflow-hidden"
+                        className=" mb-20 group relative shrink-0 w-75 h-120 bg-background border-2 rounded-3xl overflow-hidden"
                     >
 
                         <div className="relative h-[60%] overflow-hidden">

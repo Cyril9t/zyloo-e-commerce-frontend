@@ -55,7 +55,7 @@ export default function ProductSEO({ title, desc, onTitleChange, onDescChange }:
                                 <Label htmlFor="seo-d-in" className="font-semibold text-neutral-600 dark:text-neutral-400">Meta Description Core String</Label>
                                 <span className={cn("font-mono text-[10px]", desc.length > 155 ? "text-amber-500" : "text-neutral-400")}>{desc.length} / 155 characters</span>
                             </div>
-                            <Textarea id="seo-d-in" maxLength={180} value={desc} onChange={(e) => onDescChange(e.target.value)} placeholder="Summarize listing context matching search expectations..." className="min-h-[70px] text-xs leading-normal" />
+                            <Textarea id="seo-d-in" maxLength={180} value={desc} onChange={(e) => onDescChange(e.target.value)} placeholder="Summarize listing context matching search expectations..." className="min-h-17.5 text-xs leading-normal" />
                         </div>
                     </AccordionContent>
                 </AccordionItem>

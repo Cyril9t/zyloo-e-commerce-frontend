@@ -6,20 +6,16 @@ import { Button } from "../../../../components/ui/button";
 
 export default function Newsletter() {
     const [email, setEmail] = useState('');
-    const [isDark, setIsDark] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle newsletter subscription logic here
-
         setEmail('');
     };
-
 
     // Detect Tailwind Dark Mode dynamically
     useEffect(() => {
         const checkTheme = () => {
-            setIsDark(document.documentElement.classList.contains("dark"));
+            document.documentElement.classList.contains("dark");
         };
 
         checkTheme();
@@ -32,7 +28,6 @@ export default function Newsletter() {
 
         return () => observer.disconnect();
     }, []);
-
 
     return (
         <section className=" py-6 md:py-8 lg:py-12 px-2 sm:px-4 md:px-8 lg:px-10 mx-auto w-full mb-16 md:mb-20 lg:mb-24">
@@ -68,7 +63,7 @@ export default function Newsletter() {
                             {/* Unified Premium Form Field Wrapper */}
                             <div className="flex flex-col sm:flex-row items-center gap-2 p-1.5 rounded-2xl bg-background border border-border focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all duration-300 shadow-sm">
                                 <div className="flex items-center w-full pl-3 gap-2">
-                                    <Mail className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                                    <Mail className="h-5 w-5 text-muted-foreground shrink-0" />
                                     <input
                                         type="email"
                                         required

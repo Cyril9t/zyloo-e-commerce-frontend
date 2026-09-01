@@ -30,7 +30,7 @@ function categorySection() {
                 {productList.map((item) => (
                     <div
                         key={item.id}
-                        className="mb-22 group relative shrink-0 w-[300px] h-[350px] bg-muted border rounded-3xl overflow-hidden"
+                        className="mb-22 group relative shrink-0 w-75 h-87.5 bg-muted border rounded-3xl overflow-hidden"
                     >
 
                         <div className="relative h-full overflow-hidden">

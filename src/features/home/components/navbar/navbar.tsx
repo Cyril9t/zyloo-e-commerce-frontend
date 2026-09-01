@@ -16,7 +16,7 @@ import { FloatingDock } from "../../../../components/Layout/framer";
 const MobileStates = [
     {
         link: PATHS.customer.wishlist,
-        icons: <Heart className="!h-5 !w-5" />,
+        icons: <Heart className="h-5! w-5!" />,
         title: "Wishlist"
     },
     {
@@ -27,7 +27,7 @@ const MobileStates = [
     },
     {
         link: PATHS.customer.profile,
-        icons: <User2Icon className="!h-5 !w-5" />,
+        icons: <User2Icon className="h-5! w-5!" />,
         title: "Account"
     },
 ]
@@ -35,18 +35,18 @@ const MobileStates = [
 const states = [
     {
         link: PATHS.customer.wishlist,
-        icons: <Heart className="!h-5 !w-5" />,
+        icons: <Heart className="h-5! w-5!" />,
         title: "Wishlist"
     },
     {
         link: PATHS.customer.cart,
-        icons: <ShoppingCartIcon className="!h-5 !w-5" />,
+        icons: <ShoppingCartIcon className="h-5! w-5!" />,
         title: "Cart"
 
     },
     {
         link: PATHS.customer.profile,
-        icons: <User2Icon className="!h-5 !w-5" />,
+        icons: <User2Icon className="h-5! w-5!" />,
         title: "My account"
     },
 ]
@@ -73,7 +73,7 @@ export default function Navbar() {
                 loading: "Processing...",
                 error: "Operation Failed Please Try again"
             })
-            const res = await SignOut
+            await SignOut
 
             setUser(null);
             navigate(PATHS.auth.login, { replace: true })
@@ -108,7 +108,7 @@ export default function Navbar() {
         <div>
 
             <header className="hidden md:block">
-                <div className="fixed w-full top-0  z-70 flex h-18 items-center justify-between border-b bg-(--color-background)/40 px-4 backdrop-blur-lg ">
+                <div className="fixed w-full top-0  z-70 flex h-18 items-center justify-between border-b bg-background/40 px-4 backdrop-blur-lg ">
                     <Logo />
 
                     <SearchBar />
@@ -159,7 +159,7 @@ export default function Navbar() {
 
                                             <DropdownMenuTrigger asChild >
                                                 <Button variant="ghost" size="icon-lg">
-                                                    <User2Icon className="!h-5 !w-5" />
+                                                    <User2Icon className="h-5! w-5!" />
                                                 </Button>
                                             </DropdownMenuTrigger>
 
@@ -208,7 +208,7 @@ export default function Navbar() {
             </header>
 
             <div className="block md:hidden">
-                <header className=" flex h-16 items-center justify-between border-b bg-(--color-background) px-4 font-bold backdrop-blur-md">
+                <header className=" flex h-16 items-center justify-between border-b bg-background px-4 font-bold backdrop-blur-md">
 
                     <div >
                         <Logo />

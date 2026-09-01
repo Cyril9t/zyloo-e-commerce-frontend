@@ -43,7 +43,7 @@ export default function HeroSection() {
                             <img
                                 src={bg1}
                                 alt="The Art of Minimalism"
-                                className="h-[650px] w-full rounded-3xl object-cover shadow-lg"
+                                className="h-162.5 w-full rounded-3xl object-cover shadow-lg"
                             />
                         </div>
 
@@ -80,10 +80,10 @@ export default function HeroSection() {
                     <img
                         src={bg1}
                         alt="The Art of Minimalism"
-                        className="h-[600px] w-full object-cover"
+                        className="h-150 w-full object-cover"
                     />
 
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 pb-10 pt-24 text-white">
+                    <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 via-black/40 to-transparent px-6 pb-10 pt-24 text-white">
                         <h1 className="text-xs font-semibold uppercase tracking-[0.3em]">
                             Spring / Summer {year}
                         </h1>

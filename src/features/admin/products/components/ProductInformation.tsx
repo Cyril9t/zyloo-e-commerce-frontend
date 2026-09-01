@@ -35,7 +35,7 @@ export default function ProductInformation({ register, errors }: any) {
                                 <Label htmlFor="prod-full-desc" {...register("description")} className="text-xs font-semibold">Comprehensive Storefront Rich Manifest Description</Label>
                                 <span className="text-[10px] text-neutral-400 font-medium">Rich-Text Editor Layer Engaged</span>
                             </div>
-                            <Textarea id="prod-full-desc" {...register("description")} placeholder="Describe materials, cut, design philosophy, structural maintenance instructions..." className="min-h-[140px] focus-visible:ring-1 resize-y leading-relaxed" />
+                            <Textarea id="prod-full-desc" {...register("description")} placeholder="Describe materials, cut, design philosophy, structural maintenance instructions..." className="min-h-35 focus-visible:ring-1 resize-y leading-relaxed" />
                             <small className="text-destructive">
                                 {errors.description?.message}
                             </small>
@@ -61,7 +61,7 @@ export default function ProductInformation({ register, errors }: any) {
                                 type="text"
                                 placeholder="Add tag..."
                                 {...register("tagName")}
-                                className="flex-1 min-w-[120px] bg-transparent outline-none border-none shadow-none text-xs text-neutral-700 dark:text-neutral-300 px-1 py-0.5"
+                                className="flex-1 min-w-30 bg-transparent outline-none border-none shadow-none text-xs text-neutral-700 dark:text-neutral-300 px-1 py-0.5"
                             />
                             <small className="text-destructive">{errors.tagName?.message}</small>
                         </div>

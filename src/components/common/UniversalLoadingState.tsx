@@ -18,14 +18,14 @@ export default function ECommercePageLoader({
 }: PageLoaderProps) {
     return (
         <div
-            className={`w-full bg-neutral-50/60 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased ${fullScreen ? "min-h-screen" : "min-h-[500px]"
+            className={`w-full bg-neutral-50/60 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased ${fullScreen ? "min-h-screen" : "min-h-125"
                 }`}
         >
             {/* Standard Header Skeleton */}
             {fullScreen && <HeaderSkeleton />}
 
             {/* Main Page Container */}
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse space-y-8">
+            <main className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse space-y-8">
                 {/* Variant Layout Switcher */}
                 {variant === "grid" && <CatalogGridSkeleton />}
                 {variant === "detail" && <ProductDetailSkeleton />}
@@ -216,7 +216,7 @@ function DefaultGeneralSkeleton() {
 function HeaderSkeleton() {
     return (
         <header className="sticky top-0 z-40 w-full bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60">
-            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <Skeleton className="h-8 w-8 rounded-lg bg-neutral-200/80 dark:bg-neutral-800" />
                     <Skeleton className="h-4 w-28 bg-neutral-200/80 dark:bg-neutral-800" />

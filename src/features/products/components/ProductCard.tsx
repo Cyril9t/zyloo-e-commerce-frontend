@@ -1,4 +1,4 @@
-import { Heart, Eye, LucideView } from "lucide-react";
+import { Heart, Eye } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import type { Products } from "../types/Product";
@@ -25,16 +25,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         ? product?.category?.map((item) => item.name).join(", ")
         : "Uncategorized";
 
-    const tags =
-        product.tag?.length
-            ? product.tag.map((item) => item.name).join(", ")
-            : "No Tag";
-
-
-
     useEffect(() => {
-        const prices = product?.productItems?.map((item) => (setPrice(item.price)))
-
+        if (product?.productItems?.length) {
+            setPrice(product.productItems[0].price);
+        }
     }, [])
 
     const handleTouchStart = () => {
@@ -60,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="flex flex-col md:flex-row gap-4 md:gap-6 md:overflow-x-auto scroll-smooth scrollbar-none">
                 <div
                     key={product.id}
-                    className={`group relative shrink-0 w-full md:w-[300px] h-auto md:h-[480px] bg-background border rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 cursor-pointer flex flex-row md:flex-col ${isActive ? 'shadow-lg border-primary' : 'border-border'}`}
+                    className={`group relative shrink-0 w-full md:w-75 h-auto md:h-120 bg-background border rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 cursor-pointerer flex flex-row md:flex-col ${isActive ? 'shadow-lg border-primary' : 'border-border'}`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                     onTouchStart={handleTouchStart}
@@ -68,7 +62,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 >
 
                     {/* Image Section */}
-                    <div className="relative w-[110px] sm:w-[140px] md:w-full h-auto md:h-[60%] shrink-0 overflow-hidden bg-muted">
+                    <div className="relative w-27.5 sm:w-35 md:w-full h-auto md:h-[60%] shrink-0 overflow-hidden bg-muted">
                         <img
                             src={productImage}
                             alt={product.name}
@@ -106,7 +100,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                             <button
                                 className={`absolute bottom-0 left-0 right-0 bg-foreground text-background py-3 flex items-center justify-center gap-2 font-medium transition-all duration-300 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
                             >
-                                <LucideView className="w-5 h-5" />
+                                <Eye className="w-5 h-5" />
                                 View Details
                             </button>
                         </Link>
@@ -141,7 +135,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                             <Link to={`/products/${product.id}`} className="block md:hidden">
                                 <Button size="sm" className="h-8 w-8 p-0 rounded-lg">
-                                    <LucideView className="w-4 h-4" />
+                                    <Eye className="w-4 h-4" />
                                 </Button>
                             </Link>
                         </div>

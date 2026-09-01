@@ -19,7 +19,7 @@ export default function PaymentVerified() {
             <div className="max-w-xl w-full bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
 
                 {/* Header / Success Banner */}
-                <div className="p-8 text-center bg-gradient-to-b from-emerald-50/60 to-white relative">
+                <div className="p-8 text-center bg-linear-to-b from-emerald-50/60 to-white relative">
                     <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 border-8 border-emerald-50 text-emerald-600 mb-4 animate-bounce">
                         <CheckCircle2 className="w-10 h-10" />
                     </div>

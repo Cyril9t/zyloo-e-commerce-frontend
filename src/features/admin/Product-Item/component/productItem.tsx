@@ -2,7 +2,6 @@ import { CardContent, CardDescription, CardHeader, CardTitle } from "../../../..
 import { Input } from "../../../../components/ui/input";
 import { Label } from "../../../../components/ui/label";
 import { Link, useParams } from "react-router-dom";
-import { productItem } from "../../../../lib/actions";
 import { toast } from "sonner";
 import { productItemInfo } from "../data";
 import type { productItemType } from "../data";

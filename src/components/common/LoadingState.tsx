@@ -8,7 +8,7 @@ export default function OrderPageSkeleton() {
 
             {/* Header Skeleton */}
             <header className="sticky top-0 z-40 w-full bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <Skeleton className="h-8 w-8 rounded-lg bg-neutral-200/80 dark:bg-neutral-800" />
                         <Skeleton className="h-4 w-28 bg-neutral-200/80 dark:bg-neutral-800" />
@@ -18,7 +18,7 @@ export default function OrderPageSkeleton() {
             </header>
 
             {/* Main Skeleton Container */}
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-pulse">
+            <main className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-pulse">
 
                 {/* Hero Status Banner Skeleton */}
                 <div className="bg-white dark:bg-neutral-900/40 border border-neutral-200/60 dark:border-neutral-800/60 rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">

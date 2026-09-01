@@ -1,4 +1,3 @@
-import { Tag } from "lucide-react";
 import z from "zod";
 
 export const productInfoSchema = z.object({
@@ -15,4 +14,6 @@ export interface AdminProduct {
     name: string;
     category: string;
     image: string;
+    price?: number;
+    stock?: number;
 }

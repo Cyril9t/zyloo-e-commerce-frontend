@@ -94,7 +94,7 @@ export default function CheckoutPage() {
 
             {/* Header / Security Navbar */}
             <header className="hidden md:block sticky top-10 h-13 z-100 ">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <Link to={PATHS?.customer?.cart}>
                         <Button variant="default" size="sm" className="h-9 gap-2 text-xs font-semibold ">
                             <ArrowLeft className="h-3.5 w-3.5" />
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
             </header>
 
             {/* Main Content Split View */}
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            <main className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
                 {/* Checkout Steps Tracker */}
                 <div className="flex items-center gap-2  text-neutral-400 font-medium">

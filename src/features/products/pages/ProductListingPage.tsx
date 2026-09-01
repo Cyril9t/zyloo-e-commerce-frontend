@@ -63,20 +63,6 @@ export default function ProductListingPage() {
         });
     };
 
-    const toggleColor = (color: string) => {
-        setFilters((prev) => ({
-            ...prev,
-            colors: prev.colors.includes(color) ? prev.colors.filter((item) => item !== color) : [...prev.colors, color],
-        }));
-    };
-
-    const toggleSize = (size: string) => {
-        setFilters((prev) => ({
-            ...prev,
-            sizes: prev.sizes.includes(size) ? prev.sizes.filter((item) => item !== size) : [...prev.sizes, size],
-        }));
-    };
-
     const removeFilter = (key: "categories" | "brands" | "colors" | "sizes" | "rating", value: string | number | null) => {
         setFilters((prev) => {
             if (key === "rating") {
@@ -168,7 +154,7 @@ export default function ProductListingPage() {
                 </div>
 
                 {/* Filter Sidebar - Hidden on mobile, visible on lg */}
-                <aside className={`absolute lg:relative top-16 left-0 right-0 lg:top-auto lg:right-auto flex flex-col bg-background border-b lg:border-b-0 lg:border-r border-border/60 lg:h-[calc(100vh-0.8rem)] lg:sticky lg:top-16 pb-7 z-40 lg:w-[18%] max-h-[calc(100vh-8rem)] overflow-y-auto lg:max-h-none lg:overflow-y-auto ${filterMenuOpen ? 'block' : 'hidden lg:flex'}`}>
+                <aside className={`absolute top-16 left-0 right-0 lg:sticky lg:top-16 flex flex-col bg-background border-b lg:border-b-0 lg:border-r border-border/60 lg:h-[calc(100vh-0.8rem)] pb-7 z-40 lg:w-[18%] max-h-[calc(100vh-8rem)] overflow-y-auto lg:max-h-none lg:overflow-y-auto ${filterMenuOpen ? 'block' : 'hidden lg:flex'}`}>
                     <div className="flex items-center justify-between p-4 pb-3 sticky top-0 bg-background z-10">
                         <div className="flex items-center gap-2 font-semibold tracking-tight text-xs uppercase">
                             <SlidersHorizontal className="h-4 w-4" />

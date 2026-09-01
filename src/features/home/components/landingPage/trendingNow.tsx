@@ -35,7 +35,7 @@ function TrendingNow() {
                     {trendingNow.map((item) => (
                         <div
                             key={item.id}
-                            className="group relative shrink-0 w-[300px] h-[480px] bg-muted border rounded-3xl overflow-hidden"
+                            className="group relative shrink-0 w-75 h-120 bg-muted border rounded-3xl overflow-hidden"
                         >
 
                             <div className="relative h-[60%] overflow-hidden">

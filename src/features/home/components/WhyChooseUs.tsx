@@ -49,7 +49,7 @@ export default function WhyChooseUs() {
                         >
                             <CardContent className="p-6 md:p-6 flex flex-col sm:flex-row items-start gap-5">
                                 {/* Micro-interactive Icon Container */}
-                                <div className="relative flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-700 group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
+                                <div className="relative shrink-0 flex items-center justify-center h-12 w-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-700 group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
                                     <Icon className="h-5 w-5 text-zinc-700 dark:text-zinc-300 group-hover:text-primary-foreground transition-colors duration-300" />
                                 </div>
 

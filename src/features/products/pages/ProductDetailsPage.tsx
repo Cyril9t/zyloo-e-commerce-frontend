@@ -19,12 +19,9 @@ import {
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
-import { string } from "zod";
-import { map } from "zod/v3";
+import { Avatar, AvatarFallback } from "../../../components/ui/avatar";
 import { PATHS } from "../../../routes/paths";
 import { toast } from "sonner";
-import { getAllUser } from "../../../context/userContext";
 import { useAuth } from "../../../context/AuthProvider";
 
 
@@ -118,7 +115,7 @@ export default function ProductDetailsPage() {
             }
 
             const res = await trigger({ productItemId: productItemId as string, quantity: quantity })
-            const data = await res
+            await res
             setCartCount(prev => prev + 1)
 
             toast.success("Item added to Cart")

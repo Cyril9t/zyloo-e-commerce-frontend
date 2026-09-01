@@ -91,7 +91,7 @@ export default function ShopByCategory() {
                         />
 
                         {/* Premium Gradient Scrim for Contrast */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/90" />
 
                         {/* Content Floating Elements */}
                         <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">

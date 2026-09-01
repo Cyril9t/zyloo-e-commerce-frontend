@@ -121,7 +121,7 @@ export default function UsersPages() {
 
     return (
         <div className="w-full min-h-screen    antialiased ">
-            <main className="max-w-[1400px] mx-auto space-y-6">
+            <main className="max-w-350 mx-auto space-y-6">
 
                 {/* Header & Main Actions */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

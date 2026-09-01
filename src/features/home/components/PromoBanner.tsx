@@ -84,7 +84,7 @@ export default function PromoBanner() {
                 {PREMIUM_PRODUCTS.map((product) => (
                     <div
                         key={product.id}
-                        className="w-full flex-shrink-0 relative flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-12 py-6 md:py-10 gap-8"
+                        className="w-full shrink-0 relative flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-12 py-6 md:py-10 gap-8"
                     >
                         {/* Content Section */}
                         <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4 text-center md:text-left">

@@ -8,7 +8,7 @@ export default function ActionButtons() {
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-xs text-neutral-400 font-medium">
-                <MoveUp className="h-3.5 w-3.5 stroke-[2]" />
+                <MoveUp className="h-3.5 w-3.5 stroke-2" />
                 <span>Last system update: <span className="font-mono font-bold text-neutral-700 dark:text-neutral-300">Just Now</span></span>
             </div>
 

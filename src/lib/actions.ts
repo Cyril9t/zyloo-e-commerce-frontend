@@ -1,15 +1,5 @@
-import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import api from "./api";
-
-interface AdminProduct {
-    name: string;
-    category: string;
-    price: string;
-    stock: string;
-    image: File;
-    tag: string
-}
 
 const uploadProductsInfo = async (url: string, { arg }: {
     arg: {

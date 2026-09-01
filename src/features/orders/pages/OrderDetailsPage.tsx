@@ -63,7 +63,7 @@ export default function OrderDetailsPage() {
         <div className="w-full min-h-screen bg-background">
 
             <header className="sticky top-1 z-40 w-full h-13  bg-background border-b border-border">
-                <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+                <div className="max-w-350 mx-auto flex items-center justify-between">
                     <Link to={PATHS.customer.orders}>
                         <Button variant="ghost" size="sm" className="h-8 gap-2 text-xs font-semibold ">
                             <ArrowLeft className="h-3.5 w-3.5" /> Back to Orders
@@ -79,7 +79,7 @@ export default function OrderDetailsPage() {
             </header>
 
 
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            <main className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
                 <div className="border hover:border hover:border-neutral-500  transition-colors rounded-xl p-6 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6">
 
                     <div className="flex flex-col md:flex-row items-start gap-4">

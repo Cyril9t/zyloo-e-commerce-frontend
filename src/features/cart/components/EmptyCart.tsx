@@ -5,7 +5,7 @@ import { PATHS } from "../../../routes/paths";
 
 export function EmptyCart() {
     return (
-        <div className="flex flex-col items-center justify-center py-20 lg:py-28 border border-dashed border-2 rounded-xl bg-card/20 text-center px-4 max-w-2xl mx-auto animate-in fade-in duration-300">
+        <div className="flex flex-col items-center justify-center py-20 lg:py-28 border-2 border-dashed rounded-xl bg-card/20 text-center px-4 max-w-2xl mx-auto animate-in fade-in duration-300">
             <div className="p-4 bg-muted/50 border border-border/30 rounded-full mb-5">
                 <ShoppingBag className="h-8 w-8 text-muted-foreground/60 stroke-[1.5]" />
             </div>

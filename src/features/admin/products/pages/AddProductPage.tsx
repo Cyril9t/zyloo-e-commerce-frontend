@@ -75,7 +75,7 @@ export default function AddProductPage() {
 
 
             <div className=" sticky top-0 z-40 w-full bg-foreground/80 rounded-tl-xl rounded-tr-xl backdrop-blur-md ">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
                     <ProductHeader handleSubmit={handleSubmit} setImages={setImages} setUploadProgress={setUploadProgress} setUploaded={setUploaded} reset={reset} images={images} />
                 </div>
             </div>
@@ -116,10 +116,3 @@ export default function AddProductPage() {
 
 
 
-
-
-
-
-function cn(...inputs: any[]) {
-    return inputs.filter(Boolean).join(" ");
-}

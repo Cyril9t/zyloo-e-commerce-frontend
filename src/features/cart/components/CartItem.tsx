@@ -59,7 +59,7 @@ export default function CartItemCard({ items, onUpdateQuantity, onRemove }: Cart
                     <Card key={item.id} className="p-4 sm:p-6 overflow-hidden transition-all duration-300 hover:shadow-md border-border/11 bg-card/60 backdrop-blur-sm group">
                         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
 
-                            <div className="relative h-28 w-24 sm:h-32 sm:w-28 bg-muted rounded-lg overflow-hidden border border-border/40 flex-shrink-0 mx-auto sm:mx-0">
+                            <div className="relative h-28 w-24 sm:h-32 sm:w-28 bg-muted rounded-lg overflow-hidden border border-border/40 shrink-0 mx-auto sm:mx-0">
                                 <img
                                     src={item?.productItem?.image}
                                     alt={item?.productItem?.product?.name}

@@ -68,7 +68,7 @@ export default function ProductImages({ uploaded, uploadProgress, setImages, ima
 
                 {/* Dynamic Grid Layout Array Container */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {images?.map((img: any, index: any) => (
+                    {images?.map((img: any) => (
                         <div key={crypto.randomUUID()} className={cn("group relative aspect-square bg-neutral-100 dark:bg-neutral-800 rounded-lg overflow-hidden border transition-all shadow-2xs", img.isFeatured ? "border-neutral-950 dark:border-white ring-1 ring-neutral-950 dark:ring-white" : "border-neutral-200/80 dark:border-neutral-800")}>
                             <img src={img?.preview} alt="" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102" />
 

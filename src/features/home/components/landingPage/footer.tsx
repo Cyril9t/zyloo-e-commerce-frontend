@@ -52,16 +52,16 @@ export default function Footer() {
                             </h3>
                             <ul className="space-y-2 text-sm font-medium text-zinc-600 dark:text-zinc-400">
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">New Arrivals</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">New Arrivals</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Collections</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Collections</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Best Sellers</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Best Sellers</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Sustainability</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Sustainability</a>
                                 </li>
                             </ul>
                         </div>
@@ -73,16 +73,16 @@ export default function Footer() {
                             </h3>
                             <ul className="space-y-2 text-sm font-medium text-zinc-600 dark:text-zinc-400">
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Track Order</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Track Order</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Shipping & Returns</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Shipping & Returns</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Contact Support</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Contact Support</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Privacy Desk</a>
+                                    <a href="#" className="relative py-0.5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-current hover:after:w-full after:transition-all hover:text-zinc-950 dark:hover:text-zinc-50">Privacy Desk</a>
                                 </li>
                             </ul>
                         </div>

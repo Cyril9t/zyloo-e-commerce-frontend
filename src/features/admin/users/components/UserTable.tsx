@@ -1,22 +1,7 @@
 
 import DataTable from "../../../../features/admin/shared/components/DataTable";
 
-
-
-
-import { getAllUser } from "../../../../context/userContext";
-
-import { useEffect, useState } from "react";
-
 export default function UserTable() {
-    const { data } = getAllUser()
-    const [users, setUsers] = useState([]) as any
-
-    useEffect(() => {
-        setUsers(data?.users)
-    }, [data])
-
-
     return (
         <DataTable>
             <table className="w-full">

@@ -1,9 +1,7 @@
 import api from "../api";
 import useSWRMutation from "swr/mutation";
 import { registerSchema, loginSchema } from "../schema/validate";
-import z, { url } from "zod";
-import useSWR from "swr";
-import { ur } from "zod/v4/locales";
+import z from "zod";
 
 const userReg = async (url: string, { arg }: { arg: z.infer<typeof registerSchema> }) => {
     const res = await api.post(url, arg)

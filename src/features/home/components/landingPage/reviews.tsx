@@ -56,7 +56,7 @@ function Reviews() {
                             {testimonials.map((testimonial, index) => (
                                 <Card
                                     key={index}
-                                    className=" min-w-[320px] md:min-w-[380px] bg-background shrink-0 p-6"
+                                    className=" min-w-[320px] md:min-w-95 bg-background shrink-0 p-6"
                                 >
                                     <div className="flex gap-1 mb-4">
                                         {[...Array(testimonial.rating)].map((_, i) => (
