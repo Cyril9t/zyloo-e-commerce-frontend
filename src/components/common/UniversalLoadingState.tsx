@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import { Skeleton } from "../../components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "../../components/ui/card";
 import { Separator } from "../../components/ui/separator";
