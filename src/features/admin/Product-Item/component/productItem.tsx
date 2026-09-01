@@ -9,20 +9,18 @@ import type { productItemType } from "../data";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../components/ui/button";
-import type { productInfoData } from "../../products/types/product";
-import { number } from "zod";
 import { useState, type ChangeEvent } from "react";
 import type { ImagePreview } from "../../products/pages/AddProductPage";
-import { ImageIcon, UploadCloud, X } from "lucide-react";
 import { cn } from "../../../../lib/utils";
 import api from "../../../../lib/api";
 import { PATHS } from "../../../../routes/paths";
+import { UploadCloud, X } from "lucide-react";
 
 function ProductItem() {
     const { id } = useParams()
     const [isLoading, setIsloading] = useState(false)
-    const [uploaded, setUploaded] = useState(false)
-    const [uploadProgress, setUploadProgress] = useState(0)
+
+
 
     const [images, setImages] = useState<ImagePreview[]>([])
 
@@ -65,10 +63,10 @@ function ProductItem() {
                 return toast.warning("No Image selected for this productItem")
             }
 
-            const res = await api.post(`/product/product-item/${id}`, formData, {
+            await api.post(`/product/product-item/${id}`, formData, {
                 onUploadProgress: (progressEvent) => {
-                    const percent = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 1))
-                    setUploadProgress(percent)
+                    Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 1))
+
                 }
             })
 

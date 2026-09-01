@@ -1,25 +1,17 @@
 import * as React from "react";
 import {
     X,
-    Image as ImageIcon,
     Plus,
-
-    Calendar as CalendarIcon,
-
 } from "lucide-react";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../../components/ui/card";
 import { Input } from "../../../../components/ui/input";
 import { Button } from "../../../../components/ui/button";
-import type { CustomAttribute } from "../pages/AddProductPage";
-
-
-
 
 
 interface AttributesProps {
-    attributes: CustomAttribute[];
-    setAttributes: React.Dispatch<React.SetStateAction<CustomAttribute[]>>;
+    attributes: any;
+    setAttributes: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export default function ProductAttributes({ attributes, setAttributes }: AttributesProps) {
@@ -35,21 +27,21 @@ export default function ProductAttributes({ attributes, setAttributes }: Attribu
                 </Button>
             </CardHeader>
             <CardContent className="p-6 pt-0 space-y-3">
-                {attributes.map((attr) => (
+                {attributes.map((attr: any) => (
                     <div key={attr.id} className="flex gap-4 items-center animate-in fade-in duration-200">
                         <Input
                             placeholder="Specification Parameter Key (e.g., Fabric)"
                             value={attr.key}
-                            onChange={(e) => setAttributes(attributes.map(a => a.id === attr.id ? { ...a, key: e.target.value } : a))}
+                            onChange={(e) => setAttributes(attributes.map((a: any) => a.id === attr.id ? { ...a, key: e.target.value } : a))}
                             className="h-9 text-xs font-semibold"
                         />
                         <Input
                             placeholder="Data Target Mapping Value (e.g., 100% Cotton)"
                             value={attr.value}
-                            onChange={(e) => setAttributes(attributes.map(a => a.id === attr.id ? { ...a, value: e.target.value } : a))}
+                            onChange={(e) => setAttributes(attributes.map((a: any) => a.id === attr.id ? { ...a, value: e.target.value } : a))}
                             className="h-9 text-xs"
                         />
-                        <Button variant="ghost" size="icon" className="h-9 w-9 text-neutral-400 hover:text-rose-600 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800 rounded-md shrink-0" onClick={() => setAttributes(attributes.filter(a => a.id !== attr.id))}>
+                        <Button variant="ghost" size="icon" className="h-9 w-9 text-neutral-400 hover:text-rose-600 border border-transparent hover:border-neutral-200 dark:hover:border-neutral-800 rounded-md shrink-0" onClick={() => setAttributes(attributes.filter((a: any) => a.id !== attr.id))}>
                             <X className="h-4 w-4" />
                         </Button>
                     </div>

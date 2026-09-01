@@ -11,9 +11,7 @@ interface PageLoaderProps {
     fullScreen?: boolean;
 }
 
-// ==========================================
-// MAIN UNIVERSAL PAGE LOADER
-// ==========================================
+
 export default function ECommercePageLoader({
     variant = "grid",
     fullScreen = true,
@@ -39,9 +37,6 @@ export default function ECommercePageLoader({
     );
 }
 
-// ==========================================
-// 1. STOREFRONT / CATALOG GRID SKELETON
-// ==========================================
 function CatalogGridSkeleton() {
     return (
         <div className="space-y-6">
@@ -82,9 +77,7 @@ function CatalogGridSkeleton() {
     );
 }
 
-// ==========================================
-// 2. PRODUCT DETAIL PAGE SKELETON
-// ==========================================
+
 function ProductDetailSkeleton() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -132,9 +125,6 @@ function ProductDetailSkeleton() {
     );
 }
 
-// ==========================================
-// 3. CHECKOUT & CART SKELETON
-// ==========================================
 function CheckoutCartSkeleton() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -181,9 +171,7 @@ function CheckoutCartSkeleton() {
     );
 }
 
-// ==========================================
-// 4. ORDERS LIST SKELETON
-// ==========================================
+
 function OrderListSkeleton() {
     return (
         <div className="space-y-4">
@@ -212,9 +200,6 @@ function OrderListSkeleton() {
     );
 }
 
-// ==========================================
-// 5. DEFAULT FALLBACK SKELETON
-// ==========================================
 function DefaultGeneralSkeleton() {
     return (
         <div className="space-y-6">
@@ -228,9 +213,6 @@ function DefaultGeneralSkeleton() {
     );
 }
 
-// ==========================================
-// HEADER SKELETON
-// ==========================================
 function HeaderSkeleton() {
     return (
         <header className="sticky top-0 z-40 w-full bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60">

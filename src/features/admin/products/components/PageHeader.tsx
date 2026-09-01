@@ -1,4 +1,4 @@
-import { ArrowLeft, Eye, Heading1, Heading2, ImageIcon, Loader, Save, SaveAll } from "lucide-react";
+import { ArrowLeft, Eye, Loader, Save, } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import { PATHS } from "../../../../routes/paths";
 import { Link, useNavigate } from "react-router-dom";
