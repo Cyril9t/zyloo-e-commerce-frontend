@@ -1,12 +1,12 @@
-import * as React from "react";
+
 import {
-    Image as ImageIcon,
+
     Settings2,
     Calendar as CalendarIcon,
     Info
 } from "lucide-react";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../../components/ui/card";
 
 import { Label } from "../../../../components/ui/label";
 
@@ -20,7 +20,7 @@ import { Switch } from "../../../../components/ui/switch";
 import { Popover, PopoverContent, PopoverTrigger } from "../../../../components/ui/popover";
 
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../../components/ui/tooltip";
+import { TooltipContent, TooltipTrigger } from "../../../../components/ui/tooltip";
 import { Calendar } from "../../../../components/ui/calendar";
 
 

@@ -3,7 +3,7 @@ import { Button } from "../../../../components/ui/button";
 import DataTable from "../../shared/components/DataTable";
 import ConfirmDialog from "../../shared/components/ConfirmDialog";
 import { useAuth } from "../../../../context/AuthProvider";
-import { Link, useParams } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import api from "../../../../lib/api";
 import { toast } from "sonner";
 
@@ -20,8 +20,8 @@ export default function ProductTable() {
 
     const handleDelete = async (id: string) => {
         try {
-            const deletProduct = await api.delete(`/product/delete-product/${id}`)
-            const res = await deletProduct.data;
+            await api.delete(`/product/delete-product/${id}`)
+
 
             toast.success("Product Deleted Successfully")
         } catch (error) {

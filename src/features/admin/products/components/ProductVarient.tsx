@@ -1,22 +1,21 @@
 import * as React from "react";
 import {
-    Image as ImageIcon,
+
     Plus,
     Trash2,
-    Calendar as CalendarIcon,
+
 
 } from "lucide-react";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../../components/ui/card";
 import { Input } from "../../../../components/ui/input";
 import { Label } from "../../../../components/ui/label";
 import { Button } from "../../../../components/ui/button";
 import { Badge } from "../../../../components/ui/badge";
-import type { ProductVariantOption } from "../pages/AddProductPage";
 
 interface VariantsProps {
-    variants: ProductVariantOption[];
-    setVariants: React.Dispatch<React.SetStateAction<ProductVariantOption[]>>;
+    variants: any;
+    setVariants: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export default function ProductVariants({ variants, setVariants }: VariantsProps) {
@@ -32,9 +31,9 @@ export default function ProductVariants({ variants, setVariants }: VariantsProps
                 </Button>
             </CardHeader>
             <CardContent className="p-6 pt-0 space-y-4">
-                {variants.map((variant) => (
+                {variants.map((variant: any) => (
                     <div key={variant.id} className="p-4 border border-neutral-200/60 dark:border-neutral-800/60 rounded-lg bg-neutral-50/50 dark:bg-neutral-900/40 relative group animate-in fade-in duration-200">
-                        <button type="button" onClick={() => setVariants(variants.filter(v => v.id !== variant.id))} className="absolute top-3 right-3 p-1 text-neutral-400 hover:text-rose-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button type="button" onClick={() => setVariants(variants.filter((v: any) => v.id !== variant.id))} className="absolute top-3 right-3 p-1 text-neutral-400 hover:text-rose-600 opacity-0 group-hover:opacity-100 transition-opacity">
                             <Trash2 className="h-3.5 w-3.5" />
                         </button>
 
@@ -46,7 +45,7 @@ export default function ProductVariants({ variants, setVariants }: VariantsProps
                             <div className="space-y-1.5 sm:col-span-3">
                                 <Label className="text-xs font-semibold text-neutral-500">Construct Tokens (Values Array)</Label>
                                 <div className="flex flex-wrap gap-1 p-1.5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-md min-h-9 items-center">
-                                    {variant.values.map((v, i) => (
+                                    {variant.values.map((v: any, i: any) => (
                                         <Badge key={i} className="text-[10px] font-bold tracking-tight rounded-xs bg-neutral-900 dark:bg-neutral-800 text-white dark:text-neutral-200 px-2 py-0.5">{v}</Badge>
                                     ))}
                                     <span className="text-[10px] text-neutral-400 font-medium px-2 italic">Read-only schema</span>

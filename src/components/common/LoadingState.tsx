@@ -1,15 +1,7 @@
-
-
-// ==========================================
-// SHADCN/UI PRIMITIVES (Mocked Paths)
-// ==========================================
 import { Card, CardContent, CardHeader } from "../../components/ui/card";
 import { Skeleton } from "../../components/ui/skeleton";
 import { Separator } from "../../components/ui/separator";
 
-// ==========================================
-// ORDER PAGE SKELETON / LOADING STATE
-// ==========================================
 export default function OrderPageSkeleton() {
     return (
         <div className="w-full min-h-screen bg-neutral-50/60 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased">
@@ -94,10 +86,10 @@ export default function OrderPageSkeleton() {
 
                     </div>
 
-                    {/* RIGHT COLUMN: Financial & Delivery Summary (5/12) */}
+
                     <div className="lg:col-span-5 space-y-6">
 
-                        {/* Financial Totals Skeleton */}
+
                         <Card className="border border-neutral-200/60 dark:border-neutral-800/60 bg-white dark:bg-neutral-900/20">
                             <CardHeader className="p-4 sm:p-6 pb-4 border-b border-neutral-100 dark:border-neutral-800/60">
                                 <Skeleton className="h-3 w-32 bg-neutral-200/80 dark:bg-neutral-800" />
@@ -117,7 +109,7 @@ export default function OrderPageSkeleton() {
                             </CardContent>
                         </Card>
 
-                        {/* Shipping & Payment Meta Skeleton */}
+
                         <Card className="border border-neutral-200/60 dark:border-neutral-800/60 bg-white dark:bg-neutral-900/20">
                             <CardContent className="p-4 sm:p-6 space-y-5">
                                 {[1, 2, 3].map((i) => (

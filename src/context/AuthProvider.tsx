@@ -3,11 +3,8 @@ import { validate } from "../lib/auth/auth";
 import type { ReactNode } from "react";
 import type { ProductResponse } from "../features/products/pages/ProductListingPage";
 import { allProducts } from "../lib/actions";
-import type { productInfoData } from "../features/admin/products/types/product";
 import type { Products } from "../features/products/types/Product";
 import { cart } from "../lib/actions";
-import { date } from "zod/v3";
-import { el } from "zod/v4/locales";
 
 interface User {
     id: string;

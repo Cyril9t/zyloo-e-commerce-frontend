@@ -1,26 +1,13 @@
-import * as React from "react";
-import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { Tooltip, TooltipProvider, } from "../../../../components/ui/tooltip";
 import PageHeader from "../components/PageHeader";
 import ProductInformation from "../components/ProductInformation";
 import ProductImages from "../components/ProductImage";
-import PricingInventory from "../components/ProductPrice";
-import ProductSEO from "../components/ProdutSEO";
 import AdvancedAccordion from "../components/AdvanceCordination";
 import ActionButtons from "../components/ActionButton";
 import { useForm } from "react-hook-form";
 import { productInfoSchema, type productInfoData } from "../types/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
-interface ProductInfo {
-    name: string,
-    summary: string,
-    description: string,
-    category: string,
-    tag: string
-}
 
 export type ImagePreview = {
     file: File;

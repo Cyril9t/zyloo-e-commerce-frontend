@@ -1,4 +1,4 @@
-import { Bell, Search } from "lucide-react";
+import { Bell, } from "lucide-react";
 import { SidebarTrigger } from "../../../../components/ui/sidebar";
 import { Button } from "../../../../components/ui/button";
 import SearchBar from "../../../../components/common/searchBar";

@@ -1,19 +1,7 @@
 import {
-    ArrowLeft,
-    Eye,
-    Save,
-    UploadCloud,
-    X,
-    Image as ImageIcon,
     Plus,
-    Trash2,
-    Settings2,
-    Globe,
     FileDown,
-    Link2,
     Layers,
-    Calendar as CalendarIcon,
-
 } from "lucide-react";
 
 import { Card } from "../../../../components/ui/card";

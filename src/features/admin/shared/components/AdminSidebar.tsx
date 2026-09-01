@@ -1,22 +1,21 @@
-"use client";
 
 import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
-    SidebarGroupAction,
+
     SidebarGroupContent,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarMenuSkeleton,
+
 } from "../../../../components/ui/sidebar";
 import { Link } from "react-router-dom";
-import { LayoutDashboard, Package, Settings, ShoppingBag, ShoppingCart, SquareArrowRightEnterIcon, Tags, User, User2 } from "lucide-react";
+import { LayoutDashboard, Package, Settings, ShoppingCart, SquareArrowRightEnterIcon, Tags, User, User2 } from "lucide-react";
 import type { ComponentType } from "react";
-import { toast } from "sonner";
+
 import { PATHS } from "../../../../routes/paths";
 import Logo from "../../../../components/common/Logo";
 export interface ItemsTypes {

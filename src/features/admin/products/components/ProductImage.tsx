@@ -1,15 +1,14 @@
-import * as React from "react";
+
 import {
 
     UploadCloud,
     X,
     Image as ImageIcon,
-    Calendar as CalendarIcon,
+
 
 } from "lucide-react";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../../components/ui/card";
-import { Button } from "../../../../components/ui/button";
+import { CardContent, CardDescription, CardHeader, CardTitle } from "../../../../components/ui/card";
 import { Progress } from "../../../../components/ui/progress";
 import { cn } from "../../../../utils/cn";
 import type { ChangeEvent } from "react";

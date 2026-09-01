@@ -1,7 +1,5 @@
-import * as React from "react";
+
 import {
-    Image as ImageIcon,
-    Calendar as CalendarIcon,
     MoveUp,
 } from "lucide-react";
 

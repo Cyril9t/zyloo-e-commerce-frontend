@@ -8,8 +8,7 @@ import {
     ChevronRight,
     SlidersHorizontal,
     UserPlus,
-    UserCheck,
-    UserX,
+
     Shield,
     Mail,
     Lock

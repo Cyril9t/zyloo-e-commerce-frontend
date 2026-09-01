@@ -1,28 +1,12 @@
-import { Eye } from "lucide-react";
-
-import { Button } from "../../../../components/ui/button";
 
 import DataTable from "../../../../features/admin/shared/components/DataTable";
-import UserStatusBadge from "./UserStatusBadge";
 
-import { adminUsers } from "../../../../mock/adminUsers";
 
-import { getAllUser, type users } from "../../../../context/userContext";
-import { data } from "react-router-dom";
+
+
+import { getAllUser } from "../../../../context/userContext";
+
 import { useEffect, useState } from "react";
-
-interface userType {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    role: string
-}
-
-
-interface usersArray {
-    data: []
-}
 
 export default function UserTable() {
     const { data } = getAllUser()

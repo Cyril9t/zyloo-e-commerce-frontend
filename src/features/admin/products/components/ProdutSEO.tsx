@@ -1,12 +1,12 @@
 
 import {
 
-    Image as ImageIcon,
+
     Globe,
 
     Link2,
 
-    Calendar as CalendarIcon,
+
 
 } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
