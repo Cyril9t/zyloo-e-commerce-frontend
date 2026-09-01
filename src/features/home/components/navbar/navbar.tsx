@@ -74,7 +74,7 @@ export default function Navbar() {
                 error: "Operation Failed Please Try again"
             })
             const res = await SignOut
-            console.log(res);
+
             setUser(null);
             navigate(PATHS.auth.login, { replace: true })
 

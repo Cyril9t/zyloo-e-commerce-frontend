@@ -88,7 +88,7 @@ export default function ProductDetailsPage() {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        console.log(id)
+
 
         const productDetail = async () => {
 

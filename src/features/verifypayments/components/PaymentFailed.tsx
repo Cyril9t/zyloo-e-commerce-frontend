@@ -53,9 +53,9 @@ export default function PaymentFailed({ reasons }: any) {
 
 
                     <div className="space-y-3 pt-2">
-                        <Link to={PATHS.customer.checkout}>
+                        <Link to={PATHS.customer.cart}>
                             <Button
-                                onClick={() => window.location.href = '/checkout'}
+
                                 className="w-full"
                             >
                                 <RefreshCw className="w-4 h-4" />

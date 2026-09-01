@@ -29,7 +29,7 @@ export default function OrdersPage() {
             }
         }
         orders()
-        console.log(data)
+
     }, [])
 
     if (isMutating) return <OrderPageSkeleton />

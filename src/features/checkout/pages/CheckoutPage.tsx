@@ -74,7 +74,7 @@ export default function CheckoutPage() {
 
             if (order?.Message === "Payment initialized") {
                 window.location.href = order?.authorization_url;
-                console.log(order.authorization_url)
+
                 return
             }
 
@@ -274,7 +274,7 @@ export default function CheckoutPage() {
 
                         <Button disabled={loading} className="w-full h-12 text-xs font-bold uppercase tracking-wider bg-neutral-950 dark:bg-neutral-50 text-white dark:text-neutral-950 hover:opacity-90 shadow-sm transition-opacity">
 
-                            Place Order — ${total.toFixed(2)}
+                            Place Order — ₦{total.toFixed(2)}
                         </Button>
 
 

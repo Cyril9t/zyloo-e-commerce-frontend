@@ -72,8 +72,8 @@ function ProductItem() {
                 }
             })
 
-            const resData = await res.data
-            console.log(resData)
+
+
             setIsloading(false)
             setImages([])
             reset()

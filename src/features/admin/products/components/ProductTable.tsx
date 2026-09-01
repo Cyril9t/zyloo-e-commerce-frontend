@@ -22,7 +22,7 @@ export default function ProductTable() {
         try {
             const deletProduct = await api.delete(`/product/delete-product/${id}`)
             const res = await deletProduct.data;
-            console.log(res)
+
             toast.success("Product Deleted Successfully")
         } catch (error) {
             console.log("Internal Error", error)

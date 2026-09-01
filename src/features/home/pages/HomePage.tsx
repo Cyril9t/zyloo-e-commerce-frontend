@@ -36,6 +36,7 @@ function HomePage() {
             <div className='block md:hidden  absolute top-0 bottom-0 right-0 left-0  w-full h-full'>
                 <CursorRingField colors={!isDark ? ["#000000"] : ["oklch(0.145 0 0)", "oklch(0.145 0 0)"]} background={isDark ? 'oklch(0.145 0 0)' : 'oklch(1 0 0)'} dotSize={300} />
             </div>
+
             <HeroSection />
 
             <CategoriesSection />

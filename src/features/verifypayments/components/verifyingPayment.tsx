@@ -17,9 +17,8 @@ export default function PaymentVerification() {
             try {
                 const Verify = await api.post("/Payment/verifyPayment", { reference: reference })
                 const res = await Verify.data;
-                const s = Verify.status;
-                console.log(res)
-                console.log(s)
+
+
                 const message = "Payment successful"
 
                 if (res.Message === message) {
@@ -29,7 +28,7 @@ export default function PaymentVerification() {
                 }
 
             } catch (error: any) {
-                console.log(error)
+
                 setReason(error?.response?.data?.Message)
                 setVerify(false)
                 toast.error("Payment failed")

@@ -15,6 +15,7 @@ import { authLogin } from "../../../lib/auth/auth";
 import { PATHS } from "../../../routes/paths";
 import { toast } from "sonner";
 import { useAuth } from "../../../context/AuthProvider";
+import api from "../../../lib/api";
 
 export default function LoginForm() {
     const { setUser } = useAuth();
@@ -48,6 +49,10 @@ export default function LoginForm() {
 
 
         }
+    }
+
+    const Oauth20 = async () => {
+        window.location.href = "http://localhost:8000/auth/google";
     }
 
     return (
@@ -152,6 +157,7 @@ export default function LoginForm() {
                 <Button
                     variant="outline"
                     type="button"
+                    onClick={Oauth20}
                 >
                     Continue with Google
                 </Button>
