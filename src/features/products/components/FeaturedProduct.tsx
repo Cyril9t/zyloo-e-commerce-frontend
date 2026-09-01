@@ -2,7 +2,7 @@ import ProductCard from "../../products/components/ProductCard";
 import { useAuth } from "../../../context/AuthProvider";
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
-import { MoveRightIcon, Zap } from "lucide-react";
+import { MoveRightIcon } from "lucide-react";
 import { PATHS } from "../../../routes/paths";
 
 

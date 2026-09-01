@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { CheckCircle2, ArrowRight, PackageCheck, ShoppingBag, Download, Sparkles } from 'lucide-react';
 
 export default function PaymentVerified() {

@@ -1,12 +1,11 @@
-import { Star, ShoppingCart, Heart, Eye, View, ViewIcon, LucideView } from "lucide-react";
+import { Heart, Eye, LucideView } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import type { Products } from "../types/Product";
-import { createCart } from "../../../lib/actions";
-import { PATHS } from "../../../routes/paths";
+
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { number } from "zod";
+
 
 
 interface ProductCardProps {

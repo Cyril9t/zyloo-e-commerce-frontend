@@ -1,5 +1,5 @@
 
-import { Search, Star, SlidersHorizontal, RotateCcw, X, ArrowUpDown, Check } from "lucide-react";
+import { Star, SlidersHorizontal, RotateCcw, X, ArrowUpDown, } from "lucide-react";
 import ProductGrid from "../components/ProductGrid";
 import SearchBar from "../../../components/common/searchBar";
 import { useEffect, useMemo, useState } from "react";

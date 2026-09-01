@@ -1,16 +1,11 @@
-import React from 'react';
-import { XCircle, RefreshCw, CreditCard, AlertCircle, HelpCircle, ArrowLeft } from 'lucide-react';
+
+import { XCircle, RefreshCw, AlertCircle, HelpCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../../routes/paths';
 
 export default function PaymentFailed({ reasons }: any) {
-    const failureDetails = {
-        errorCode: "ERR_CARD_DECLINED",
-        reason: "Your card was declined due to insufficient funds or bank security flags.",
-        paymentMethod: "Visa ending in 4242",
-        amountAttempted: "$129.00"
-    };
+
 
     return (
         <div className="">
