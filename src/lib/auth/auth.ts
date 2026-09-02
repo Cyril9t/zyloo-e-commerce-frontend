@@ -2,7 +2,6 @@ import api from "../api";
 import useSWRMutation from "swr/mutation";
 import { registerSchema, loginSchema } from "../schema/validate";
 import z from "zod";
-import axios from "axios";
 
 const userReg = async (url: string, { arg }: { arg: z.infer<typeof registerSchema> }) => {
     const res = await api.post(url, arg)
@@ -15,12 +14,12 @@ export const authReg = () => {
 
 
 const login = async (url: string, { arg }: { arg: z.infer<typeof loginSchema> }) => {
-    const res = await axios.post(url, arg)
+    const res = await api.post(url, arg)
     return res.data
 }
 
 export const authLogin = () => {
-    return useSWRMutation('https://zyloo-api-v1.onrender.com/auth/login', login);
+    return useSWRMutation('/auth/login', login);
 }
 
 const trigger = async (url: string) => {
