@@ -19,7 +19,7 @@ import { useAuth } from "../../../context/AuthProvider";
 
 export default function LoginForm() {
     const { setUser } = useAuth();
-    const { trigger } = authLogin()
+    const { trigger, isMutating } = authLogin()
     const [showPassword, setShowPassword] = useState(false);
 
     const { handleSubmit, register, formState: { errors } } = useForm<loginData>({
@@ -139,6 +139,7 @@ export default function LoginForm() {
                 type="submit"
                 className="w-full"
                 size="lg"
+                disabled={isMutating}
             >
                 Sign In
             </Button>
