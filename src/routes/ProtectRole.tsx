@@ -13,9 +13,14 @@ export default function AdminRoute() {
         return <Navigate to={PATHS.auth.login} replace />;
     }
 
-    if (user.role !== "ADMIN") {
+    if (user.role === "ADMIN") {
+        return <Navigate to="/admin" replace />;
+    }
+
+    if (user.role === "CUSTOMER") {
         return <Navigate to={PATHS.customer.home} replace />;
     }
+
 
     return <Outlet />;
 }
