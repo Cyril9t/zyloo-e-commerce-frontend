@@ -20,8 +20,8 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
         title: "SonicWave Pro",
         subtitle: "Wireless Noise-Cancelling Headphones",
         description: "Experience pure audio bliss with hybrid active noise cancellation and up to 60 hours of playback time.",
-        price: "$249.00",
-        originalPrice: "$299.00",
+        price: "₦49000.00",
+        originalPrice: "₦75000.00",
         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
         ctaText: "Shop Sound"
     },
@@ -31,7 +31,7 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
         title: "Chrono Classic v4",
         subtitle: "Minimalist Automatic Timepiece",
         description: "Crafted with surgical-grade stainless steel and scratch-resistant sapphire crystal. Waterproof up to 100m.",
-        price: "$580.00",
+        price: "₦80000.00",
         image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
         ctaText: "Explore Craft"
     },
@@ -41,8 +41,8 @@ const PREMIUM_PRODUCTS: ProductSlide[] = [
         title: "AeroStride One",
         subtitle: "Next-Gen Performance Running Shoes",
         description: "Featuring engineered mesh for breathability and our proprietary nitro-infused foam for maximum energy return.",
-        price: "$145.00",
-        originalPrice: "$175.00",
+        price: "₦55000.00",
+        originalPrice: "₦75000.00",
         image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
         ctaText: "Gear Up"
     }
