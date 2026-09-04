@@ -1,9 +1,11 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { PATHS } from "./paths";
 
 export default function AdminRoute() {
+
     const { user, isLoading } = useAuth();
+
 
     if (isLoading) {
         return <h1>Loading...</h1>;
@@ -14,7 +16,8 @@ export default function AdminRoute() {
     }
 
     if (user.role === "ADMIN") {
-        return <Navigate to="/admin" replace />;
+
+        return <Navigate to={PATHS.admin.dashboard} />
     }
 
     if (user.role === "CUSTOMER") {
