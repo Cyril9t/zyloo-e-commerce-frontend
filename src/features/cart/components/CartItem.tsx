@@ -11,7 +11,7 @@ import ConfirmDialog from "../../admin/shared/components/ConfirmDialog";
 
 
 interface CartItemCardProps {
-    items: Data[]
+    items: Data[] | [];
     onUpdateQuantity: (id: string, delta: number) => void;
     onRemove: (id: string) => void;
 }
