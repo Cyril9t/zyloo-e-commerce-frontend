@@ -42,7 +42,7 @@ export type Data = {
 }
 
 interface carts {
-    cart: [] | Data[]
+    cart: Data[]
 }
 
 interface AuthContextType {
