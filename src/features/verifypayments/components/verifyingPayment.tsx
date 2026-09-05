@@ -20,7 +20,7 @@ export default function PaymentVerification() {
 
 
                 const message = "Payment successful"
-                console.log(res);
+
                 if (res.Message === message) {
                     toast.success("Payment Verified")
                     navigate(`/order-success/${res?.Order?.id}`, { replace: true })
