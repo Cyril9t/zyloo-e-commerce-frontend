@@ -20,7 +20,7 @@ export default function PaymentVerification() {
 
 
                 const message = "Payment successful"
-
+                console.log(res);
                 if (res.Message === message) {
                     toast.success("Payment Verified")
                     navigate(`/order-success/${res?.Order?.id}`, { replace: true })
@@ -41,15 +41,15 @@ export default function PaymentVerification() {
 
     return (
         <div className="w-full">
-            {verify ? (<div className="w-full bg-white rounded-2xl shadow-xl border border-slate-100 transition-all duration-300">
+            {verify ? (<div className="w-full px-0 md:px-10  rounded-2xl shadow-xl border-2 border-border transition-all duration-300">
 
                 {/* Top Header & Status Graphic */}
-                <div className="p-8 text-center bg-linear-to-b from-slate-50/50 to-white">
+                <div className="p-8 text-center ">
                     <div className="relative inline-flex items-center justify-center mb-6">
                         {status !== 'success' ? (
                             <div className="relative">
                                 {/* Glowing Background Pulse */}
-                                <div className="absolute inset-0 rounded-full bg-indigo-500/20 animate-ping" />
+                                <div className="absolute inset-0 rounded-full animate-ping" />
                                 <div className="relative w-20 h-20 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                                     <Loader2 className="w-10 h-10 text-indigo-600 animate-spin" />
                                 </div>
@@ -61,13 +61,13 @@ export default function PaymentVerification() {
                         )}
                     </div>
 
-                    <h2 className="text-2xl font-bold text-slate-800 tracking-tight">
+                    <h2 className="text-2xl font-bold tracking-tight">
                         {status === 'Verifying' && 'Verifying Payment...'}
 
                         {status === 'success' && 'Payment Confirmed!'}
                     </h2>
 
-                    <p className="text-sm text-slate-500 mt-2">
+                    <p className="text-sm opacity-50 mt-2">
                         {status !== 'success'
                             ? 'Please do not refresh or close this page.'
                             : 'Thank you for your purchase! Your order is being prepared.'}
@@ -76,8 +76,8 @@ export default function PaymentVerification() {
 
                 {/* Progress Timeline */}
                 <div className="px-8 pb-6">
-                    <div className="flex items-center justify-between text-xs font-medium text-slate-400 border-t border-b border-slate-100 py-3">
-                        <span className={status === 'Verifying' ? 'text-indigo-600 font-semibold' : 'text-slate-500'}>
+                    <div className="flex items-center justify-between text-xs font-medium  border-t border-b border-slate-100 py-3">
+                        <span className={status === 'Verifying' ? 'text-indigo-600 font-semibold' : 'text-slate-600'}>
                             1. Verification
                         </span>
                         <span>&rarr;</span>
