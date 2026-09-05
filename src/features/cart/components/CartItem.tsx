@@ -72,7 +72,7 @@ export default function CartItemCard({ items, onUpdateQuantity, onRemove }: Cart
                                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                     <div>
                                         <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground/90 block mb-0.5">
-                                            {item?.productItem?.product?.tags.map((t) => (t?.name))}
+                                            {item?.productItem?.product?.tags?.map((t) => (t?.name))}
                                         </span>
                                         <h3 className="text-sm font-medium text-foreground tracking-tight leading-snug group-hover:text-primary transition-colors">
                                             {item?.productItem?.product?.name}

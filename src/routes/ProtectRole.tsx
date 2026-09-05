@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { PATHS } from "./paths";
+import ECommercePageLoader from "../components/common/UniversalLoadingState";
 
 export default function AdminRoute() {
 
@@ -8,7 +9,7 @@ export default function AdminRoute() {
 
 
     if (isLoading) {
-        return <h1>Loading...</h1>;
+        return <ECommercePageLoader variant="grid" fullScreen={true} />;
     }
 
     if (!user) {

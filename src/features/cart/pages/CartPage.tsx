@@ -39,7 +39,7 @@ export default function CartPage() {
     const shipping = subtotal > 250 || subtotal === 0 ? 0 : 20;
     const tax = Math.round(subtotal * 0.08);
 
-    if (cartMutating) return <ECommercePageLoader variant="detail" fullScreen={false} />
+    if (cartMutating) return <ECommercePageLoader variant="list" fullScreen={false} />
 
     return (
         <div className="w-full min-h-screen bg-background text-foreground antialiased selection:bg-neutral-200">

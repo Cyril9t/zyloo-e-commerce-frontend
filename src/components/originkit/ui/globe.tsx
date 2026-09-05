@@ -191,7 +191,7 @@ interface GlobeProps {
 }
 
 export default function Globe({
-    speed = 2,
+    speed = 5,
     smoothing = 8,
     dots = { color: "#ffffff", size: 5, density: 8, allDots: false },
     fill = "dots",
