@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner";
 import { useState } from "react";
+import { Separator } from "../../../components/ui/separator";
 
 
 
@@ -43,6 +44,11 @@ export default function RegisterForm() {
             console.log(error)
         }
     }
+
+    const Oauth20 = async () => {
+        window.location.href = "https://zyloo-api-v1.onrender.com/auth/google";
+    }
+
     return (
         <form onSubmit={handleSubmit(submit)} className="space-y-3">
             <div className="grid gap-2 md:grid-cols-2">
@@ -153,6 +159,29 @@ export default function RegisterForm() {
             >
                 Create Account
             </Button>
+
+            <div className="relative">
+                <Separator />
+
+                <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-background px-3 text-sm text-muted-foreground">
+                    OR
+                </span>
+            </div>
+
+            {/* Social */}
+
+            <div className="grid gap-3">
+                <Button
+                    disabled={checkbox}
+                    variant="outline"
+                    type="button"
+                    onClick={Oauth20}
+                >
+                    Continue with Google
+                </Button>
+
+
+            </div>
 
             <p className="text-center text-sm text-muted-foreground">
                 Already have an account?{" "}

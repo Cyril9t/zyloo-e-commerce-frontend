@@ -52,7 +52,7 @@ export default function LoginForm() {
     }
 
     const Oauth20 = async () => {
-        window.location.href = "http://localhost:8000/auth/google";
+        window.location.href = "https://zyloo-api-v1.onrender.com/auth/google";
     }
 
     return (
