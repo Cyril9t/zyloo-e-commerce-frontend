@@ -28,6 +28,7 @@ function ProductItem() {
         const selectedFiles = Array.from(e.target.files || []);
 
         const preview = selectedFiles.map((file) => ({
+            id: crypto.randomUUID(),
             file,
             preview: URL.createObjectURL(file),
         }))
@@ -62,7 +63,7 @@ function ProductItem() {
                 return toast.warning("No Image selected for this productItem")
             }
 
-            await api.post(`/product/product-item/${id}`, formData, {
+            const resp = await api.post(`/product/product-item/${id}`, formData, {
                 onUploadProgress: (progressEvent) => {
                     Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 1))
 
@@ -75,11 +76,11 @@ function ProductItem() {
             setImages([])
             reset()
 
-            toast.success("Item Added to the Product created")
+            toast.success((await resp.data.Message))
 
-        } catch (error) {
+        } catch (error: any) {
             setIsloading(false)
-            toast.error("Operation failed")
+            toast.error(error?.response?.data?.Message)
             console.log(error)
         }
     }
@@ -242,6 +243,10 @@ function ProductItem() {
                                             <div className="absolute inset-0 bg-neutral-950/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-2">
                                                 <div className="flex justify-end">
                                                     <button
+                                                        onClick={() => {
+                                                            const deleteImage = images.filter((imgs) => (imgs.id !== img.id))
+                                                            setImages(deleteImage)
+                                                        }}
                                                         type="button"
                                                         className="p-1.5 bg-white/90 dark:bg-neutral-900/90 rounded-md text-neutral-600 dark:text-neutral-300 hover:text-rose-600 dark:hover:text-rose-400 shadow-sm transition-colors backdrop-blur-xs"
                                                     >

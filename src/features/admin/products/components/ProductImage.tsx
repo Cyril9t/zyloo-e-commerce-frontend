@@ -17,7 +17,7 @@ import type { ChangeEvent } from "react";
 
 
 
-export default function ProductImages({ uploaded, uploadProgress, setImages, images }: any) {
+export default function ProductImages({ deleteImage, uploaded, uploadProgress, setImages, images }: any) {
 
     const fileUpload = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -75,7 +75,10 @@ export default function ProductImages({ uploaded, uploadProgress, setImages, ima
                             {/* Action Overlay Strip */}
                             <div className="absolute inset-0 bg-neutral-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-2">
                                 <div className="flex justify-end">
-                                    <button type="button" className="p-1 bg-white/90 rounded-md text-neutral-500 hover:text-rose-600 shadow-xs transition-colors backdrop-blur-xs">
+                                    <button onClick={() => {
+
+                                        deleteImage(img.id)
+                                    }} type="button" className="p-1 bg-white/90 rounded-md text-neutral-500 hover:text-rose-600 shadow-xs transition-colors backdrop-blur-xs">
                                         <X className="h-3.5 w-3.5" />
                                     </button>
                                 </div>

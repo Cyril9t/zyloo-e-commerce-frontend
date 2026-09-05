@@ -47,11 +47,11 @@ export default function PageHeader({ uploaded, setUploaded, setUploadProgress, s
             setUploaded(true)
             reset()
 
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            console.log(error?.response?.data?.Message)
             setIsloading(false)
             setUploaded(false)
-            toast.error("Server Error")
+            toast.error(error?.response?.data?.Message)
         } finally {
             if (uploaded) {
 
@@ -68,8 +68,8 @@ export default function PageHeader({ uploaded, setUploaded, setUploadProgress, s
                 <div ><Loader size={30} /></div>
                 <div>Uploading in Progress....</div>
             </div> : (
-                <div className="w-full gap-70 text-background flex ">
-                    <div className="w-full flex items-center gap-4 grow text-start">
+                <div className="w-full flex flex-col gap-4 text-background md:flex-row md:items-center md:justify-between">
+                    <div className="w-full flex min-w-0 items-center gap-4 text-start">
                         <Link to={PATHS.admin.products}>
                             <Button variant="secondary" size="icon" className="h-9 w-9  shadow-2xs">
                                 <ArrowLeft className="h-4 w-4 " />
@@ -78,7 +78,7 @@ export default function PageHeader({ uploaded, setUploaded, setUploadProgress, s
                         <div>
 
 
-                            <h1 className="text-xl font-semibold tracking-tight   flex items-center gap-2">
+                            <h1 className="text-xl font-semibold tracking-tight flex items-center gap-2">
                                 Add New Product
                             </h1>
 
@@ -86,16 +86,16 @@ export default function PageHeader({ uploaded, setUploaded, setUploadProgress, s
                         </div>
                     </div>
 
-                    <div className=" flex items-center gap-2 text-end">
-                        <Button variant="secondary" size="sm" className="h-9 text-xs font-semibold  shadow-2xs">
+                    <div className="flex w-full flex-wrap items-center gap-2 md:w-auto md:justify-end">
+                        <Button variant="secondary" size="sm" className="h-9 flex-1 text-xs font-semibold shadow-2xs sm:flex-none">
                             <Save className="h-3.5 w-3.5 mr-2 " />
                             Save Draft
                         </Button>
-                        <Button variant="secondary" size="sm" className="h-9 text-xs font-semibold  shadow-2xs">
+                        <Button variant="secondary" size="sm" className="h-9 flex-1 text-xs font-semibold shadow-2xs sm:flex-none">
                             <Eye className="h-3.5 w-3.5 mr-2" />
                             Preview
                         </Button>
-                        <Button variant={"default"} size="sm" onClick={handleSubmit(submitInfo)} className="h-9 text-xs font-bold uppercase tracking-wider px-4  hover:opacity-90 transition-opacity shadow-sm">
+                        <Button variant={"default"} size="sm" onClick={handleSubmit(submitInfo)} className="h-9 w-full px-4 text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity shadow-sm sm:w-auto">
                             Publish Product
                         </Button>
 

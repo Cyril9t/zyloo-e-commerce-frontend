@@ -6,10 +6,15 @@ import { useAuth } from "../../../../context/AuthProvider";
 import { Link, } from "react-router-dom";
 import api from "../../../../lib/api";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 export default function ProductTable() {
     const { products } = useAuth()
+    const [product, setProduct] = useState<any>([])
 
+    useEffect(() => {
+        setProduct(products)
+    }, [])
     const cate = (product: any) => {
         const category = product.length === 1
             ? product?.map((item: any) => item.name)
@@ -20,13 +25,13 @@ export default function ProductTable() {
 
     const handleDelete = async (id: string) => {
         try {
-            await api.delete(`/product/delete-product/${id}`)
+            const deleteItem = await api.delete(`/product/delete-product/${id}`)
+            toast.success((await deleteItem.data.Message))
+            setProduct(product.filter((p: any) => (p.id !== id)))
 
-
-            toast.success("Product Deleted Successfully")
-        } catch (error) {
-            console.log("Internal Error", error)
-            toast.error("Server Error")
+        } catch (error: any) {
+            console.log(error.response.data.Message)
+            toast.error(error.response.data.Message)
         }
     }
 
@@ -44,7 +49,7 @@ export default function ProductTable() {
                 </thead>
 
                 <tbody>
-                    {products.map((product) => (
+                    {product.map((product: any) => (
                         <tr
                             key={product.id}
                             className="border-t"
@@ -66,7 +71,7 @@ export default function ProductTable() {
                             </td>
 
                             <td className="p-4">
-                                ₦{product?.productItems?.map((p) => (p.price))}
+                                ₦{product?.productItems?.map((p: any) => (p.price))}
                             </td>
 
 
