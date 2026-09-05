@@ -111,7 +111,7 @@ export default function Navbar() {
                 <div className="fixed w-full top-0  z-70 flex h-18 items-center justify-between border-b bg-background/40 px-4 backdrop-blur-lg ">
                     <Logo />
 
-                    <SearchBar />
+                    <SearchBar navigateToProducts />
 
                     <NavbarLinks />
 

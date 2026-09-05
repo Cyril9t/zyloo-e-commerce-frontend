@@ -3,6 +3,7 @@ import { Star, SlidersHorizontal, RotateCcw, X, ArrowUpDown, } from "lucide-reac
 import ProductGrid from "../components/ProductGrid";
 import SearchBar from "../../../components/common/searchBar";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ECommercePageLoader from "../../../components/common/UniversalLoadingState";
 import { cn } from "../../../utils/cn";
 import type { Products } from "../types/Product";
@@ -35,12 +36,21 @@ export interface ProductResponse {
 }
 
 export default function ProductListingPage() {
-    const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [filters, setFilters] = useState<FilterState>(() => ({
+        ...INITIAL_FILTERS,
+        search: searchParams.get("search") ?? "",
+    }));
     const [loading, setLoading] = useState<boolean>(false);
     const [filterMenuOpen, setFilterMenuOpen] = useState<boolean>(false);
     const { products, hangTight } = useAuth()
 
+    const searchQuery = searchParams.get("search") ?? filters.search;
 
+    const clearFilters = () => {
+        setFilters(INITIAL_FILTERS);
+        setSearchParams({}, { replace: true });
+    };
 
 
     useEffect(() => {
@@ -84,7 +94,7 @@ export default function ProductListingPage() {
     const filteredProducts = useMemo(() => {
         return products
             .filter((product) => {
-                if (filters.search && !product.name.toLowerCase().includes(filters.search.toLowerCase())) {
+                if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
                     return false;
                 }
 
@@ -126,7 +136,7 @@ export default function ProductListingPage() {
                         return 0;
                 }
             });
-    }, [products, filters]);
+    }, [products, filters, searchQuery]);
 
     if (hangTight) return <ECommercePageLoader variant="grid" fullScreen={false} />
 
@@ -134,7 +144,13 @@ export default function ProductListingPage() {
         <div className="w-full bg-background text-foreground antialiased selection:bg-neutral-200">
             {/* Search Bar at Top */}
             <div className="md:hidden block w-full border-b border-border/60 bg-background px-4 py-3 sm:px-6 sm:py-4">
-                <SearchBar />
+                <SearchBar
+                    value={searchQuery}
+                    onChange={(search) => {
+                        setFilters((prev) => ({ ...prev, search }));
+                        setSearchParams({}, { replace: true });
+                    }}
+                />
             </div>
 
             <div className=" w-full flex flex-col lg:flex-row  border-x border-border/40 ">
@@ -162,7 +178,7 @@ export default function ProductListingPage() {
                         </div>
                         <div className="flex items-center gap-2">
                             <button
-                                onClick={() => setFilters(INITIAL_FILTERS)}
+                                onClick={clearFilters}
                                 className="flex items-center text-xs font-normal text-muted-foreground hover:text-foreground transition-colors p-1"
                             >
                                 <RotateCcw className="h-3 w-3 mr-1.5" />
@@ -336,7 +352,7 @@ export default function ProductListingPage() {
                                     {filters.rating}+ Stars <X className="h-3 w-3 cursor-pointer hover:text-primary" onClick={() => removeFilter("rating", null)} />
                                 </span>
                             )}
-                            <button onClick={() => setFilters(INITIAL_FILTERS)} className="text-xs font-bold text-primary underline underline-offset-2 ml-1">
+                            <button onClick={clearFilters} className="text-xs font-bold text-primary underline underline-offset-2 ml-1">
                                 Clear all
                             </button>
                         </div>
@@ -348,7 +364,7 @@ export default function ProductListingPage() {
                     ) : filteredProducts.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-20 border border-dashed rounded-xl bg-muted/5">
                             <p className="text-xs font-medium text-muted-foreground tracking-wide">No premium objects match your selections.</p>
-                            <button onClick={() => setFilters(INITIAL_FILTERS)} className="mt-2 text-xs font-bold text-primary underline underline-offset-4">
+                            <button onClick={clearFilters} className="mt-2 text-xs font-bold text-primary underline underline-offset-4">
                                 Reset system parameters
                             </button>
                         </div>
