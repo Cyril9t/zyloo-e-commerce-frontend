@@ -22,7 +22,7 @@ import { toast } from "sonner";
 
 export default function UsersPages() {
     const { trigger, isMutating } = totalUsers()
-
+    const [isLoading, setIsloading] = useState(false)
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -41,16 +41,18 @@ export default function UsersPages() {
 
 
     const handleDelete = async (id: string) => {
+        setIsloading(true)
         try {
 
 
             const deleteUser = await api.delete(`/users/deleteUser/${id}`)
             const data = await deleteUser.data
             toast.success(data.Message)
-
+            setIsloading(false)
         } catch (error: any) {
             console.log(error?.response?.data?.Message)
             toast.error(error?.response?.data?.Message)
+            setIsloading(false)
         }
     }
 
@@ -171,6 +173,7 @@ export default function UsersPages() {
                                                         onConfirm={() => { handleDelete(user.id) }}
                                                         trigger={
                                                             <Button
+                                                                disabled={isLoading}
                                                                 variant="destructive"
                                                                 size="icon"
                                                             >
