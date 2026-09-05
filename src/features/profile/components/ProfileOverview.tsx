@@ -16,7 +16,7 @@ export default function ProfileOverview({ profile }: { profile: UserProfileData 
                 {/* Immersive Avatar Container */}
                 <div className="relative group cursor-pointer mb-4">
                     <Avatar className="h-34 w-34 ring-3 ring-muted-foreground transition-transform duration-300 group-hover:scale-[1.02]">
-                        <AvatarFallback className="text-3xl bg-border">{user?.firstName?.[0] ?? "U"}</AvatarFallback>
+                        <AvatarFallback className="text-3xl bg-border">{user?.firstName?.[0] ?? "..."}</AvatarFallback>
                     </Avatar>
                     <div className="absolute bottom-0 right-1 p-2 bg-foreground rounded-full text-background border border-background shadow-sm transition-opacity opacity-90 group-hover:opacity-100">
                         <Camera className="h-3.5 w-3.5" />
