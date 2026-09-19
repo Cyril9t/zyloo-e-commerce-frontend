@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://api.iconify.design/lucide:shopping-bag.svg?color=%23ffffff">
-  <img src="https://api.iconify.design/lucide:shopping-bag.svg?color=%23000000" width="40" height="40" alt="" />
+  <img src="https://api.iconify.design/lucide:store.svg?color=%23000000" width="40" height="40" alt="" />
 </picture>
 
 # Zyloo
