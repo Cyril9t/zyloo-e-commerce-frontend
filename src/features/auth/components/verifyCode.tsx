@@ -7,7 +7,7 @@ import { toast } from "sonner";
 function VerifyCode() {
     const [inputValue, setInputValue] = useState<string[]>(Array(6).fill(0));
     const inputRef = useRef<Array<HTMLInputElement | null>>([]);
-    const [code, setCode] = useState<any>()
+    const [setCode] = useState<any>()
     const [loading, setLoading] = useState(false);
 
     const handleChange = (value: string, index: number) => {
