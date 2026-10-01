@@ -33,7 +33,7 @@ export default function LoginForm() {
             const login = await trigger(data)
             const user = await login
             // localStorage.setItem("email", user.userEmail)
-            toast.success(`${user?.Message}, ${user.userEmail}`)
+            toast.success(`${user?.Message}, ${user.userInfo.email}`)
 
             setUser(user.userInfo);
 
