@@ -31,9 +31,10 @@ export default function LoginForm() {
     const submit = async (data: loginData) => {
         try {
             const login = await trigger(data)
-
             const user = await login
-            toast.success(user?.Message)
+            // localStorage.setItem("email", user.userEmail)
+            toast.success(`${user?.Message}, ${user.userEmail}`)
+
             setUser(user.userInfo);
 
             if (user.userInfo.role === "ADMIN") {

@@ -5,6 +5,7 @@ import RegisterPage from "../features/auth/pages/RegisterPage";
 import ForgotPasswordPage from "../features/auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "../features/auth/pages/ResetPasswordPage";
 import GuestRoute from "./Guest";
+import VeryToken from "../features/auth/pages/VerifyCode";
 export default function AuthRoutes() {
     return (
         <>
@@ -15,6 +16,7 @@ export default function AuthRoutes() {
                     <Route path={PATHS.auth.register} element={<RegisterPage />} />
                     <Route path={PATHS.auth.forgotPassword} element={<ForgotPasswordPage />} />
                     <Route path={PATHS.auth.resetPassword} element={<ResetPasswordPage />} />
+                    <Route path={PATHS.auth.verifyCode} element={<VeryToken />} />
 
                 </Route>
             </Routes>

@@ -1,9 +1,12 @@
+
+
 export const PATHS = {
     auth: {
         login: "/login",
         register: "/register",
         forgotPassword: "/forgot-password",
         resetPassword: "/reset-password",
+        verifyCode: "/verify-OTP"
     },
 
     customer: {
