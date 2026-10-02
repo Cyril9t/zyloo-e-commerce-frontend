@@ -2,13 +2,15 @@ import { useRef, useState } from "react";
 import { Button } from "../../../components/ui/button";
 import api from "../../../lib/api";
 import { toast } from "sonner";
-
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "../../../routes/paths";
+import { useAuth } from "../../../context/AuthProvider";
 
 function VerifyCode() {
-    const [inputValue, setInputValue] = useState<string[]>(Array(6).fill(0));
+    const [inputValue, setInputValue] = useState<string[]>(Array(6).fill(""));
     const inputRef = useRef<Array<HTMLInputElement | null>>([]);
-    const [setCode] = useState<any>()
     const [loading, setLoading] = useState(false);
+    const { setUser } = useAuth();
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d?$/.test(value)) return;
@@ -32,12 +34,10 @@ function VerifyCode() {
         }
     };
 
-
+    const navigate = useNavigate()
 
     const handleSubmit = async () => {
-        const code = inputValue.map((c) => (c))
-        const N = code
-        setCode((prev: any) => ({ ...prev, ...N }))
+        const code = Number(inputValue.join(""))
         const email = localStorage.getItem("email")
         console.log(code)
 
@@ -45,6 +45,16 @@ function VerifyCode() {
             setLoading(true)
             const res = await api.post("/auth/verifyOTP", { code, email })
             const data = await res.data
+
+            setUser(data.userInfo);
+
+            if (data.userInfo.role === "ADMIN") {
+
+                navigate(PATHS.admin.dashboard, { replace: true });
+            } else {
+                navigate(PATHS.customer.home, { replace: true });
+            }
+
             console.log(data)
             toast.success(data.Message)
             localStorage.removeItem("email")
@@ -53,6 +63,24 @@ function VerifyCode() {
             toast.error(error?.response?.data?.Message)
             console.error(error)
             setLoading(false)
+        }
+    }
+
+
+    const resendOTP = async () => {
+        try {
+            setLoading(true)
+            const email = localStorage.getItem("email")
+            const resp = await api.put("/auth/resendOtp", { email })
+            const data = await resp
+            toast.success(data.data.Message)
+            setLoading(false)
+
+        } catch (error: any) {
+            setLoading(false)
+            console.log(error)
+            console.log(error?.response?.data?.Message)
+            toast(error?.response?.data?.Message)
         }
     }
     return (
@@ -75,7 +103,7 @@ function VerifyCode() {
                     )
                 })}
             </div>
-            <Button variant={"ghost"} className="h-6 w-fit">Send-OTP again?</Button>
+            <Button variant={"ghost"} disabled={loading} onClick={resendOTP} className="h-6 w-fit">Send-OTP again?</Button>
             <Button disabled={loading} className="w-full" onClick={handleSubmit}>
                 Verify-code
             </Button>

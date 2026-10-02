@@ -14,11 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { authLogin } from "../../../lib/auth/auth";
 import { PATHS } from "../../../routes/paths";
 import { toast } from "sonner";
-import { useAuth } from "../../../context/AuthProvider";
+// import { useAuth } from "../../../context/AuthProvider";
 
 
 export default function LoginForm() {
-    const { setUser } = useAuth();
+    // const { setUser } = useAuth();
     const { trigger, isMutating } = authLogin()
     const [showPassword, setShowPassword] = useState(false);
 
@@ -32,17 +32,18 @@ export default function LoginForm() {
         try {
             const login = await trigger(data)
             const user = await login
-            // localStorage.setItem("email", user.userEmail)
+            localStorage.setItem("email", user.userInfo.email)
             toast.success(`${user?.Message}, ${user.userInfo.email}`)
 
-            setUser(user.userInfo);
+            // setUser(user.userInfo);
 
-            if (user.userInfo.role === "ADMIN") {
-                navigate(PATHS.admin.dashboard, { replace: true });
-            } else {
-                navigate(PATHS.customer.home, { replace: true });
-            }
+            // if (user.userInfo.role === "ADMIN") {
+            //     navigate(PATHS.admin.dashboard, { replace: true });
+            // } else {
+            //     navigate(PATHS.customer.home, { replace: true });
+            // }
 
+            navigate(PATHS.auth.verifyCode)
         } catch (error: any) {
             console.log(error)
             console.log(error?.response?.data?.Message)
