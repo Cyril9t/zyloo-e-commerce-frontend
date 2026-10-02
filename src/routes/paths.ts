@@ -6,7 +6,8 @@ export const PATHS = {
         register: "/register",
         forgotPassword: "/forgot-password",
         resetPassword: "/reset-password",
-        verifyCode: "/verify-OTP"
+        verifyCode: "/verify-OTP",
+        verifyEmail: "/Verify-Email"
     },
 
     customer: {

@@ -4,13 +4,43 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
+import instance from "../../../lib/api";
+
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "../../../routes/paths";
 
 export default function ResetPasswordForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [password, setPassword] = useState({
+        newPassword: "",
+        confirmPassword: ""
+    })
 
+    const handleChange = (e: any) => {
+        const { name, value } = e.target
+        setPassword((prev) => ({ ...prev, [name]: value }))
+    }
+    const navigate = useNavigate()
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+        if (!password.confirmPassword || !password.newPassword) return toast.warning("All fields are required")
+        if (password.confirmPassword !== password.newPassword) return toast.warning("Passwords not matched")
+
+
+        const email = localStorage.getItem("email")
+        try {
+            const resp = await instance.post("/auth/reset-password", { email, password: password.newPassword })
+            const data = await resp.data.Message
+            toast.success(data)
+            navigate(PATHS.auth.login, { replace: true })
+        } catch (error: any) {
+            console.log(error)
+        }
+    }
     return (
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
                 <Label htmlFor="password">
                     New Password
@@ -19,8 +49,11 @@ export default function ResetPasswordForm() {
                 <div className="relative">
                     <Input
                         id="password"
+                        name="newPassword"
+                        value={password.newPassword}
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
+                        onChange={handleChange}
                     />
 
                     <Button
@@ -47,8 +80,11 @@ export default function ResetPasswordForm() {
                 <div className="relative">
                     <Input
                         id="confirmPassword"
+                        name="confirmPassword"
+                        value={password.confirmPassword}
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="••••••••"
+                        onChange={handleChange}
                     />
 
                     <Button
