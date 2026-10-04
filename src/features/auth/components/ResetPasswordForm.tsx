@@ -18,24 +18,34 @@ export default function ResetPasswordForm() {
         confirmPassword: ""
     })
 
+    const [isLoading, setIsLoading] = useState(false)
+
+
     const handleChange = (e: any) => {
         const { name, value } = e.target
         setPassword((prev) => ({ ...prev, [name]: value }))
     }
     const navigate = useNavigate()
+
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         if (!password.confirmPassword || !password.newPassword) return toast.warning("All fields are required")
         if (password.confirmPassword !== password.newPassword) return toast.warning("Passwords not matched")
 
+        setIsLoading(true)
 
         const email = localStorage.getItem("email")
         try {
             const resp = await instance.post("/auth/reset-password", { email, password: password.newPassword })
             const data = await resp.data.Message
             toast.success(data)
+            if (data === "Email required") return
             navigate(PATHS.auth.login, { replace: true })
+            localStorage.removeItem("email")
+            setIsLoading(false)
         } catch (error: any) {
+            setIsLoading(false);
+
             console.log(error)
         }
     }
@@ -107,9 +117,10 @@ export default function ResetPasswordForm() {
                 type="submit"
                 className="w-full"
                 size="lg"
+                disabled={isLoading}
             >
                 Reset Password
             </Button>
-        </form>
+        </form >
     );
 }

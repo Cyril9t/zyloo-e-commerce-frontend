@@ -46,7 +46,7 @@ function VerifyPasswordOTP() {
             const data = await res.data
             console.log(data)
             toast.success(data.Message)
-            localStorage.removeItem("email")
+
             navigate(PATHS.auth.resetPassword)
             setLoading(false)
         } catch (error: any) {
